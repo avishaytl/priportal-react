@@ -1,0 +1,241 @@
+html {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+ -webkit-box-pack: center;
+     -ms-flex-pack: center;
+         justify-content: center;
+ -webkit-box-align: center;
+     -ms-flex-align: center;
+         align-items: center;
+         -webkit-touch-callout: none; /* iOS Safari */
+         -webkit-user-select: none; /* Safari */
+          -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+             -ms-user-select: none; /* Internet Explorer/Edge */
+                 user-select: none;
+                 font-family: system, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+ display: -webkit-box;
+ display: -ms-flexbox;
+ display: flex;
+ -webkit-box-pack: justify;
+     -ms-flex-pack: justify;
+         justify-content: space-between;
+ -webkit-box-align: center;
+     -ms-flex-align: center;
+         align-items: center;
+ min-height: 100vh; 
+ font-family: system, -apple-system, BlinkMacSystemFont, sans-serif;
+ font-size: 20px;
+ /* color: #5d6494; */
+ -webkit-font-smoothing: antialiased;
+ -moz-osx-font-smoothing: grayscale;
+}
+
+input{
+    cursor: default;
+    border: none;
+    border-width: 0; 
+}
+input::-moz-selection { /* Code for Firefox */
+    color: #262626;
+    background: #ececec;
+    border: none;
+    border-width: 0; 
+  }
+  textarea:focus, input:focus{
+    outline: none;
+}
+input::selection {
+color: #262626;
+background: #ececec;
+border: none;
+border-width: 0; 
+} 
+
+.box {
+ position: absolute;
+ width: 320px;
+ height: 320px;
+ display: -webkit-box;
+ display: -ms-flexbox;
+ display: flex;
+ -webkit-box-pack: center;
+     -ms-flex-pack: center;
+         justify-content: center;
+ -webkit-box-align: center;
+     -ms-flex-align: center;
+         align-items: center;
+ -webkit-box-orient: vertical;
+ -webkit-box-direction: normal;
+     -ms-flex-direction: column;
+         flex-direction: column;
+ border-radius: 3px;
+ overflow: hidden;
+ -webkit-transition: -webkit-box-shadow ease 1s;
+ transition: -webkit-box-shadow ease 1s;
+ transition: box-shadow ease 1s;
+ transition: box-shadow ease 1s, -webkit-box-shadow ease 1s;
+} 
+
+.icon { 
+ /* padding-left: 100px; */
+ /* margin-top: 80px;*/ 
+ /* border-radius: 62.5px;*/
+ /* background-color: rgba(255, 255, 255, 0.1);   */
+ position: absolute;
+ top:0;
+ -webkit-transition: all 0.6s ease;
+ transition: all 0.6s ease;
+ -webkit-transition-delay: 0.12s;
+         transition-delay: 0.12s;
+ will-change: transform; 
+}
+
+.super-box-container {  
+    overflow: visible; 
+    align-self: center;
+ width: 320px;
+ min-height: 320px; 
+ display: -webkit-box;
+ display: -ms-flexbox;
+ display: flex;
+ -webkit-transition: all 0.6s ease;
+ transition: all 0.6s ease;
+ -webkit-transition-delay: 0.12s;
+         transition-delay: 0.12s;
+ will-change: transform;  
+}
+ 
+
+.title {
+    margin-top: 50px;
+ position: relative; 
+ font-size: 2.0rem;
+ font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+ text-align: center; 
+ color: #ececec;
+} 
+
+.super-box:hover .icon {
+  opacity: 0;
+ /* -webkit-transform: translateY(-28px) scale(0.5);
+         transform: translateY(-28px) scale(0.5);  */
+}
+ 
+.super-box {
+   width: 220px;
+ height: 220px; 
+ display: -webkit-box;
+ display: -ms-flexbox;
+ display: flex;
+ padding-bottom: 5vh;
+ -webkit-box-pack: center;
+     -ms-flex-pack: center;
+         justify-content: center;
+ -webkit-box-align: center;
+     -ms-flex-align: center;
+         align-items: center;
+ -webkit-box-orient: vertical;
+ -webkit-box-direction: normal;
+     -ms-flex-direction: column;
+         flex-direction: column;
+}
+
+.login-view{   
+  position: absolute; 
+  z-index: 2;  
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+  text-align: center;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  -webkit-transition-delay: 0.32s;
+          transition-delay: 0.32s;
+          opacity: 0;  
+}
+#title{
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    -webkit-transition-delay: 0.12s;
+            transition-delay: 0.12s; 
+}
+.input-btn:hover {
+    background-color: #cecece8f; 
+}
+.input-icon-btn{
+    font-size: 30px;
+    color: #262626;
+}
+.input-btn:hover .input-icon-btn{ 
+    color: #ececec;
+}
+
+.MuiFormLabel-root {
+  color: #ececec !important; 
+  font-size: 1.35rem !important;
+}
+.MuiInputBase-input {
+  color: #ececec !important; 
+  font-size: 1.35rem !important;
+} 
+.text {
+ position: relative;
+ top: -32px;
+ width: 400px;
+ text-align: center;
+ -webkit-transition: all 0.4s ease;
+ transition: all 0.4s ease;
+ -webkit-transition-delay: 0.32s;
+         transition-delay: 0.32s;
+}
+
+.super-box:hover .text {
+ opacity: 0;
+ -webkit-transform: scale(.8);
+         transform: scale(.8);
+ 
+}
+ .super-box:hover .login-view{ 
+    opacity: 0;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+ }
+.super-box .login-view:hover {
+    opacity: 1;
+    -webkit-transform: scale(.8);
+            transform: scale(.8);
+    
+   }
+.super-box-container:hover + .login-view {
+ opacity: 1;
+ -webkit-transform: scale(.8);
+         transform: scale(.8);
+ 
+}
+
+
+
+.super-box:hover #title{ 
+   opacity: 0; 
+}
+.super-box #title:hover {
+   opacity: 1; 
+   
+  }
+.super-box-container:hover + #title {
+opacity: 1; 
+
+}
+title
+.dr {
+  position: absolute;
+  bottom: 16px; 
+  right: 16px;
+  width:100px;
+}
