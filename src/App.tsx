@@ -3,19 +3,19 @@ import './App.scss';
 import { create } from 'jss';
 import rtl from 'jss-rtl';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import { useTheme } from '@material-ui/core/styles';
+// import { useTheme } from '@material-ui/core/styles';
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles'; 
 import { FiArrowLeft } from 'react-icons/fi';
 import { IoEarthOutline, IoHomeOutline, IoContrastOutline } from 'react-icons/io5'; 
 import Checkbox from '@material-ui/core/Checkbox';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {useSpring, animated} from 'react-spring'; 
-import { FullScreen, useFullScreenHandle } from "react-full-screen"; 
+// import { FullScreen, useFullScreenHandle } from "react-full-screen"; 
 import ClipLoader from "react-spinners/ClipLoader";
 import Title from './Title';
 import ReactTooltip from 'react-tooltip';
-import { BrowserRouter, Link, Route, Switch, useHistory, withRouter} from "react-router-dom";
+import { BrowserRouter, Route, Switch, useHistory, withRouter} from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group"; 
 import { Scrollbars } from 'react-custom-scrollbars'; 
 
@@ -41,8 +41,7 @@ const data = {
 
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] }); 
 
-const LoginScreen = (props: any) => {  
-  const handle = useFullScreenHandle();
+const LoginScreen = (props: any) => {   
   const [showUserTitle, setUserTitleAnime] = useState(true);
   const [showLoginView, setLoginView] = useState(false);
   const [isLoading, setLoadingTime] = useState(false); 
@@ -56,17 +55,16 @@ const LoginScreen = (props: any) => {
   const CompanyTitleAnime = ({ on }:any) => {
     const iconProps = useSpring({ opacity: on ? 1 : 0, from: { opacity: on ? 0 : 1} }); 
     return  <animated.div style={iconProps} >    
-                <Title entry={data.titleEntry} subColor={styles.text} title={data.titleCompanyName} background={data.secondColor}/>
+                <Title entry={data.titleEntry} subColor={styles.color} title={data.titleCompanyName} background={data.secondColor}/>
             </animated.div> 
   }; 
 
   const userProps = useSpring({ opacity: isLoading ? 0 : 1, from: { opacity: 1 }}); 
   const loaderProps = useSpring({ opacity: isLoading ? 1 : 0, from: { opacity: 0 }}); 
   
-  return( 
-    <FullScreen handle={handle}> 
-      <ReactTooltip />
+  return(  
       <div className={`login-screen`}> 
+        <ReactTooltip />
           <div className={'background-img'}> 
             <div className={`bg-blur ${styles.bgImg}`}></div>
             <img className={'bg-img'} src='http://demo.softsolutions.co.il/priportal//bg-demo.jpg' alt='logo'/> 
@@ -95,7 +93,7 @@ const LoginScreen = (props: any) => {
                         }
                       }}>   
                       <animated.div  style={userProps}>
-                        <p className={`company-title ${styles.text}`}>
+                        <p className={`company-title ${styles.color}`}>
                         {data.titleCompanyName}
                       </p> 
                     <input ref={userRef} onKeyDown={(e)=>{
@@ -111,7 +109,7 @@ const LoginScreen = (props: any) => {
                               setTimeout(() => {   
                                 navigateToDashboard()
                               }, 2000);
-                        }} className={`input-btn ${styles.btn}`}>
+                        }} className={'input-btn'}>
                           <FiArrowLeft className={'input-icon-btn'}/>
                         </div>
                         <input disabled style={{fontSize:'1.3rem',margin:10,boxShadow:'none',border:0,height:45,backgroundColor:'transparent'}}/>
@@ -141,11 +139,11 @@ const LoginScreen = (props: any) => {
                         }} 
                         inputProps={{ 'aria-label': 'checkbox with default color' }}
                       />  
-                      <p className={`margin0-padding0 ${styles.text}`}>
+                      <p className={`margin0-padding0 ${styles.color}`}>
                       {data.priorityUser}
                       </p>
                     </div>
-                      <p style={{marginTop:10, cursor:'pointer'}} className={`margin0-padding0 ${styles.text}`}> 
+                      <p style={{marginTop:10, cursor:'pointer'}} className={`margin0-padding0 ${styles.color}`}> 
                       {data.forgotPassword}
                       </p> 
                       {isErrorMsg && <p style={{marginTop:10, color:'#e72222',fontWeight:'bold'}} className={'margin0-padding0'}>
@@ -156,21 +154,28 @@ const LoginScreen = (props: any) => {
           </div> 
           <div className={'footer'}> 
             <div className={'footer-child'} style={{justifyContent:'flex-start',paddingLeft: 30}}>
-              <p className={`footer-text ${styles.text}`}>{data.softsolutions}</p>
+              <p className={`footer-text ${styles.color}`}>{data.softsolutions}</p>
             </div> 
             <div className={'footer-child'} style={{justifyContent:'flex-end',paddingRight: 30}}>
-              <IoHomeOutline data-tip={tooltip.homeIcon} className={`footer-icon ${styles.text}`}/>
-              <IoEarthOutline data-tip={tooltip.earthIcon} className={`footer-icon ${styles.text}`}/>
-              <IoContrastOutline onClick={()=> props.setDarkState(!props.darkState) } data-tip={tooltip.theme} className={`footer-icon ${styles.text}`}/>
+              <IoHomeOutline data-tip={tooltip.homeIcon} className={`footer-icon ${styles.color}`}/>
+              <IoEarthOutline data-tip={tooltip.earthIcon} className={`footer-icon ${styles.color}`}/>
+              <IoContrastOutline onClick={()=> props.setDarkState(!props.darkState) } data-tip={tooltip.theme} className={`footer-icon ${styles.color}`}/>
             </div>
           </div> 
           </div> 
-        </div> 
-    </FullScreen>
+        </div>   
   )
 };
 
-const Second = () => <div className="second"  style={{backgroundColor:'#3b3b3b',width:'100vw',height:'100vh'}}>Second Component</div>;
+const MainScreen = (props: any) => { 
+  const styles = props.styles;
+  return(
+    <div className={`main-screen ${styles.background}`}>
+      <ReactTooltip />
+      
+    </div>
+  )
+}
 
 const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) => {
   const useStyles = makeStyles((theme) => {
@@ -180,11 +185,11 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
         backgroundColor: isDarkState ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.5)',
         filter: isDarkState ? 'brightness(0)' : 'brightness(0.5)'
       }, 
-      text: {
+      background:{
+        background: isDarkState ? '#303030' : '#ececec', 
+      },
+      color: {
         color: isDarkState ? '#ececec' : '#303030',
-      }, 
-      btn: {
-        backgroundColor:'#cecece4f',
       },  
   })
   });
@@ -193,14 +198,14 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
             <CSSTransition key={location.key} classNames="slide" timeout={2000}>
               <Switch location={location}>
                 <Route path="/" component={()=><LoginScreen  styles={classes} setDarkState={setDarkState} darkState={darkState}/> } exact /> 
-                <Route path="/dashboard" component={Second} />
+                <Route path="/dashboard" component={()=><MainScreen  styles={classes} setDarkState={setDarkState} darkState={darkState}/> } />
               </Switch>
             </CSSTransition>
           </TransitionGroup>)
 });
  
 function App() {
-  const [darkState, setDarkState] = useState(true);
+  const [darkState, setDarkState] = useState(false);
   const palletType = darkState ? "dark" : "light";
   const theme = createMuiTheme({
       direction:'rtl',

@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 interface  TitleProps { title: string, background: string, entry: string, subColor: any };
 interface  TitleState { pos: any, shadow: boolean, colors: any[], background:any,text:any,bold:any };
@@ -10,6 +10,9 @@ interface  TitleState { pos: any, shadow: boolean, colors: any[], background:any
 export default class Title extends React.Component<TitleProps,TitleState>{
 	constructor(props: any) {
 		super(props);
+		this.section = React.createRef();
+		this.playword_1 = React.createRef();
+		this.playword_2 = React.createRef();
 		this.state = {
 			pos: { x: 0, y: 0 },
 			shadow: true,
@@ -30,6 +33,9 @@ export default class Title extends React.Component<TitleProps,TitleState>{
 			bold: null
 		};
 	}
+	section: any = null;
+	playword_1: any = null;
+	playword_2: any = null;
 
 	componentDidMount() {
 		this.RandomBackground();
@@ -47,13 +53,13 @@ export default class Title extends React.Component<TitleProps,TitleState>{
 	}
 
 	CreateShadow() {
-		if ("ontouchstart" in window == false && this.state.shadow) {
+		if ("ontouchstart" in window === false && this.state.shadow) {
 			let [moveX, moveY] = [this.state.pos.x / -100, this.state.pos.y / -120];
 
 			let [Section, firstWord, secondWord]: any = [
-				ReactDOM.findDOMNode(this.refs.section),
-				ReactDOM.findDOMNode(this.refs.playword_1),
-				ReactDOM.findDOMNode(this.refs.playword_2)
+				ReactDOM.findDOMNode(this.section.current),
+				ReactDOM.findDOMNode(this.playword_1.current),
+				ReactDOM.findDOMNode(this.playword_2.current)
 			];
             if(firstWord && secondWord && Section){
                 firstWord.style.transform = `translate3d(${moveX / 2}px, ${moveY}px, 0)`;
@@ -68,10 +74,10 @@ export default class Title extends React.Component<TitleProps,TitleState>{
 			return Math.floor(Math.random() * (max - min + 1) + min);
 		};
 
-		let RandomID = getRandomInt(0, 1),
-			SelectColor = this.state.colors[RandomID];
+		let RandomID = getRandomInt(0, 1);
+			// SelectColor = this.state.colors[RandomID];
 
-		console.log(RandomID);
+		// console.log(RandomID);
 
 		this.setState({
 			background: this.state.colors[RandomID].background,
@@ -92,13 +98,13 @@ export default class Title extends React.Component<TitleProps,TitleState>{
 				id="title"
 				onMouseMove={this.onMouseMove.bind(this)} 
 			>
-				<h1 className={this.props.subColor} ref="section">
+				<h1 className={this.props.subColor} ref={this.section}>
 						{this.props.entry}{" "}
-					<span className="bold" ref="playword_1" style={boldStyle}>
+					<span className="bold" ref={this.playword_1} style={boldStyle}>
 						{this.props.title}
 					</span> 
 					<br /> 
-					<span className="bold" ref="playword_2" style={boldStyle}> 
+					<span className="bold" ref={this.playword_2} style={boldStyle}> 
 					</span> 
 				</h1>
 			</section>
