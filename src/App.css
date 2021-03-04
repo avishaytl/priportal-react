@@ -14,7 +14,7 @@ html {
             -moz-user-select: none; /* Old versions of Firefox */
              -ms-user-select: none; /* Internet Explorer/Edge */
                  user-select: none;
-                 font-family: system, -apple-system, BlinkMacSystemFont, sans-serif;
+                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
@@ -28,7 +28,7 @@ body {
      -ms-flex-align: center;
          align-items: center;
  min-height: 100vh; 
- font-family: system, -apple-system, BlinkMacSystemFont, sans-serif;
+ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
  font-size: 20px;
  /* color: #5d6494; */
  -webkit-font-smoothing: antialiased;
@@ -39,6 +39,7 @@ input{
     cursor: default;
     border: none;
     border-width: 0; 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 input::-moz-selection { /* Code for Firefox */
     color: #262626;
@@ -145,7 +146,7 @@ border-width: 0;
          flex-direction: column;
 }
 
-.login-view{   
+.login-view{    
   position: absolute; 
   z-index: 2;  
  display: flex;
@@ -197,8 +198,8 @@ border-width: 0;
 
 .super-box:hover .text {
  opacity: 0;
- -webkit-transform: scale(.8);
-         transform: scale(.8);
+ -webkit-transform: scale(.9);
+         transform: scale(.9);
  
 }
  .super-box:hover .login-view{ 
@@ -208,14 +209,14 @@ border-width: 0;
  }
 .super-box .login-view:hover {
     opacity: 1;
-    -webkit-transform: scale(.8);
-            transform: scale(.8);
+    -webkit-transform: scale(.9);
+            transform: scale(.9);
     
    }
 .super-box-container:hover + .login-view {
  opacity: 1;
- -webkit-transform: scale(.8);
-         transform: scale(.8);
+ -webkit-transform: scale(.9);
+         transform: scale(.9);
  
 }
 
