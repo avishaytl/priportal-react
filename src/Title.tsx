@@ -1,7 +1,7 @@
 
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
-interface  TitleProps { title: string, background: string };
+interface  TitleProps { title: string, background: string, entry: string, subColor: any };
 interface  TitleState { pos: any, shadow: boolean, colors: any[], background:any,text:any,bold:any };
 // const App = ({}: MyProps) => {
 //     const [value, setValue] = useState<string>('');
@@ -92,10 +92,10 @@ export default class Title extends React.Component<TitleProps,TitleState>{
 				id="title"
 				onMouseMove={this.onMouseMove.bind(this)} 
 			>
-				<h1 className="middle" ref="section">
-					כניסה{" "}
+				<h1 className={this.props.subColor} ref="section">
+						{this.props.entry}{" "}
 					<span className="bold" ref="playword_1" style={boldStyle}>
-						Demo System
+						{this.props.title}
 					</span> 
 					<br /> 
 					<span className="bold" ref="playword_2" style={boldStyle}> 
