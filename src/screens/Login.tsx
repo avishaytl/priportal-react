@@ -39,7 +39,11 @@ function Login(props: any){
     const passRef: any = useRef(null);  
     const history = useHistory();
     const styles = props.styles;
-    const navigateToMain = () => history.push('/main'); 
+
+    const navigateToMain = async() => {
+      // await getMenuItems(data.menuCategories, styles)
+      history.push('/main')
+    }; 
   
     const CompanyTitleAnime = ({ on }:any) => {
       const iconProps = useSpring({ opacity: on ? 1 : 0, from: { opacity: on ? 0 : 1} }); 
@@ -125,6 +129,7 @@ function Login(props: any){
                           defaultChecked 
                           style ={{
                             color: data.secondColor,
+                            cursor: 'default'
                           }} 
                           inputProps={{ 'aria-label': 'checkbox with default color' }}
                         />  
@@ -132,7 +137,7 @@ function Login(props: any){
                         {data.priorityUser}
                         </p>
                       </div>
-                        <p style={{marginTop:10, cursor:'pointer'}} className={`margin0-padding0 ${styles.color}`}> 
+                        <p style={{marginTop:10}} className={`margin0-padding0 ${styles.color}`}> 
                         {data.forgotPassword}
                         </p> 
                         {isErrorMsg && <p style={{marginTop:10, color:'#e72222',fontWeight:'bold'}} className={'margin0-padding0'}>

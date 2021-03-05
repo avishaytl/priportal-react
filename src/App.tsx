@@ -12,6 +12,32 @@ import { Scrollbars } from 'react-custom-scrollbars';
 import LoginScreen from './screens/Login'; 
 import MainScreen from './screens/Main';  
 
+document.onkeydown = keyboardDown;
+document.onkeyup = keyboardUp;
+document.oncontextmenu = function(e){
+  // var evt = new Object({keyCode:93});
+  stopEvent(e);
+  // keyboardUp(evt);
+}
+
+function stopEvent(event: any){
+ if(event.preventDefault !== undefined)
+  event.preventDefault();
+ if(event.stopPropagation !== undefined)
+  event.stopPropagation();
+}
+
+function keyboardDown(e: any){
+  // console.debug(e.keyCode,e.key)
+  // if(e.keyCode === 68){
+  //   alert('d')
+  // }
+}
+
+function keyboardUp(e: any){
+  // alert('keyboardUp')
+}
+
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });  
 
 const data = { 
@@ -22,34 +48,48 @@ const data = {
 
 const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) => {
   const useStyles = makeStyles((theme) => {
-    let isDarkState =  theme.palette.background.default === '#303030';
-    return({ 
-      bgImg: { 
-        backgroundColor: isDarkState ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.5)',
-        filter: isDarkState ? 'brightness(0)' : 'brightness(0.5)'
-      }, 
-      background: {
-        background: isDarkState ? '#303030' : '#ececec', 
-      },
-      backgroundNative: {
-        background: isDarkState ? '#ececec' : '#303030', 
-      },
-      primaryMenuColor: { 
-        background: data.secondColor,  
-      },
-      color: {
-        color: isDarkState ? '#ececec' : '#303030',
-      },  
-      colorNative: {
-        color: isDarkState ? '#303030' : '#ececec', 
-      },
-      light: {
-        color: '#ececec',
-      },
-      dark: {
-        color: '#303030', 
-      }  
-  })
+      let isDarkState =  theme.palette.background.default === '#303030';
+      return({   
+        bgImg: { 
+          backgroundColor: isDarkState ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.5)',
+          filter: isDarkState ? 'brightness(0)' : 'brightness(0.5)'
+        }, 
+        background: {
+          background: isDarkState ? '#303030' : '#ececec', 
+        },
+        backgroundNative: {
+          background: isDarkState ? '#ececec' : '#303030', 
+        },
+        primaryMenuB: { 
+          background: data.secondColor,  
+        },
+        primaryMenuC: { 
+          color: data.secondColor,  
+        },
+        color: {
+          color: isDarkState ? '#ececec' : '#303030',
+        },  
+        colorNative: {
+          color: isDarkState ? '#303030' : '#ececec', 
+        },
+        menuItem: { 
+          borderLeftColor: data.secondColor, 
+          borderLeftStyle: 'solid',
+          borderLeftWidth: 6, 
+        },
+        light: {
+          color: '#ececec',
+        },
+        lightB: {
+          background: '#ececec',
+        },
+        dark: {
+          color: '#303030', 
+        },
+        darkB: {
+          background: '#303030',
+        },
+    })
   });
   const classes = useStyles(); 
   return (<TransitionGroup>
