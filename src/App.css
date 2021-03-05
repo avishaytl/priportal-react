@@ -1,3 +1,8 @@
+
+/***********************************/
+/*********     App CSS     *********/
+/***********************************/
+
 .login-screen, .main-screen { 
     -webkit-box-pack: center;
      -ms-flex-pack: center;
@@ -21,31 +26,13 @@
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    min-height: 100vh; 
+    /* min-height: 100vh;  */
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 20px;
     /* color: #5d6494; */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 } 
-
-.bg-blur{ 
-    position: absolute; 
-    width: 100vw;
-    height: 100vh;
-}
-
-.background-img { 
-    position: absolute;
-    right: 0;
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    object-fit: fill;
-    justify-content: flex-end;
-    filter: blur(1px);
-    overflow: hidden ;
-}
 
 input{ 
     width: 300px;
@@ -66,60 +53,102 @@ input::-moz-selection { /* Code for Firefox */
 }
 
 input::selection {
-color: #ececec;
-background: #303030;
-border: none;
-border-width: 0; 
+    color: #ececec;
+    background: #303030;
+    border: none;
+    border-width: 0; 
 } 
+
 input::placeholder {
     color: #b3b3b3;
 }
+
+.hvr-grow {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
+
+.hvr-grow:hover,
+.hvr-grow:focus,
+.hvr-grow:active {
+    transform: scale(0.9);
+}
+
+/***********************************/
+/******** Login Screen CSS *********/
+/***********************************/
+
+.bg-blur{ 
+    position: absolute; 
+    width: 100vw;
+    height: 100vh;
+}
+
+.background-img { 
+    position: absolute;
+    right: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    object-fit: fill;
+    justify-content: flex-end;
+    filter: blur(1px);
+    overflow: hidden ;
+}
+
 .box {
- position: absolute;
- width: 320px;
- height: 320px;
- display: -webkit-box;
- display: -ms-flexbox;
- display: flex;
- -webkit-box-pack: center;
-     -ms-flex-pack: center;
-         justify-content: center;
- -webkit-box-align: center;
-     -ms-flex-align: center;
-         align-items: center;
- -webkit-box-orient: vertical;
- -webkit-box-direction: normal;
-     -ms-flex-direction: column;
-         flex-direction: column;
- border-radius: 3px;
- overflow: hidden;
- -webkit-transition: -webkit-box-shadow ease 1s;
- transition: -webkit-box-shadow ease 1s;
- transition: box-shadow ease 1s;
- transition: box-shadow ease 1s, -webkit-box-shadow ease 1s;
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    border-radius: 3px;
+    overflow: hidden;
+    -webkit-transition: -webkit-box-shadow ease 1s;
+    transition: -webkit-box-shadow ease 1s;
+    transition: box-shadow ease 1s;
+    transition: box-shadow ease 1s, -webkit-box-shadow ease 1s;
 } 
 
 .icon {  
- position: absolute;
- top:0;
- -webkit-transition: all 0.6s ease;
- transition: all 0.6s ease;
- -webkit-transition-delay: 0.12s;
-         transition-delay: 0.12s;
- will-change: transform; 
+    position: absolute;
+    top:0;
+    -webkit-transition: all 0.6s ease;
+    transition: all 0.6s ease;
+    -webkit-transition-delay: 0.12s;
+            transition-delay: 0.12s;
+    will-change: transform; 
 }
 
 .footer-icon { 
-    font-size: 30px;
+    font-size: 26px;
     cursor: pointer;
     margin-right: 10px;
     margin-left: 10px;
 }
-
+  
 .footer-child { 
     width: 50%; 
     display: flex;
 }
+
 
 .footer-text { 
     font-size: 12px;
@@ -160,67 +189,66 @@ input::placeholder {
 .super-box-container {  
     overflow: visible; 
     align-self: center;
- width: 320px;
- min-height: 320px; 
- display: -webkit-box;
- display: -ms-flexbox;
- display: flex;
- -webkit-transition: all 0.6s ease;
- transition: all 0.6s ease;
- -webkit-transition-delay: 0.12s;
-         transition-delay: 0.12s;
- will-change: transform;  
-}
- 
+    width: 320px;
+    min-height: 320px; 
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-transition: all 0.6s ease;
+    transition: all 0.6s ease;
+    -webkit-transition-delay: 0.12s;
+            transition-delay: 0.12s;
+    will-change: transform;  
+} 
 
 .title {
     margin-top: 50px;
- position: relative; 
- font-size: 2.0rem;
- font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
- text-align: center; 
- color: #ececec;
+    position: relative; 
+    font-size: 2.0rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center; 
+    color: #ececec;
 } 
 
 .super-box:hover .icon {
-  opacity: 0; 
+    opacity: 0; 
 }
  
 .super-box {
-   width: 220px;
- height: 220px; 
- display: -webkit-box;
- display: -ms-flexbox;
- display: flex;
- padding-bottom: 5vh;
- -webkit-box-pack: center;
-     -ms-flex-pack: center;
-         justify-content: center;
- -webkit-box-align: center;
-     -ms-flex-align: center;
-         align-items: center;
- -webkit-box-orient: vertical;
- -webkit-box-direction: normal;
-     -ms-flex-direction: column;
-         flex-direction: column;
+    width: 220px;
+    height: 220px; 
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding-bottom: 5vh;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
 }
 
-.login-view{    
-  position: absolute; 
-  z-index: 2;  
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: center;
-  text-align: center;
-  -webkit-transition: all 0.4s ease;
-  transition: all 0.4s ease;
-  -webkit-transition-delay: 0.32s;
-          transition-delay: 0.32s;
-          opacity: 0;  
+.login-view {    
+    position: absolute; 
+    z-index: 2;  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    -webkit-transition-delay: 0.32s;
+            transition-delay: 0.32s;
+            opacity: 0;  
 }
 
-#title{
+#title {
     -webkit-transition: all 0.4s ease;
     transition: all 0.4s ease;
     -webkit-transition-delay: 0.22s;
@@ -267,30 +295,30 @@ input::placeholder {
 }
 
 .MuiFormLabel-root {
-  color: #ececec !important; 
-  font-size: 1.35rem !important;
+    color: #ececec !important; 
+    font-size: 1.35rem !important;
 }
 
 .MuiInputBase-input {
-  color: #ececec !important; 
-  font-size: 1.35rem !important;
+    color: #ececec !important; 
+    font-size: 1.35rem !important;
 } 
 
 .text {
- position: relative;
- top: -32px;
- width: 400px;
- text-align: center;
- -webkit-transition: all 0.4s ease;
- transition: all 0.4s ease;
- -webkit-transition-delay: 0.32s;
-         transition-delay: 0.32s;
+    position: relative;
+    top: -32px;
+    width: 400px;
+    text-align: center;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    -webkit-transition-delay: 0.32s;
+            transition-delay: 0.32s;
 }
 
 .super-box:hover .text {
- opacity: 0;
- -webkit-transform: scale(.9);
-         transform: scale(.9);
+    opacity: 0;
+    -webkit-transform: scale(.9);
+            transform: scale(.9);
  
 }
  .super-box:hover .login-view{ 
@@ -304,13 +332,12 @@ input::placeholder {
     -webkit-transform: scale(.9);
             transform: scale(.9);
     
-   }
+}
 
 .super-box-container:hover + .login-view {
- opacity: 1;
- -webkit-transform: scale(.9);
-         transform: scale(.9);
- 
+    opacity: 1;
+    -webkit-transform: scale(.9);
+            transform: scale(.9); 
 }
 
 .company-title{
@@ -327,11 +354,10 @@ input::placeholder {
 .super-box #title:hover {
    opacity: 1; 
    
-  }
+}
 
 .super-box-container:hover + #title {
-opacity: 1; 
-
+    opacity: 1;  
 }
 
 title .dr {
@@ -339,47 +365,203 @@ title .dr {
   bottom: 16px; 
   right: 16px;
   width:100px;
-}
-
-
-
-
-
-
-
-
-
-body {
-    margin: 0;
-  }
-  
-  .App { 
-    text-align: center;
-    position: relative;
-  }  
-  
-  .slide-enter,
+} 
+ 
+.slide-enter,
   .slide-exit {
     transition: transform 1000ms ease-out;
   }
   
-  .slide-enter {
+.slide-enter {
     transform: translateX(100%);
-  }
+}
   
-  .slide-enter.slide-enter-active {
+.slide-enter.slide-enter-active {
     transform: translateX(0%);
-  }
+}
   
-  .slide-exit {
+.slide-exit {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     transform: translateX(0%);
-  }
+}
   
-  .slide-exit-active {
+.slide-exit-active {
     transform: translateX(-100%);
-  }
+} 
+
+/***********************************/
+/********* Main Screen CSS *********/
+/***********************************/
   
+.main-user-bar{
+    width: 8vw;
+    min-width: 150px;
+    height: 100vh;  
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start;
+}
+
+.user-bar-bg-click {
+    width: 8vw;
+    min-width: 150px;
+    height: 100vh;  
+    position: absolute;
+    z-index: 0; 
+}
+
+.user-bar-img{
+    width: 100px;
+    height: 100px;
+    border-radius: 60px;
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
+    z-index: 1;
+}
+
+.user-bar-title {
+    font-size: 14px;
+    letter-spacing: 1px;
+    z-index: 1;
+}
+
+.user-bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.user-bar-grid-icons {
+    z-index: 1;
+    width: 98%; 
+    display: grid;
+    grid-template-columns: auto auto; 
+    padding: 10px; 
+}
+
+.bar-user-icon { 
+    font-size: 34px;
+    /* cursor: pointer;  */
+    padding: 0;
+    margin: 0;
+} 
+
+.grid-item { 
+    z-index: 1; 
+    padding: 15px;
+    font-size: 30px;  
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* cursor: pointer; */
+}
+
+.user-bar-footer {
+    height: 60px;
+    width: 8vw;
+    min-width: 150px; 
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bar-footer-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    justify-content: center;
+    max-height: 50px;
+    width: 100%;
+}
+
+.bar-img{
+    z-index: 1;
+    max-width: 100px;
+}
+
+.main-container {
+    z-index: 1;
+    width: 100vw;
+    height: 100vh; 
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    flex-direction: row;
+}
+
+.footer-user-icon { 
+    font-size: 30px;
+    /* cursor: pointer; */
+    margin-right: 20px;
+    margin-left: 20px;
+} 
+
+.footer-user-icon:hover { 
+    font-size: 30px;
+    color: #a7a7a7;
+} 
+
+.user-msg-ball{
+    position: absolute;
+    width: 20px;
+    left: 35px;
+    bottom: 25px;
+    height: 20px;
+    background-color: rgb(216, 51, 51);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.msg-text {
+    font-size: 13px; 
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.bm-burger-button {
+    display: none;
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    left: 36px;
+    top: 36px;
+}
+
+.bm-overlay {
+    width: 0 !important;
+} 
+
+.bm-cross-button { 
+    display: none;
+} 
+
+.bm-menu {
+    padding: 2.5em 1.5em 0;
+    font-size: 1.15em;
+} 
+
+
+
+
+@media only screen and (max-width: 500px) {
+    .bm-burger-button {
+        display: block; 
+    } 
+    .main-user-bar {
+        display: none;
+    }
+}

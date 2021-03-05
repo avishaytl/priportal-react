@@ -18,14 +18,14 @@ export default class Title extends React.Component<TitleProps,TitleState>{
 			shadow: true,
 			colors: [
 				{
-					background: "#2A2C39",
-					text: "#ffffff",
-					bold: "#FF4056"
+					background: `#2A2C39`,
+					text: `#ffffff`,
+					bold: `#FF4056`
 				},
 				{
-					background: "#FCF751",
-					text: "#2A2C39",
-					bold: "#14151c"
+					background: `#FCF751`,
+					text: `#2A2C39`,
+					bold: `#14151c`
 				}
 			],
 			background: null,
@@ -53,7 +53,7 @@ export default class Title extends React.Component<TitleProps,TitleState>{
 	}
 
 	CreateShadow() {
-		if ("ontouchstart" in window === false && this.state.shadow) {
+		if (`ontouchstart` in window === false && this.state.shadow) {
 			let [moveX, moveY] = [this.state.pos.x / -100, this.state.pos.y / -120];
 
 			let [Section, firstWord, secondWord]: any = [
@@ -95,16 +95,16 @@ export default class Title extends React.Component<TitleProps,TitleState>{
 			<section
 			
 			style={{position:'absolute',top:-50,bottom:0,left:0,right:0,alignSelf:'center'}}
-				id="title"
+				id={`title`}
 				onMouseMove={this.onMouseMove.bind(this)} 
 			>
 				<h1 className={this.props.subColor} ref={this.section}>
-						{this.props.entry}{" "}
-					<span className="bold" ref={this.playword_1} style={boldStyle}>
+						{this.props.entry}{` `}
+					<span className={`bold`} ref={this.playword_1} style={boldStyle}>
 						{this.props.title}
 					</span> 
 					<br /> 
-					<span className="bold" ref={this.playword_2} style={boldStyle}> 
+					<span className={`bold`} ref={this.playword_2} style={boldStyle}> 
 					</span> 
 				</h1>
 			</section>
@@ -112,4 +112,4 @@ export default class Title extends React.Component<TitleProps,TitleState>{
 	}
 }
 
-// React.render(<App />, document.querySelector("body"));
+// React.render(<App />, document.querySelector(`body`));
