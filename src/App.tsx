@@ -51,11 +51,21 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
       let isDarkState =  theme.palette.background.default === '#303030';
       return({   
         bgImg: { 
-          backgroundColor: isDarkState ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.5)',
-          filter: isDarkState ? 'brightness(0)' : 'brightness(0.5)'
+          backgroundColor: isDarkState ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0)',
+          // filter: isDarkState ? 'brightness(0)' : 'brightness(0.5)'
         }, 
+        blurIn: { 
+          filter: isDarkState ? 'blur(0) brightness(0.6)' : '',
+          backgroundColor: isDarkState ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.3)',
+        }, 
+        blurOut: { 
+          filter: isDarkState ? 'blur(6px) brightness(0.6)' : 'blur(6px)',
+        },
         background: {
-          background: isDarkState ? '#303030' : '#ececec', 
+          background: isDarkState ? '#303030' : '#cecece', 
+        },
+        menuBackground: {
+          background: isDarkState ? '#010101' : '#bebebe',  
         },
         backgroundNative: {
           background: isDarkState ? '#ececec' : '#303030', 
@@ -67,7 +77,7 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
           color: data.secondColor,  
         },
         color: {
-          color: isDarkState ? '#ececec' : '#303030',
+          color: isDarkState ? '#cecece' : '#303030',
         },  
         colorNative: {
           color: isDarkState ? '#303030' : '#ececec', 

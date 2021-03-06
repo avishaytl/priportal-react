@@ -99,9 +99,9 @@ export default class Title extends React.Component<TitleProps,TitleState>{
 				onMouseMove={this.onMouseMove.bind(this)} 
 			>
 				<h1 className={this.props.subColor} ref={this.section}>
-						{this.props.entry}{` `}
-					<span className={`bold`} ref={this.playword_1} style={boldStyle}>
-						{this.props.title}
+						{/* {this.props.entry}{` `} */}
+					<span className={`${this.props.subColor}`} ref={this.playword_1}>
+						{this.props.entry}
 					</span> 
 					<br /> 
 					<span className={`bold`} ref={this.playword_2} style={boldStyle}> 

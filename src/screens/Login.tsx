@@ -29,6 +29,26 @@ const data = {
     secondColor: '#174768',
     softsolutions: 'developered by Softsolutions LTD 2021 ● v.24'
 }
+ 
+function Footer ({ on, styles, setDarkState, isDarkState }:any) {
+    const footerProps = useSpring({ opacity: on ? 1 : 0, display: on ? 'flex' : 'none', flexDirection:'column', from: { opacity: on ? 0 : 1, display: on ? 'none' : 'flex', flexDirection:'column'} }); 
+        return <div className={'footer'}> 
+                <animated.div style={footerProps} > 
+                    <div className={'footer-child'}>
+                      <IoEarthOutline className={`footer-icon ${styles.color}`}/>
+                      <IoHomeOutline className={`footer-icon ${styles.color}`}/>
+                      <IoContrastOutline onClick={()=> setDarkState(!isDarkState) } className={`footer-icon ${styles.color}`}/>
+                    </div>
+                    <p className={`footer-text ${styles.color}`}>{data.softsolutions}</p>  
+                </animated.div> 
+              </div> 
+}; 
+function CompanyTitleAnime ({ on, styles }:any) {
+    const titleProps = useSpring({ opacity: on ? 1 : 0, from: { opacity: on ? 0 : 1} }); 
+    return  <animated.div style={titleProps} >    
+                <Title entry={data.titleEntry} subColor={styles.color} title={data.titleCompanyName} background={data.secondColor}/>
+          </animated.div> 
+}; 
   
 function Login(props: any){   
     const [showUserTitle, setUserTitleAnime] = useState(true);
@@ -45,12 +65,12 @@ function Login(props: any){
       history.push('/main')
     }; 
   
-    const CompanyTitleAnime = ({ on }:any) => {
-      const iconProps = useSpring({ opacity: on ? 1 : 0, from: { opacity: on ? 0 : 1} }); 
-      return  <animated.div style={iconProps} >    
-                  <Title entry={data.titleEntry} subColor={styles.color} title={data.titleCompanyName} background={data.secondColor}/>
-              </animated.div> 
-    }; 
+    // const CompanyTitleAnime = ({ on }:any) => {
+    //   const iconProps = useSpring({ opacity: on ? 1 : 0, from: { opacity: on ? 0 : 1} }); 
+    //   return  <animated.div style={iconProps} >    
+    //               <Title entry={data.titleEntry} subColor={styles.color} title={data.titleCompanyName} background={data.secondColor}/>
+    //           </animated.div> 
+    // }; 
   
     const userProps = useSpring({ opacity: isLoading ? 0 : 1, from: { opacity: 1 }}); 
     const loaderProps = useSpring({ opacity: isLoading ? 1 : 0, from: { opacity: 0 }}); 
@@ -60,8 +80,9 @@ function Login(props: any){
           <ReactTooltip />
             <div className={'background-img'}> 
               <div className={`bg-blur ${styles.bgImg}`}></div>
-              <img className={'bg-img'} src='http://demo.softsolutions.co.il/priportal//bg-demo.jpg' alt='logo'/> 
-            </div>
+              {/* https://www.roxannasadventure.com/projects/woodlaptop.jpg */}
+                <img className={showLoginView ? `bg-img ${styles.blurOut}` : `bg-img ${styles.blurIn}`} src='http://demo.softsolutions.co.il/priportal//bg-demo.jpg' alt='logo'/> 
+              </div>
             {isLoading && <animated.div style={loaderProps}>
                   <div style={{position:'absolute', 
                   width:'100vw',
@@ -72,12 +93,12 @@ function Login(props: any){
                   left:0,
                   top:0, 
                 alignSelf:'center'}}> 
-                    <ClipLoader color={'#ececec'} loading={true} size={60} /> 
+                    <ClipLoader color={`${styles.color}`} loading={true} size={60} /> 
                   </div>
                 </animated.div>}
             <div className={'container'}> 
               <div className={`super-box`}> 
-                  {!showLoginView && <CompanyTitleAnime on={showUserTitle}/> } 
+                  {!showLoginView && !isLoading && <CompanyTitleAnime styles={styles} on={showUserTitle}/> } 
                   <div className={`super-box-container`}/>  
                       <div style={showLoginView  ? { opacity: 1, transform:'scale(.9)' } : {}} dir='rtl' className={`login-view`} onClick={()=>{ 
                           if(!showLoginView){ 
@@ -86,7 +107,7 @@ function Login(props: any){
                           }
                         }}>   
                         <animated.div  style={userProps}>
-                          <p className={`company-title ${styles.color}`}>
+                          <p className={`company-title ${styles.primaryMenuC}`}>
                           {data.titleCompanyName}
                         </p> 
                       <input ref={userRef} onKeyDown={(e)=>{
@@ -99,8 +120,9 @@ function Login(props: any){
                         <div style={{width:45,height:45,overflow:'hidden',position:'absolute',left:10,marginBottom: 10}}>
                           <div onClick={()=>{ 
                                 setLoadingTime(true); 
-                                setTimeout(() => {   
-                                  navigateToMain()
+                                setTimeout(() => {    
+                                  navigateToMain() 
+                                  setLoginView(false)
                                 }, 2000);
                           }} className={'input-btn'}>
                             <FiArrowLeft className={'input-icon-btn'}/>
@@ -116,6 +138,7 @@ function Login(props: any){
                                 }, 3000);
                               else{
                                 setTimeout(() => {   
+                                  setLoginView(false)
                                   navigateToMain()
                                 }, 1000);
                               }
@@ -146,16 +169,7 @@ function Login(props: any){
                   </animated.div> 
                 </div>   
             </div> 
-            <div className={'footer'}> 
-              <div className={'footer-child'} style={{justifyContent:'flex-start',paddingLeft: 30}}>
-                <p className={`footer-text ${styles.color}`}>{data.softsolutions}</p>
-              </div> 
-              <div className={'footer-child'} style={{justifyContent:'flex-end',paddingRight: 30}}>
-                <IoHomeOutline data-tip={tooltip.homeIcon} className={`footer-icon ${styles.color}`}/>
-                <IoEarthOutline data-tip={tooltip.earthIcon} className={`footer-icon ${styles.color}`}/>
-                <IoContrastOutline onClick={()=> props.setDarkState(!props.darkState) } data-tip={tooltip.theme} className={`footer-icon ${styles.color}`}/>
-              </div>
-            </div> 
+              {<Footer on={showLoginView} styles={styles} isDarkState={props.darkState} setDarkState={props.setDarkState}/> } 
             </div> 
           </div>   
     )
