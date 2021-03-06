@@ -19,7 +19,8 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import {useSpring, animated} from 'react-spring';  
 import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu'; 
+import Menu from '@material-ui/core/Menu';  
+import { Scrollbars } from 'react-custom-scrollbars';
 
 function stopEvent(event: any){
     if(event.preventDefault !== undefined)
@@ -353,9 +354,11 @@ function Main(props: any) {
                                         </p>  
                                     </div>
                                 </div>
-                                <div className={`main-inside ${styles.mainBackground}`}> 
-                                
-                                </div>
+                                <Scrollbars style={{width:'100vw',height:'calc(100vh - 60px)'}}>
+                                    <div className={`main-inside ${styles.mainBackground}`}>
+                                      <p style={{minHeight:'200vh'}}>main</p>
+                                    </div>
+                                </Scrollbars>
                             </div>
                             <UserMenu isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen} styles={styles}/>
                         </div>
