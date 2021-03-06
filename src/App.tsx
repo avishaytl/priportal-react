@@ -87,8 +87,8 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
           borderLeftStyle: 'solid',
           borderLeftWidth: 6, 
         },
-        light: {
-          color: '#ececec',
+        loginText: {
+          color:  isDarkState ? '#ececec' : '#303030',
         },
         lightB: {
           background: '#ececec',

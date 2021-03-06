@@ -35,18 +35,19 @@ function Footer ({ on, styles, setDarkState, isDarkState }:any) {
         return <div className={'footer'}> 
                 <animated.div style={footerProps} > 
                     <div className={'footer-child'}>
-                      <IoEarthOutline className={`footer-icon ${styles.color}`}/>
-                      <IoHomeOutline className={`footer-icon ${styles.color}`}/>
-                      <IoContrastOutline onClick={()=> setDarkState(!isDarkState) } className={`footer-icon ${styles.color}`}/>
+                      <IoEarthOutline className={`footer-icon ${styles.loginText}`}/>
+                      <IoHomeOutline className={`footer-icon ${styles.loginText}`}/>
+                      <IoContrastOutline onClick={()=> setDarkState(!isDarkState) } className={`footer-icon ${styles.loginText}`}/>
                     </div>
-                    <p className={`footer-text ${styles.color}`}>{data.softsolutions}</p>  
+                    <p className={`footer-text ${styles.loginText}`}>{data.softsolutions}</p>  
                 </animated.div> 
               </div> 
 }; 
+
 function CompanyTitleAnime ({ on, styles }:any) {
     const titleProps = useSpring({ opacity: on ? 1 : 0, from: { opacity: on ? 0 : 1} }); 
     return  <animated.div style={titleProps} >    
-                <Title entry={data.titleEntry} subColor={styles.color} title={data.titleCompanyName} background={data.secondColor}/>
+                <Title entry={data.titleEntry} subColor={styles.loginText} title={data.titleCompanyName} background={data.secondColor}/>
           </animated.div> 
 }; 
   
@@ -68,7 +69,7 @@ function Login(props: any){
     // const CompanyTitleAnime = ({ on }:any) => {
     //   const iconProps = useSpring({ opacity: on ? 1 : 0, from: { opacity: on ? 0 : 1} }); 
     //   return  <animated.div style={iconProps} >    
-    //               <Title entry={data.titleEntry} subColor={styles.color} title={data.titleCompanyName} background={data.secondColor}/>
+    //               <Title entry={data.titleEntry} subColor={styles.loginText} title={data.titleCompanyName} background={data.secondColor}/>
     //           </animated.div> 
     // }; 
   
@@ -93,7 +94,7 @@ function Login(props: any){
                   left:0,
                   top:0, 
                 alignSelf:'center'}}> 
-                    <ClipLoader color={`${styles.color}`} loading={true} size={60} /> 
+                    <ClipLoader color={props.darkState ? `#ececec` : `#303030`} loading={true} size={60} /> 
                   </div>
                 </animated.div>}
             <div className={'container'}> 
@@ -156,11 +157,11 @@ function Login(props: any){
                           }} 
                           inputProps={{ 'aria-label': 'checkbox with default color' }}
                         />  
-                        <p className={`margin0-padding0 ${styles.color}`}>
+                        <p className={`margin0-padding0 ${styles.loginText}`}>
                         {data.priorityUser}
                         </p>
                       </div>
-                        <p style={{marginTop:10}} className={`margin0-padding0 ${styles.color}`}> 
+                        <p style={{marginTop:10}} className={`margin0-padding0 ${styles.loginText}`}> 
                         {data.forgotPassword}
                         </p> 
                         {isErrorMsg && <p style={{marginTop:10, color:'#e72222',fontWeight:'bold'}} className={'margin0-padding0'}>

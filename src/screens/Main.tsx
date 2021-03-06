@@ -16,6 +16,8 @@ import ListItem from "@material-ui/core/ListItem";
 import Collapse from "@material-ui/core/Collapse";
 import List from "@material-ui/core/List";
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
+import {useSpring, animated} from 'react-spring';  
 
 document.onkeyup = keyboardUp;
 document.oncontextmenu = function(e){
@@ -196,9 +198,17 @@ function UserMenu(props: any) {
     );
 } 
 
+function MainContainer ({ on, child }:any) {
+    const mainProps = useSpring({ opacity: on ? 1 : 0, from: { opacity: on ? 0 : 1} }); 
+    return  <animated.div style={mainProps} >    
+                {child}
+          </animated.div> 
+}; 
+
 function Main(props: any) {  
     const [isMenuOpen,setMenuOpen] = useState(false) 
     const [isReady,setIsReady] = useState(false);
+    const [isBackPress,setBackPress] = useState(false);
     const styles = props.styles; 
     document.onkeydown = keyboardDown;
 
@@ -221,6 +231,11 @@ function Main(props: any) {
             runSortCut(str + 6)
     }
 
+
+
+    const [ locationKeys, setLocationKeys ]:any = useState([])
+    const history = useHistory()
+     
     useEffect(()=>{
         if(!isReady){ 
             setIsReady(true)
@@ -228,32 +243,60 @@ function Main(props: any) {
                 setMenuOpen(true) 
             }, 1000);
         } 
-    })
+
+        return history.listen((location: any) => {
+          if (history.action === 'PUSH') {
+            setLocationKeys([ location.key ])
+          }
+      
+          if (history.action === 'POP') {
+            if (locationKeys[1] === location.key) {
+                setBackPress(true) 
+                setMenuOpen(false) 
+                setTimeout(() => {
+                    setLocationKeys(([ _, ...keys ]:any) => keys) 
+                }, 1700);
+      
+              // Handle forward event
+      
+            } else {
+              setLocationKeys((keys: any) => [ location.key, ...keys ])
+      
+              // Handle back event
+      
+            }
+          }
+        })
+    }, [ locationKeys, isReady ])
 
     return( <div className={`main-screen ${styles.background} ${isReady ? styles.transform : ``}`}>
-          <ReactTooltip place={'left'}/> 
-          <div id={`outer-container`}>
-            <ContextMenu darkState={props.darkState} isMenuOpen={isMenuOpen} pageWrapId={ `page-wrap` } outerContainerId={ `outer-container` } styles={styles}/> 
-            <main id={`page-wrap`}> 
-              <div className={'main-container'}>
-                <div className={`main ${styles.primaryMenuB}`}>
-                    <div style={{width:10}}/>
-                    <div className={`main-header`}> 
-                        <div className={`user-title`}> 
-                            <IoIosArrowDown style={{fontSize:16,margin:5}} className={`margin0-padding0 ${styles.color}`}/>
-                            <p className={`user-bar-title ${styles.color}`}>
-                                {data.barCompanyName}
-                            </p>  
-                        </div>
-                    </div>
-                    <div className={`main-inside`}>
+            <MainContainer on={!isBackPress} child={
+                <>
+                    <ReactTooltip place={'left'}/> 
+                    <div id={`outer-container`}>
+                        <ContextMenu darkState={props.darkState} isMenuOpen={isMenuOpen} pageWrapId={ `page-wrap` } outerContainerId={ `outer-container` } styles={styles}/> 
+                        <main id={`page-wrap`}> 
+                        <div className={'main-container'}>
+                            <div className={`main ${styles.primaryMenuB}`}>
+                                <div style={{width:10}}/>
+                                <div className={`main-header`}> 
+                                    <div className={`user-title`}> 
+                                        <IoIosArrowDown style={{fontSize:16,margin:5}} className={`margin0-padding0 ${styles.color}`}/>
+                                        <p className={`user-bar-title ${styles.color}`}>
+                                            {data.barCompanyName}
+                                        </p>  
+                                    </div>
+                                </div>
+                                <div className={`main-inside`}>
 
-                    </div>
-                </div>
-                <UserMenu isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen} styles={styles}/>
-              </div>
-            </main>
-          </div>
+                                </div>
+                            </div>
+                            <UserMenu isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen} styles={styles}/>
+                        </div>
+                        </main>
+                    </div> 
+                </> 
+            }/> 
         </div>)
 }
 

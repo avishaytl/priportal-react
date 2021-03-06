@@ -2,7 +2,9 @@
 /***********************************/
 /*********     App CSS     *********/
 /***********************************/
-
+body,html {
+    background-color: #000;
+}
 .login-screen, .main-screen { 
     -webkit-box-pack: center;
      -ms-flex-pack: center;
