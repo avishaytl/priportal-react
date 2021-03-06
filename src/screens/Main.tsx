@@ -139,6 +139,9 @@ const data = {
   
 }  
  
+function runSortCut(str: any){
+    alert(str)
+}
 
 function ContextMenu(props: any) { 
     const styles = props.styles;  
@@ -161,22 +164,22 @@ function UserMenu(props: any) {
             <div className={`user-bar-container`}>
                 <div className={`user-bar-grid-icons`}> 
                     <div className={`grid-item hvr-grow `}>
-                        <FiSearch data-tip={tooltip.moduleIcon + '1'} className={`bar-user-icon ${styles.color}`}/>
+                        <FiSearch data-tip={tooltip.moduleIcon + '1'} onClick={()=>runSortCut(tooltip.moduleIcon + '1')} className={`bar-user-icon ${styles.color}`}/>
                     </div>
                     <div className={`grid-item hvr-grow `}>
-                        <AiFillFileAdd data-tip={tooltip.moduleIcon + '2'} className={`bar-user-icon ${styles.color}`}/>
+                        <AiFillFileAdd data-tip={tooltip.moduleIcon + '2'} onClick={()=>runSortCut(tooltip.moduleIcon + '2')}  className={`bar-user-icon ${styles.color}`}/>
                     </div>
                     <div className={`grid-item hvr-grow `}>
-                        <AiOutlineStar data-tip={tooltip.moduleIcon + '3'} className={`bar-user-icon ${styles.color}`}/>
+                        <AiOutlineStar data-tip={tooltip.moduleIcon + '3'} onClick={()=>runSortCut(tooltip.moduleIcon + '3')}  className={`bar-user-icon ${styles.color}`}/>
                     </div>  
                     <div className={`grid-item hvr-grow  `}>
-                        <RiSendPlaneFill data-tip={tooltip.moduleIcon + '4'} className={`bar-user-icon ${styles.color}`}/>
+                        <RiSendPlaneFill data-tip={tooltip.moduleIcon + '4'} onClick={()=>runSortCut(tooltip.moduleIcon + '4')}  className={`bar-user-icon ${styles.color}`}/>
                     </div>
                     <div className={`grid-item hvr-grow  `}>
-                        <AiFillFolderOpen data-tip={tooltip.moduleIcon + '5'} className={`bar-user-icon ${styles.color}`}/>
+                        <AiFillFolderOpen data-tip={tooltip.moduleIcon + '5'} onClick={()=>runSortCut(tooltip.moduleIcon + '5')}  className={`bar-user-icon ${styles.color}`}/>
                     </div>
                     <div className={`grid-item hvr-grow  `}>
-                        <AiFillFolder data-tip={tooltip.moduleIcon + '6'} className={`bar-user-icon ${styles.color}`}/>
+                        <AiFillFolder data-tip={tooltip.moduleIcon + '6'} onClick={()=>runSortCut(tooltip.moduleIcon + '6')}  className={`bar-user-icon ${styles.color}`}/>
                     </div>
                     <div className={`grid-item hvr-grow  `}>
                         {data.userMsg ? <div className={`user-msg-ball`}>
@@ -195,17 +198,40 @@ function UserMenu(props: any) {
 
 function Main(props: any) {  
     const [isMenuOpen,setMenuOpen] = useState(false) 
+    const [isReady,setIsReady] = useState(false);
     const styles = props.styles; 
     document.onkeydown = keyboardDown;
 
     function keyboardDown(e: any){
         console.debug(e.keyCode,e.key)
+        let str = ' קיצור דרך ';
         if(e.keyCode === 68)//d
             setMenuOpen(!isMenuOpen)
-        
+        if(e.keyCode === 49)
+            runSortCut(str + 1)
+        if(e.keyCode === 50)
+            runSortCut(str + 2) 
+        if(e.keyCode === 51)
+            runSortCut(str + 3) 
+        if(e.keyCode === 52)
+            runSortCut(str + 4) 
+        if(e.keyCode === 53)
+            runSortCut(str + 5)
+        if(e.keyCode === 53)
+            runSortCut(str + 6)
     }
-    return( <div className={`main-screen ${styles.background}`}>
-          <ReactTooltip /> 
+
+    useEffect(()=>{
+        if(!isReady){ 
+            setIsReady(true)
+            setTimeout(() => {
+                setMenuOpen(true) 
+            }, 1000);
+        } 
+    })
+
+    return( <div className={`main-screen ${styles.background} ${isReady ? styles.transform : ``}`}>
+          <ReactTooltip place={'left'}/> 
           <div id={`outer-container`}>
             <ContextMenu darkState={props.darkState} isMenuOpen={isMenuOpen} pageWrapId={ `page-wrap` } outerContainerId={ `outer-container` } styles={styles}/> 
             <main id={`page-wrap`}> 

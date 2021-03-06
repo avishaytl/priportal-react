@@ -99,11 +99,14 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
         darkB: {
           background: '#303030',
         },
+        transform: {
+          willChange: 'unset',
+        },
     })
   });
   const classes = useStyles(); 
   return (<TransitionGroup>
-            <CSSTransition key={location.key} classNames={`slide`} timeout={2000}>
+            <CSSTransition key={location.key} classNames={`slide`} timeout={3000}>
               <Switch location={location}>
                 <Route path={`/`} component={()=><LoginScreen  styles={classes} setDarkState={setDarkState} darkState={darkState}/> } exact /> 
                 <Route path={`/main`} component={()=><MainScreen  styles={classes} setDarkState={setDarkState} darkState={darkState}/> } />
