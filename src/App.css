@@ -434,17 +434,20 @@ title .dr {
     justify-content: flex-start;
 }
  
-.main-inside{
+.main-inside{ 
     width: calc(100vw - 60px);
     /* height: calc(100vh - 60px);  */
     -moz-box-shadow:    inset 0 0 10px #3a3a3a;
     -webkit-box-shadow: inset 0 0 10px #3a3a3a;
-    box-shadow:         inset 0 0 10px #3a3a3a;  
+    box-shadow:         inset 0 0 10px #3a3a3a;   
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: flex-start;
     overflow-y: visible;
+    will-change: transform;
+    -webkit-transition: all 0.35s ease;
+    transition: all 0.35s ease;
 }
 
 .main-header {
@@ -766,7 +769,7 @@ main {
 .main-item4 { grid-area: right; }
 .main-item5 { grid-area: footer; }
 
-.grid-container {
+.grid-container { 
     min-width: 100%;
     min-height: calc(100vh - 60px);
     display: grid;

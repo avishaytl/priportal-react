@@ -103,6 +103,16 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
         },
         mainBackground: {
           background: isDarkState ? '#202020 !important' : '#ececec !important', 
+        },
+        mainWidthOpen: {
+          position:'absolute',
+          width: 'calc(100% - 300px)',
+          left: 0, 
+        }, 
+        mainWidthClose: {
+          position:'absolute',
+          width: '100%',
+          left: 0, 
         }
     })
   });

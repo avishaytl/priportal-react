@@ -201,6 +201,13 @@ function MainContainer ({ on, child }:any) {
           </animated.div> 
 }; 
 
+function MainView ({ on, child }:any) {
+    const mainProps = useSpring({ width: on ? 100 : 200, from: { width: on ? 0 : 0} }); 
+    return  <animated.div style={mainProps} >    
+                {child}
+          </animated.div> 
+}; 
+
 const initialState = {
     mouseX: null,
     mouseY: null,
@@ -356,15 +363,17 @@ function Main(props: any) {
                                     </div>
                                 </div>
                                 <Scrollbars style={{width:'100vw',height:'calc(100vh - 60px)'}}>
-                                    <div className={`main-inside ${styles.lightB}`}> 
-                                        <div className="grid-container">
-                                            <div className="main-item1">1</div>
-                                            <div className="main-item2">2</div>
-                                            <div className="main-item3">3</div>  
-                                            <div className="main-item4">4</div>
-                                            <div className="main-item5">5</div>
-                                        </div>
-                                    </div>
+                                    {/* <MainView on={isMenuOpen} child={ */}
+                                        {/* <div className={`main-inside ${styles.lightB} ${isMenuOpen ? styles.mainWidthOpen : styles.mainWidthClose}`}>  */}
+                                        <div className={`main-inside ${styles.lightB}`}> 
+                                            <div className="grid-container">
+                                                <div className="main-item1">1</div>
+                                                <div className="main-item2">2</div>
+                                                <div className="main-item3">3</div>  
+                                                <div className="main-item4">4</div>
+                                                <div className="main-item5">5</div>
+                                            </div>
+                                        </div>  
                                 </Scrollbars>
                             </div>
                             <UserMenu isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen} styles={styles}/>
