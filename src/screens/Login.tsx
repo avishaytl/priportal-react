@@ -94,7 +94,7 @@ function Login(props: any){
                   left:0,
                   top:0, 
                 alignSelf:'center'}}> 
-                    <ClipLoader color={props.darkState ? `#ececec` : `#303030`} loading={true} size={60} /> 
+                    <ClipLoader color={props.darkState ? `#ececec` : `#202020`} loading={true} size={60} /> 
                   </div>
                 </animated.div>}
             <div className={'container'}> 

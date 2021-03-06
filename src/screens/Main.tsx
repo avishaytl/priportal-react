@@ -2,7 +2,7 @@ import '../App.css';
 import '../App.scss';  
 import React, { useEffect, useState } from 'react'; 
 import ReactTooltip from 'react-tooltip'; 
-import { push as Menu } from 'react-burger-menu'; 
+import { push as MenuPush } from 'react-burger-menu'; 
 import { FiSettings, FiSearch } from 'react-icons/fi'; 
 import { BiMessageRoundedDetail, BiNotepad } from 'react-icons/bi'; 
 import { AiFillFileAdd, AiOutlineStar, AiFillHome, AiFillFolderOpen, AiFillFolder, AiTwotoneSetting, AiOutlineFolder, AiOutlineUser, AiOutlineBell  } from 'react-icons/ai'; 
@@ -18,19 +18,14 @@ import List from "@material-ui/core/List";
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import {useSpring, animated} from 'react-spring';  
-
-document.onkeyup = keyboardUp;
-document.oncontextmenu = function(e){
-// var evt = new Object({keyCode:93});
-stopEvent(e);
-// keyboardUp(evt);
-}
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu'; 
 
 function stopEvent(event: any){
-if(event.preventDefault !== undefined)
-    event.preventDefault();
-if(event.stopPropagation !== undefined)
-    event.stopPropagation();
+    if(event.preventDefault !== undefined)
+        event.preventDefault();
+    if(event.stopPropagation !== undefined)
+        event.stopPropagation();
 }
 
 function keyboardUp(e: any){
@@ -42,10 +37,10 @@ function ListChild(props: any){
     let handleClick = () => {
         setOpen(!open)
     }
-    console.debug('props.darkState',props.darkState)
+    // console.debug('props.darkState',props.darkState)
     const item = props.item;
     const styles = props.styles 
-    let bg = props.darkState ? '#303030' : '#ececec';
+    let bg = props.darkState ? '#202020' : '#ececec';
     let ho = props.darkState ? '#141414' : '#bebebe';
     const MenuItem = styled.div` 
         flex:1;
@@ -56,8 +51,8 @@ function ListChild(props: any){
     return (
         <React.Fragment key={props.index}>
             <ListItem key={props.index} onClick={handleClick}> 
-                <MenuItem>
-                    <div id={`menu1`} className={`menu-item`}>
+                <MenuItem key={props.index}>
+                    <div className={`menu-item`}>
                         <div className={`menu-text ${styles.menuItem}`}> 
                             <p className={`margin0-padding0 font20  ${styles.color}`}>{item.categorie.label}</p>
                             {item.category !== null ? open ? <FcOpenedFolder className={`menu-folder`}/> : <FcFolder className={`menu-folder`}/> : null} 
@@ -72,11 +67,11 @@ function ListChild(props: any){
                         {item.category.map((ite: any,l: any) => { 
                             if(ite.category)
                                 return <div style={{paddingRight:5}} className={`${styles.menuBackground}`} key={l}>
-                                            <ListChild darkState={props.darkState} key={l} styles={styles} item={ite} ket={l} index={l}/> 
+                                            <ListChild darkState={props.darkState} key={l} styles={styles} item={ite} index={l}/> 
                                         </div>
                             return  <MenuItem key={l}>
                                         <ListItem key={l}>
-                                            <div style={{paddingRight:5}} id={`menu1`} className={`menu-item ${styles.menuBackground}`}>
+                                            <div style={{paddingRight:5}} className={`menu-item ${styles.menuBackground}`}>
                                                 <div className={`menu-text ${styles.menuItem}`}>  
                                                     <p className={`margin0-padding0 font20 ${styles.color}`}>{ite.categorie.label}</p>
                                                     <BiNotepad className={`menu-folder ${styles.color}`}/>
@@ -147,11 +142,11 @@ function runSortCut(str: any){
 
 function ContextMenu(props: any) { 
     const styles = props.styles;  
-    return( <Menu burgerBarClassName={styles.backgroundNative} isOpen={props.isMenuOpen} pageWrapId={props.pageWrapId} outerContainerId={props.outerContainerId} className={`burger-menu ${styles.background}`} right >
+    return( <MenuPush burgerBarClassName={styles.backgroundNative} isOpen={props.isMenuOpen} pageWrapId={props.pageWrapId} outerContainerId={props.outerContainerId} className={`burger-menu ${styles.background}`} right >
                 <div className={`menu-list`}> 
                     <CategoryList darkState={props.darkState} data={data.menuCategories} styles={styles}/>
                 </div>
-            </Menu>)
+            </MenuPush>)
     
 } 
 
@@ -159,7 +154,7 @@ function UserMenu(props: any) {
     const styles = props.styles;
     return ( 
         <div className={`main-user-bar ${styles.background}`}>
-            <div onClick={()=>props.setMenuOpen(!props.isMenuOpen)}  className={`user-bar-bg-click`}/> 
+            <div onClick={()=>props.setMenuOpen(!props.isMenuOpen)} className={`user-bar-bg-click`}/> 
             <div className={`user-bar-img ${styles.lightB}`}>
                 <img className={`bar-img`} src='http://demo.softsolutions.co.il/images/mobilelogo.png' alt='logo'/>    
             </div>  
@@ -205,37 +200,56 @@ function MainContainer ({ on, child }:any) {
           </animated.div> 
 }; 
 
+const initialState = {
+    mouseX: null,
+    mouseY: null,
+  };
+  
 function Main(props: any) {  
     const [isMenuOpen,setMenuOpen] = useState(false) 
     const [isReady,setIsReady] = useState(false);
     const [isBackPress,setBackPress] = useState(false);
     const styles = props.styles; 
-    document.onkeydown = keyboardDown;
-
-    function keyboardDown(e: any){
-        console.debug(e.keyCode,e.key)
-        let str = ' קיצור דרך ';
-        if(e.keyCode === 68)//d
-            setMenuOpen(!isMenuOpen)
-        if(e.keyCode === 49)
-            runSortCut(str + 1)
-        if(e.keyCode === 50)
-            runSortCut(str + 2) 
-        if(e.keyCode === 51)
-            runSortCut(str + 3) 
-        if(e.keyCode === 52)
-            runSortCut(str + 4) 
-        if(e.keyCode === 53)
-            runSortCut(str + 5)
-        if(e.keyCode === 53)
-            runSortCut(str + 6)
-    }
-
-
-
     const [ locationKeys, setLocationKeys ]:any = useState([])
-    const history = useHistory()
-     
+    const history = useHistory() 
+    const [state, setState]:any = React.useState(initialState);
+    const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const options = [
+        'העתק',
+        'הדבק',
+        'קיצור דרך 1',
+        'קיצור דרך 2',
+        'קיצור דרך 3',
+        'קיצור דרך 4',
+        'קיצור דרך 5',
+        'קיצור דרך 6',
+      ];
+      const handleClick = (event: any) => {
+          event.preventDefault();
+          setState({
+            mouseX: event.clientX - 2,
+            mouseY: event.clientY - 4,
+          });
+      };
+  
+      const handleClose = () => {
+          setState(initialState);
+      };
+    
+    const handleMenuItemClick = (event: any, index: any) => {
+        setSelectedIndex(index);
+        setState(initialState);
+    }; 
+
+    document.onkeydown = keyboardDown;document.onkeyup = keyboardUp;
+    document.oncontextmenu = function(e){
+    // var evt = new Object({keyCode:93});
+        console.debug('e.currentTarget',e.currentTarget)
+        // handleClickListItem(e)
+        stopEvent(e);
+    // keyboardUp(evt);
+    }
+      
     useEffect(()=>{
         if(!isReady){ 
             setIsReady(true)
@@ -267,12 +281,62 @@ function Main(props: any) {
             }
           }
         })
-    }, [ locationKeys, isReady ])
+    }, [ locationKeys, isReady ]) 
 
-    return( <div className={`main-screen ${styles.background} ${isReady ? styles.transform : ``}`}>
+    function keyboardDown(e: any){
+        console.debug(e.keyCode,e.key)
+        let str = ' קיצור דרך ';
+        if(e.keyCode === 68)//d
+            setMenuOpen(!isMenuOpen)
+        if(e.keyCode === 49)
+            runSortCut(str + 1)
+        if(e.keyCode === 50)
+            runSortCut(str + 2) 
+        if(e.keyCode === 51)
+            runSortCut(str + 3) 
+        if(e.keyCode === 52)
+            runSortCut(str + 4) 
+        if(e.keyCode === 53)
+            runSortCut(str + 5)
+        if(e.keyCode === 53)
+            runSortCut(str + 6)
+    }
+    let ho = props.darkState ? '#141414' : '#bebebe';
+    const MenuItemStyle = styled.div` 
+        flex:1;
+        :hover {
+            background: ${ho}; 
+        }`  
+    return( <div onContextMenu={handleClick} className={`main-screen ${styles.background} ${isReady ? styles.transform : ``}`}>
+            <ReactTooltip place={'left'}/> 
             <MainContainer on={!isBackPress} child={
-                <>
-                    <ReactTooltip place={'left'}/> 
+                <>  
+                        <Menu 
+                            dir={'rtl'}
+                            keepMounted
+                            open={state.mouseY !== null}
+                            onClose={handleClose}
+                            anchorReference="anchorPosition"
+                            anchorPosition={
+                            state.mouseY !== null && state.mouseX !== null
+                                ? { top: state.mouseY, left: state.mouseX }
+                                : undefined
+                            } 
+                        > 
+                            {options.map((option, index) => (
+                            <MenuItem 
+                                style={{fontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif`}}
+                                key={option}
+                                disabled={index === 0 || index === 1}
+                                // selected={index === selectedIndex}
+                                onClick={(event) => handleMenuItemClick(event, index)}
+                            >
+                                <MenuItemStyle>
+                                    {option}
+                                </MenuItemStyle>
+                            </MenuItem>
+                            ))} 
+                        </Menu>  
                     <div id={`outer-container`}>
                         <ContextMenu darkState={props.darkState} isMenuOpen={isMenuOpen} pageWrapId={ `page-wrap` } outerContainerId={ `outer-container` } styles={styles}/> 
                         <main id={`page-wrap`}> 
@@ -280,15 +344,17 @@ function Main(props: any) {
                             <div className={`main ${styles.primaryMenuB}`}>
                                 <div style={{width:10}}/>
                                 <div className={`main-header`}> 
-                                    <div className={`user-title`}> 
+                                    <div onClick={(e)=>{console.debug(e.currentTarget);
+                                        // handleClickListItem(e)
+                                        }} className={`user-title`}> 
                                         <IoIosArrowDown style={{fontSize:16,margin:5}} className={`margin0-padding0 ${styles.color}`}/>
                                         <p className={`user-bar-title ${styles.color}`}>
                                             {data.barCompanyName}
                                         </p>  
                                     </div>
                                 </div>
-                                <div className={`main-inside`}>
-
+                                <div className={`main-inside ${styles.mainBackground}`}> 
+                                
                                 </div>
                             </div>
                             <UserMenu isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen} styles={styles}/>

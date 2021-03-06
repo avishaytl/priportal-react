@@ -47,12 +47,11 @@ const data = {
 }
 
 const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) => {
-  const useStyles = makeStyles((theme) => {
+  const useStyles = makeStyles((theme: any) => {
       let isDarkState =  theme.palette.background.default === '#303030';
       return({   
         bgImg: { 
-          backgroundColor: isDarkState ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0)',
-          // filter: isDarkState ? 'brightness(0)' : 'brightness(0.5)'
+          backgroundColor: isDarkState ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0)', 
         }, 
         blurIn: { 
           filter: isDarkState ? 'blur(0) brightness(0.6)' : '',
@@ -62,13 +61,13 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
           filter: isDarkState ? 'blur(6px) brightness(0.6)' : 'blur(6px)',
         },
         background: {
-          background: isDarkState ? '#303030' : '#cecece', 
+          background: isDarkState ? '#191919' : '#cecece', 
         },
         menuBackground: {
           background: isDarkState ? '#010101' : '#bebebe',  
         },
         backgroundNative: {
-          background: isDarkState ? '#ececec' : '#303030', 
+          background: isDarkState ? '#ececec' : '#202020', 
         },
         primaryMenuB: { 
           background: data.secondColor,  
@@ -77,10 +76,10 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
           color: data.secondColor,  
         },
         color: {
-          color: isDarkState ? '#cecece' : '#303030',
+          color: isDarkState ? '#cecece' : '#202020',
         },  
         colorNative: {
-          color: isDarkState ? '#303030' : '#ececec', 
+          color: isDarkState ? '#202020' : '#ececec', 
         },
         menuItem: { 
           borderLeftColor: data.secondColor, 
@@ -88,20 +87,23 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
           borderLeftWidth: 6, 
         },
         loginText: {
-          color:  isDarkState ? '#ececec' : '#303030',
+          color:  isDarkState ? '#ececec' : '#202020',
         },
         lightB: {
           background: '#ececec',
         },
         dark: {
-          color: '#303030', 
+          color: '#202020', 
         },
         darkB: {
-          background: '#303030',
+          background: '#202020',
         },
         transform: {
           willChange: 'unset',
         },
+        mainBackground: {
+          background: isDarkState ? '#202020' : '#ececec', 
+        }
     })
   });
   const classes = useStyles(); 
