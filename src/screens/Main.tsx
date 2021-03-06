@@ -302,7 +302,7 @@ function Main(props: any) {
         if(e.keyCode === 53)
             runSortCut(str + 6)
     }
-    let ho = props.darkState ? '#141414' : '#bebebe';
+    let ho = props.darkState ? '#bebebe' : '#bebebe';
     const MenuItemStyle = styled.div` 
         flex:1;
         :hover {
@@ -313,6 +313,7 @@ function Main(props: any) {
             <MainContainer on={!isBackPress} child={
                 <>  
                         <Menu 
+                            //className={`${styles.mainBackground}`}
                             dir={'rtl'}
                             keepMounted
                             open={state.mouseY !== null}
@@ -355,8 +356,14 @@ function Main(props: any) {
                                     </div>
                                 </div>
                                 <Scrollbars style={{width:'100vw',height:'calc(100vh - 60px)'}}>
-                                    <div className={`main-inside ${styles.mainBackground}`}>
-                                      <p style={{minHeight:'200vh'}}>main</p>
+                                    <div className={`main-inside ${styles.lightB}`}> 
+                                        <div className="grid-container">
+                                            <div className="main-item1">1</div>
+                                            <div className="main-item2">2</div>
+                                            <div className="main-item3">3</div>  
+                                            <div className="main-item4">4</div>
+                                            <div className="main-item5">5</div>
+                                        </div>
                                     </div>
                                 </Scrollbars>
                             </div>

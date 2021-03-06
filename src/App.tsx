@@ -61,7 +61,7 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
           filter: isDarkState ? 'blur(6px) brightness(0.6)' : 'blur(6px)',
         },
         background: {
-          background: isDarkState ? '#191919' : '#cecece', 
+          background: isDarkState ? '#191919' : '#d5d5d5', 
         },
         menuBackground: {
           background: isDarkState ? '#010101' : '#bebebe',  
@@ -76,7 +76,7 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
           color: data.secondColor,  
         },
         color: {
-          color: isDarkState ? '#cecece' : '#202020',
+          color: isDarkState ? '#d5d5d5' : '#202020',
         },  
         colorNative: {
           color: isDarkState ? '#202020' : '#ececec', 
@@ -102,7 +102,7 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
           willChange: 'unset',
         },
         mainBackground: {
-          background: isDarkState ? '#202020' : '#ececec', 
+          background: isDarkState ? '#202020 !important' : '#ececec !important', 
         }
     })
   });
