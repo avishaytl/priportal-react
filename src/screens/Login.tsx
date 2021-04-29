@@ -1,178 +1,287 @@
 import '../App.css'; 
 import '../App.scss';  
-import { FiArrowLeft } from 'react-icons/fi';
-import { IoEarthOutline, IoHomeOutline, IoContrastOutline } from 'react-icons/io5'; 
-import Checkbox from '@material-ui/core/Checkbox';
-import React, { useRef, useState } from 'react';
-import {useSpring, animated} from 'react-spring';  
-import ClipLoader from 'react-spinners/ClipLoader';
-import Title from '../Title';
-import ReactTooltip from 'react-tooltip';
+import { BsArrowRight } from 'react-icons/bs';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
+import { useRef, useState } from 'react'; 
+// import ReactTooltip from 'react-tooltip';
 import { useHistory } from 'react-router-dom'; 
+import styled from 'styled-components'; 
 
-const tooltip = {
-    homeIcon: 'הוספה למסך בית',
-    earthIcon: 'שפה',
-    theme: 'ערכת נושא',
+interface UserLoginProps{
+  position: string; // left, right, mid
+  isPriorityUser: boolean;
+  userName: string;
+  userPass: string;
+  imgSrc: string;
+  language: string;
+  onLoginPress: ()=> void;
+  onLangauagePress: ()=> void;
 }
 
-const data = {
-    errorMsg: 'שם משתמש או סיסמא שגויים',
-    earthIcon: 'החלפת שפה',
-    forgotPassword: 'שכחתי סיסמא?',
-    priorityUser: 'משתמש פריוריטי',
-    user: 'שם משתמש',
-    password: 'סיסמא',
-    titleEntry: 'כניסה',
-    titleCompanyName: 'Demo System', 
-    primaryColor: '#48c0ee',
-    secondColor: '#174768',
-    softsolutions: 'developered by Softsolutions LTD 2021 ● v.24'
+interface UserInputProps{
+  value: string;
+  type: string;
+  userRefs: any; 
+  onLoginPress: ()=> void;
 }
- 
-function Footer ({ on, styles, setDarkState, isDarkState }:any) {
-    const footerProps = useSpring({ opacity: on ? 1 : 0, display: on ? 'flex' : 'none', flexDirection:'column', from: { opacity: on ? 0 : 1, display: on ? 'none' : 'flex', flexDirection:'column'} }); 
-        return <div className={'footer'}> 
-                <animated.div style={footerProps} > 
-                    <div className={'footer-child'}>
-                      <IoEarthOutline className={`footer-icon ${styles.loginText}`}/>
-                      <IoHomeOutline className={`footer-icon ${styles.loginText}`}/>
-                      <IoContrastOutline onClick={()=> setDarkState(!isDarkState) } className={`footer-icon ${styles.loginText}`}/>
-                    </div>
-                    <p className={`footer-text ${styles.loginText}`}>{data.softsolutions}</p>  
-                </animated.div> 
-              </div> 
-}; 
 
-function CompanyTitleAnime ({ on, styles }:any) {
-    const titleProps = useSpring({ opacity: on ? 1 : 0, from: { opacity: on ? 0 : 1} }); 
-    return  <animated.div style={titleProps} >    
-                <Title entry={data.titleEntry} subColor={styles.loginText} title={data.titleCompanyName} background={data.secondColor}/>
-          </animated.div> 
-}; 
-  
-function Login(props: any){   
-    const [showUserTitle, setUserTitleAnime] = useState(true);
-    const [showLoginView, setLoginView] = useState(false);
-    const [isLoading, setLoadingTime] = useState(false); 
-    const [isErrorMsg, setErrorMsg] = useState(false);  
-    const userRef: any = useRef(null);  
-    const passRef: any = useRef(null);  
-    const history = useHistory();
-    const styles = props.styles;
+const TitleModal = styled.h1` 
+  color: #383838;
+  font-weight: 600;
+  font-size: 4vh;
+  margin: 15px;
+  text-align: center;
+`
+const LangButton = styled.div` 
+  width: 44px;
+  height: 24px; 
+  background: #dbe8f2;
+  border-radius: 18px / 12px; 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 2px;
+  transition: all .1s ease-in-out;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  :hover{ 
+    background: #bfd1e0;
+    -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.05);
+    box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.05); 
+  }
+`
+const UserInputView = styled.div` 
+  width: 100%;
+  height: 80px; 
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center; 
+  margin-top: 2px;
+  margin-bottom: 2px; 
+` 
+const UserInput = styled.div` 
+  width: 100%;
+  height: 50px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: #ececec; 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start; 
+  border-radius: 8px;  
+  transition: all .1s ease-in-out;
+  border: solid 1px #cecece;
+  :hover{
+    transform: scale(1.02); 
+    -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.05);
+    box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.05); 
+  }
+` 
+const UserInputLabel = styled.label`  
+  display: block;
+  position: relative; 
+  margin-bottom: 3px;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+`  
+const LangValue = styled.p` 
+  font-size: 14px;
+  color: #314570;
+  font-weight: 500;
+  `
+  const LoginButton = styled.div` 
+  width: 100%;
+  height: 50px;
+  background-image: linear-gradient(to right, #121e34 , #314570);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.25);
+  box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.25); 
+  transition: all .1s ease-in-out;
+  :hover{
+    transform: scale(1.02);  
+  }
+`
+const LoginButtonText = styled.p` 
+  color: #ececec;
+  font-weight: 400;
+  font-size: 18px;
+`
+const PriorityUserView = styled.div` 
+  width: 100%;
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end; 
+` 
+const PriorityUserLabel = styled.label`  
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;  
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+`
 
-    const navigateToMain = async() => {
-      // await getMenuItems(data.menuCategories, styles)
+
+function Input(props: UserInputProps){
+  const { value, type, userRefs, onLoginPress } = props;
+  const [inputValue, setInputValue] = useState(value)
+  const [isHiddenEye, setHiddenEye] = useState(true)
+  return <> 
+    {type === `password` && (!isHiddenEye ? <FaRegEye onClick={()=>setHiddenEye(!isHiddenEye)}/> : <FaRegEyeSlash onClick={()=>setHiddenEye(!isHiddenEye)}/>)}
+    <input 
+        onKeyDown={(e)=>{
+            if (e.key === 'Enter')
+              if(type === `text` && userRefs[`password`])
+                userRefs[`password`].current.focus();
+              else 
+                onLoginPress() 
+        }} 
+        ref={userRefs[type]} 
+        defaultValue={inputValue} 
+        onChange={(e)=>setInputValue(e.target.value)} 
+        className={`user-login-input`} 
+        type={type === `text` || !isHiddenEye ? `text` : `password`} />
+  </>
+}
+
+function InputCheckbox(props: {value: boolean}){
+  const { value } = props;
+  const [isCheck, setIsCheck] = useState(value) 
+  return <label className="user-login-priority-label">{`משתמש פריוריטי`}  
+          <input onChange={()=>setIsCheck(!isCheck)} checked={isCheck} type="checkbox"/>
+          <span className="user-login-priority-span"></span>
+        </label> 
+}
+
+function LoginUserModal(props: UserLoginProps){
+  const { position, isPriorityUser, userName, userPass, imgSrc, language, onLoginPress, onLangauagePress } = props;
+  const userRefs = {
+    text: useRef(null),
+    password: useRef(null),
+  }; 
+  const UserModal = styled.div` 
+      width: 450px;
+      height: 65vh;
+      background: #ffffffc0;
+      position: absolute;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.25);
+      -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.25);
+      box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.25);
+      max-width: 90vw;
+      min-height: 600px;
+      max-height: 100vh;
+      padding-left: 50px; 
+      padding-right: 50px; 
+      ${position === 'mid' ? `` : position === `left` ? `left: 8vw` : `right: 8vw;`}
+      `
+  const ImageModal = styled.div`  
+      width: 200px;
+      height: 200px; 
+      max-height: 300px;  
+      max-width: 300px;   
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;  
+      background-image: url(${imgSrc}); 
+      `
+
+  return(  
+      <UserModal className={`user-modal`}>  
+          <ImageModal/>
+          <LangButton onClick={onLangauagePress}>
+            <LangValue>{language === 'Il' ? 'En' : 'Il'}</LangValue>
+            <BsArrowRight style={{paddingTop:2}}/>
+          </LangButton>
+          <TitleModal className={`user-login-title`}>{`כניסה למערכת`}</TitleModal> 
+          <UserInputView>
+            <UserInputLabel>{`שם משתמש`}</UserInputLabel>
+            <UserInput>
+              <Input onLoginPress={onLoginPress} userRefs={userRefs} value={userName} type={`text`}/> 
+            </UserInput> 
+          </UserInputView>
+          <UserInputView>
+            <UserInputLabel>{`סיסמא`}</UserInputLabel>
+            <UserInput> 
+              <Input onLoginPress={onLoginPress} userRefs={userRefs} value={userPass} type={`password`}/> 
+            </UserInput> 
+          </UserInputView>
+          <PriorityUserView>
+            <PriorityUserLabel> 
+              <InputCheckbox value={isPriorityUser}/>
+            </PriorityUserLabel> 
+          </PriorityUserView>
+          <LoginButton onClick={onLoginPress}>
+            <LoginButtonText>{`כניסה`}</LoginButtonText>
+          </LoginButton>
+      </UserModal>
+  ) 
+}
+
+function Login(props: any){    
+    const [modalPosition, setModalPosition] = useState('right');   
+    const companyImage = 'https://bbware.in/wp-content/uploads/2017/06/8-1.jpg';
+    const history = useHistory(); 
+    const navigateToMain = async() => { 
       history.push('/main')
-    }; 
-  
-    // const CompanyTitleAnime = ({ on }:any) => {
-    //   const iconProps = useSpring({ opacity: on ? 1 : 0, from: { opacity: on ? 0 : 1} }); 
-    //   return  <animated.div style={iconProps} >    
-    //               <Title entry={data.titleEntry} subColor={styles.loginText} title={data.titleCompanyName} background={data.secondColor}/>
-    //           </animated.div> 
-    // }; 
-  
-    const userProps = useSpring({ opacity: isLoading ? 0 : 1, from: { opacity: 1 }}); 
-    const loaderProps = useSpring({ opacity: isLoading ? 1 : 0, from: { opacity: 0 }}); 
-    
+    };  
+
+    const LoginBackgroundView = styled.div` 
+        flex:1;
+        max-width: 100vw;
+        height: 100vh;  
+        max-height: 100vh;  
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat; 
+        min-width: 100vw;
+        display: flex;
+        flex-direction: column; 
+        align-items: ${modalPosition === 'mid' ? 'center' : modalPosition === 'left' ? 'flex-start' : 'flex-end'};
+        justify-content: center;
+        background-image: url(${companyImage}); 
+        `
     return(  
         <div className={`login-screen`}> 
-          <ReactTooltip />
-            <div className={'background-img'}> 
-              <div className={`bg-blur ${styles.bgImg}`}></div>
-              {/* https://www.roxannasadventure.com/projects/woodlaptop.jpg */}
-                <img className={showLoginView ? `bg-img ${styles.blurOut}` : `bg-img ${styles.blurIn}`} src='http://demo.softsolutions.co.il/priportal//bg-demo.jpg' alt='logo'/> 
-              </div>
-            {isLoading && <animated.div style={loaderProps}>
-                  <div style={{position:'absolute', 
-                  width:'100vw',
-                  height:'100vh', 
-                  zIndex:10,
-                  alignItems:'center',justifyContent:'center',
-                  display:'flex',
-                  left:0,
-                  top:0, 
-                alignSelf:'center'}}> 
-                    <ClipLoader color={props.darkState ? `#ececec` : `#202020`} loading={true} size={60} /> 
-                  </div>
-                </animated.div>}
-            <div className={'container'}> 
-              <div className={`super-box`}> 
-                  {!showLoginView && !isLoading && <CompanyTitleAnime styles={styles} on={showUserTitle}/> } 
-                  <div className={`super-box-container`}/>  
-                      <div style={showLoginView  ? { opacity: 1, transform:'scale(.9)' } : {}} dir='rtl' className={`login-view`} onClick={()=>{ 
-                          if(!showLoginView){ 
-                            setUserTitleAnime(false)
-                            setLoginView(true);  
-                          }
-                        }}>   
-                        <animated.div  style={userProps}>
-                          <p className={`company-title ${styles.primaryMenuC}`}>
-                          {data.titleCompanyName}
-                        </p> 
-                      <input ref={userRef} onKeyDown={(e)=>{
-                            if (e.key === 'Enter') { 
-                              if(passRef && passRef.current)
-                                passRef.current.focus();
-                            }
-                        }} placeholder={data.user} style={{backgroundColor:'rgba(0,0,0,0.3)',color:'#ececec',fontSize:'1.3rem',margin:10,boxShadow:'none',height:45,paddingRight:10}}/>
-                      <div style={{display:'flex',flexDirection:'row',alignItems:'flex-end'}}> 
-                        <div style={{width:45,height:45,overflow:'hidden',position:'absolute',left:10,marginBottom: 10}}>
-                          <div onClick={()=>{ 
-                                setLoadingTime(true); 
-                                setTimeout(() => {    
-                                  navigateToMain() 
-                                  setLoginView(false)
-                                }, 2000);
-                          }} className={'input-btn'}>
-                            <FiArrowLeft className={'input-icon-btn'}/>
-                          </div>
-                          <input disabled style={{fontSize:'1.3rem',margin:10,boxShadow:'none',border:0,height:45,backgroundColor:'transparent'}}/>
-                        </div>
-                        <input ref={passRef} onKeyDown={(e)=>{
-                            if (e.key === 'Enter') {
-                              if(!isErrorMsg)
-                                setTimeout(() => {  
-                                  setErrorMsg(true)
-                                  setLoadingTime(false);
-                                }, 3000);
-                              else{
-                                setTimeout(() => {   
-                                  setLoginView(false)
-                                  navigateToMain()
-                                }, 1000);
-                              }
-                              setLoadingTime(true)
-                            }
-                        }} type={'password'} placeholder={data.password} 
-                        style={{backgroundColor:'rgba(0,0,0,0.3)',color:'#ececec',fontSize:'1.3rem',margin:10,boxShadow:'none',height:45,paddingRight:10}}/>
-                      </div> 
-                      <div className={'priority-user'}>
-                        <Checkbox
-                          defaultChecked 
-                          style ={{
-                            color: data.secondColor,
-                            cursor: 'default'
-                          }} 
-                          inputProps={{ 'aria-label': 'checkbox with default color' }}
-                        />  
-                        <p className={`margin0-padding0 ${styles.loginText}`}>
-                        {data.priorityUser}
-                        </p>
-                      </div>
-                        <p style={{marginTop:10}} className={`margin0-padding0 ${styles.loginText}`}> 
-                        {data.forgotPassword}
-                        </p> 
-                        {isErrorMsg && <p style={{marginTop:10, color:'#e72222',fontWeight:'bold'}} className={'margin0-padding0'}>
-                        {data.errorMsg}
-                        </p> }
-                  </animated.div> 
-                </div>   
-            </div> 
-              {<Footer on={showLoginView} styles={styles} isDarkState={props.darkState} setDarkState={props.setDarkState}/> } 
-            </div> 
-          </div>   
+          {/* <ReactTooltip/> */}
+          <LoginBackgroundView className={`login-back-view`}>
+            <LoginUserModal 
+                position={modalPosition} 
+                isPriorityUser={true} 
+                userName={`avishay`} 
+                userPass={`P0O9i8u7`} 
+                imgSrc={`https://demo.softsolutions.co.il/images/softlogo.png`}
+                language={`Il`}
+                onLoginPress={()=>{
+                  navigateToMain();
+                }}
+                onLangauagePress={()=>{
+                  alert('onLangauagePress')
+                }} 
+              />
+          </LoginBackgroundView> 
+        </div>   
     )
 };
 
