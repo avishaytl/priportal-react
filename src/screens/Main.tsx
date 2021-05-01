@@ -20,7 +20,7 @@ import Menu from '@material-ui/core/Menu';
 import { Scrollbars } from 'react-custom-scrollbars';
 import UserIconMenuT from '../components/UserIconMenu';   
 import imgdashboard from '../dashboard.png';  
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'; 
 
 function stopEvent(event: any){
     if(event.preventDefault !== undefined)
@@ -204,13 +204,17 @@ function renderIMenuItems({items, setSelectedItem, isSelectedItem, handleCategor
                 setSelectedItem(value)
             }} setMenuOpen={setMenuOpen} darkState={darkState} value={items[i].categorie.label} on={isMenuOpen} child={
                 <div className={`grid-item hvr-grow `}> 
-                    { isSelectedItem === items[i].categorie.label ? <IconSelected onClick={()=>{
+                    { isSelectedItem === items[i].categorie.label ?  <IconSelected onClick={()=>{
                         setMenuOpen(false)
-                        alert(items[i].categorie.label)
-                    }} className={`bar-user-icon ${styles.color}`}/> : <Icon onClick={()=>{
+                        setTimeout(() => {
+                            alert(items[i].categorie.label) 
+                        }, 250);
+                    }} className={`bar-user-icon ${styles.color}`}/>  :  <Icon onClick={()=>{
                         setMenuOpen(false)
-                        alert(items[i].categorie.label)
-                    }} className={`bar-user-icon ${styles.color}`}/> }
+                        setTimeout(() => {
+                            alert(items[i].categorie.label) 
+                        }, 250);
+                    }} className={`bar-user-icon ${styles.color}`}/>  }
                 </div>}/>  
             {isCategoryAnime[items[i].categorie.label] && <CategoryListAnime on={isCategoryAnime[items[i].categorie.label]} child={<CategoryList setMenuOpen={setMenuOpen} darkState={darkState} data={items[i].category ? items[i].category : []} styles={styles}/>}/> }
             </>
@@ -578,6 +582,117 @@ const MainDashboardContainer = styled.div`
     background-repeat: no-repeat;
     background-image: url(${imgdashboard});
 `
+const MainDashboarView = styled.div` 
+    width: 100%;
+    height: 100%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start; 
+`
+const MainBoardView = styled.div` 
+    width: 100%;
+    height: 50vh; 
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    justify-content: flex-start; 
+`
+const MainBoardViewRightChild = styled.div` 
+    width: 50%;
+    height: 100%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start;
+    padding: 20px; 
+    padding-left: 10px; 
+`
+const MainBoardViewLeftChild = styled.div`  
+    width: 50%;
+    height: 100%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    padding: 20px; 
+    padding-right: 10px;
+`
+const BorderLeftChild = styled.div`  
+    width: 100%;
+    height: 100%; 
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center; 
+    justify-content: flex-start;
+`
+const BorderRightChild = styled.div`  
+    width: 100%;
+    height: 100%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start;
+`
+const RightBorderChildBottom = styled.div`  
+    width: 100%;
+    height: 65%; 
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center; 
+    justify-content: flex-start;
+    padding-top: 10px;
+`
+const RightBorderChildTop = styled.div`  
+    width: 100%;
+    height: 35%; 
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center; 
+    justify-content: flex-start;
+    padding-bottom: 10px;
+`
+
+const LeftBorderChild = styled.div`  
+    width: 50%;
+    height: 100%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start;
+    background: white; 
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15);
+    box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15); 
+`
+const RightTopItem = styled.div`  
+    flex:1;
+    max-width: 33.33%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start;
+    background: white; 
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15);
+    box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15);  
+`
+const RightBottomItem = styled.div`   
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start;
+    background: white; 
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15);
+    box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15); 
+`
 
 const DashboardTitle = styled.div` 
     width: 100%;
@@ -735,7 +850,43 @@ function DashboardMain (props: any) {
                     </DashboardTitleHeaderChild> 
               </DashboardTitle>
               <MainDashboardContainer>
-
+                <MainDashboarView> 
+                    <MainBoardView className={`main-border-view`}>
+                        <MainBoardViewLeftChild className={`left-border-view`}>
+                            <BorderLeftChild>
+                                <LeftBorderChild style={{marginLeft:10,width:'40%'}}>
+                                    1
+                                </LeftBorderChild>
+                                <LeftBorderChild style={{marginRight:10,width:'60%'}}>
+                                    2
+                                </LeftBorderChild> 
+                            </BorderLeftChild> 
+                        </MainBoardViewLeftChild>
+                        <MainBoardViewRightChild className={`right-border-view`}>
+                            <BorderRightChild>
+                                <RightBorderChildTop className={`right-top-border-view`}>
+                                    <RightTopItem style={{marginLeft:10}}>
+                                        1
+                                    </RightTopItem>
+                                    <RightTopItem style={{marginLeft:10,marginRight:10}}>
+                                        2
+                                    </RightTopItem>
+                                    <RightTopItem style={{marginRight:10}}>
+                                        3
+                                    </RightTopItem>
+                                </RightBorderChildTop>
+                                <RightBorderChildBottom className={`right-bottom-border-view`}>
+                                    <RightBottomItem style={{marginLeft:10,width:'60%'}}>
+                                        1
+                                    </RightBottomItem>
+                                    <RightBottomItem style={{marginRight:10,width:'40%'}}>
+                                        2
+                                    </RightBottomItem> 
+                                </RightBorderChildBottom>
+                            </BorderRightChild>  
+                        </MainBoardViewRightChild>
+                    </MainBoardView>
+                </MainDashboarView>
               </MainDashboardContainer>
           </DashboardMainView>    
     ) 
