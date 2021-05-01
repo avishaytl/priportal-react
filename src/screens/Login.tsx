@@ -243,7 +243,7 @@ function Login(props: any){
     const [modalPosition, setModalPosition] = useState('right');   
     const companyImage = 'https://bbware.in/wp-content/uploads/2017/06/8-1.jpg';
     const history = useHistory(); 
-    const navigateToMain = async() => { 
+    const navigateToMain = () => { 
       history.push('/main')
     };  
 
@@ -268,7 +268,7 @@ function Login(props: any){
           <LoginBackgroundView className={`login-back-view`}>
             <LoginUserModal 
                 position={modalPosition} 
-                isPriorityUser={true} 
+                isPriorityUser={false} 
                 userName={`avishay`} 
                 userPass={`P0O9i8u7`} 
                 imgSrc={`https://demo.softsolutions.co.il/images/softlogo.png`}

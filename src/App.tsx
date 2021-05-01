@@ -61,13 +61,13 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
           filter: isDarkState ? 'blur(6px) brightness(0.6)' : 'blur(6px)',
         },
         background: {
-          background: isDarkState ? '#191919' : '#d5d5d5', 
+          background: isDarkState ? '#191919' : '#f1f1f1', 
         },
         menuBackground: {
           background: isDarkState ? '#010101' : '#bebebe',  
         },
         backgroundNative: {
-          background: isDarkState ? '#ececec' : '#202020', 
+          background: isDarkState ? '#f1f1f1' : '#202020', 
         },
         primaryMenuB: { 
           background: data.secondColor,  
@@ -76,21 +76,22 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
           color: data.secondColor,  
         },
         color: {
-          color: isDarkState ? '#d5d5d5' : '#202020',
+          color: !isDarkState ? '#f1f1f1' : '#202020',
         },  
         colorNative: {
-          color: isDarkState ? '#202020' : '#ececec', 
+          color: isDarkState ? '#202020' : '#f1f1f1', 
         },
         menuItem: { 
-          borderLeftColor: data.secondColor, 
+          borderLeftColor: '#f1f1f1',// data.secondColor, 
           borderLeftStyle: 'solid',
           borderLeftWidth: 6, 
+          borderRadius: 6,
         },
         loginText: {
-          color:  isDarkState ? '#ececec' : '#202020',
+          color:  isDarkState ? '#f1f1f1' : '#202020',
         },
         lightB: {
-          background: '#ececec',
+          background: '#f1f1f1',
         },
         dark: {
           color: '#202020', 
@@ -102,7 +103,7 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
           willChange: 'unset',
         },
         mainBackground: {
-          background: isDarkState ? '#202020 !important' : '#ececec !important', 
+          background: isDarkState ? '#202020 !important' : '#f1f1f1 !important', 
         },
         mainWidthOpen: {
           position:'absolute',
@@ -118,7 +119,7 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
   });
   const classes = useStyles(); 
   return (<TransitionGroup>
-            <CSSTransition key={location.key} classNames={`slide`} timeout={3000}>
+            <CSSTransition key={location.key} classNames={`slide`} timeout={1000}>
               <Switch location={location}>
                 <Route path={`/`} component={()=><LoginScreen  styles={classes} setDarkState={setDarkState} darkState={darkState}/> } exact /> 
                 <Route path={`/main`} component={()=><MainScreen  styles={classes} setDarkState={setDarkState} darkState={darkState}/> } />
