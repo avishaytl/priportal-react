@@ -856,7 +856,7 @@ function DashboardHeader (props: any) {
 };  
 // , width: on ? 'calc(100% - 200px)' : 'calc(100% - 90px)'
 function GridlayoutView ({ on, child, styles, setMenuOpen, setMenuRef }:any) {
-    const mainProps = useSpring({ position: on ? 'fixed' : 'absolute', width: '100%',height:'100%', from: {  position: on ? 'absolute' : 'fixed' } });  
+    const mainProps = useSpring({ position: on ? 'fixed' : 'absolute', width: '95%',height:'100%', from: {  position: on ? 'absolute' : 'fixed' } });  
     const Menu = styled.div` 
         flex:1;   
         background-image: linear-gradient(to top, #121e34 , #314570, #314570, #1e2c4c);
