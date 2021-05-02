@@ -241,7 +241,7 @@ function LoginUserModal(props: UserLoginProps){
 
 function Login(props: any){    
     const [modalPosition, setModalPosition] = useState('right');   
-    const companyImage = 'https://bbware.in/wp-content/uploads/2017/06/8-1.jpg';
+    const companyImage = 'https://wallpaperaccess.com/full/521095.jpg';
     const history = useHistory(); 
     const navigateToMain = () => { 
       history.push('/main')

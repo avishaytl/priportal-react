@@ -18,9 +18,28 @@ import {useSpring, animated} from 'react-spring';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';  
 import { Scrollbars } from 'react-custom-scrollbars';
-import UserIconMenuT from '../components/UserIconMenu';   
+import LocalStorageLayout from '../components/Gridlayout';   
 import imgdashboard from '../dashboard.png';  
 import ReactDOM from 'react-dom'; 
+import GridLayout from 'react-grid-layout';
+
+class MyFirstGrid extends React.Component {
+  render() {
+    // layout is an array of objects, see the demo for more complete usage
+    const layout = [
+      {i: 'a', x: 0, y: 0, w: 1, h: 2, static: true},
+      {i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4},
+      {i: 'c', x: 4, y: 0, w: 1, h: 2}
+    ];
+    return (
+      <GridLayout className="layout" layout={layout} cols={12} rowHeight={30} width={1200}>
+        <div key="a">a</div>
+        <div key="b">b</div>
+        <div key="c">c</div>
+      </GridLayout>
+    )
+  }
+}
 
 function stopEvent(event: any){
     if(event.preventDefault !== undefined)
@@ -167,7 +186,7 @@ function UserIconMenu ({ on, child, value, darkState, onClick, isSelectedItem, s
     let ho = darkState ? '#ffffffa0' : '#000000a0';
     const MenuItem = styled.div`
         padding-top: 3px; 
-        max-height: 40px; 
+        max-height: ${on ? `40px` : `90px`}; 
         transition-duration: 0.2s; 
         transition-property: transform;   
         background: ${isSelectedItem === value ? `#000000a0;` : `transparent;`}
@@ -356,7 +375,7 @@ function UserMenu(props: any) {
 
 const Header = styled.div` 
     width: 100%;
-    height: 100px; 
+    height: 65px; 
     margin: 0px;
     padding: 0px;
     display: flex;
@@ -381,7 +400,7 @@ const HeaderChild = styled.div`
 `
 const HeaderCompanyIcon = styled.div` 
     width: 300px;
-    height: 100px; 
+    height: 65px; 
     margin: 0px;
     padding: 0px;  
     display: flex;
@@ -389,8 +408,8 @@ const HeaderCompanyIcon = styled.div`
 `
 const CopanyImage = styled.div` 
     background: #fff;
-    width: 100px;
-    height: 90px; 
+    width: 60px;
+    height: 60px; 
     margin: 0px;
     padding: 0px;
     background-image: url(${'https://demo.softsolutions.co.il/priportal/softlogo.png'});
@@ -412,7 +431,7 @@ const CopanyImage = styled.div`
 `
 const CompanyTitle = styled.div` 
     width: 250px;
-    height: 100px;
+    height: 65px;
     overflow: hidden;  
     margin: 0px;
     padding: 0px; 
@@ -535,7 +554,8 @@ const HeaderSelectCompany = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center; 
-    justify-content: center;   
+    justify-content: center;    
+    margin-left: 10px;
 `
 const SelectedCopanyTitle = styled.p`  
     font-size: 20px; 
@@ -554,8 +574,8 @@ const UserMessageView = styled.div`
     align-items: center; 
     justify-content: center;  
     padding-top: 5px; 
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-right: 15px;
+    margin-left: 15px;
 `
 const BurgerMenuIcon = styled.div`   
     display: flex;
@@ -576,11 +596,13 @@ const DashboardMainView = styled.div`
 `
 const MainDashboardContainer = styled.div` 
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    overflow-y: auto;
     background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-image: url(${imgdashboard});
+    background-size: cover; 
+    background-repeat: no-repeat;  
+    background-image: linear-gradient(to top, transparent, transparent, #f1f1f1),url(${imgdashboard});
+    
 `
 const MainDashboarView = styled.div` 
     width: 100%;
@@ -592,14 +614,14 @@ const MainDashboarView = styled.div`
 `
 const MainBoardView = styled.div` 
     width: 100%;
-    height: 50vh; 
+    height: 100%; 
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center; 
-    justify-content: flex-start; 
+    justify-content: flex-start;  
 `
 const MainBoardViewRightChild = styled.div` 
-    width: 50%;
+    width: 100%;
     height: 100%; 
     display: flex;
     flex-direction: column;
@@ -609,7 +631,7 @@ const MainBoardViewRightChild = styled.div`
     padding-left: 10px; 
 `
 const MainBoardViewLeftChild = styled.div`  
-    width: 50%;
+    width: 100%;
     height: 100%; 
     display: flex;
     flex-direction: column;
@@ -617,6 +639,15 @@ const MainBoardViewLeftChild = styled.div`
     justify-content: center;
     padding: 20px; 
     padding-right: 10px;
+`
+const MainBoardScrollView = styled.div`  
+    width: 100%;
+    height: 100%; 
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    justify-content: center; 
+    padding-bottom: 60px;
 `
 const BorderLeftChild = styled.div`  
     width: 100%;
@@ -823,9 +854,27 @@ function DashboardHeader (props: any) {
             </Header>  
     ) 
 };  
-
+// , width: on ? 'calc(100% - 200px)' : 'calc(100% - 90px)'
+function GridlayoutView ({ on, child, styles, setMenuOpen, setMenuRef }:any) {
+    const mainProps = useSpring({ position: on ? 'fixed' : 'absolute', width: '100%',height:'100%', from: {  position: on ? 'absolute' : 'fixed' } });  
+    const Menu = styled.div` 
+        flex:1;   
+        background-image: linear-gradient(to top, #121e34 , #314570, #314570, #1e2c4c);
+        border-top-left-radius: 10px;
+        -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.55);
+        -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.55);
+        box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.55); 
+        margin:0px;
+        padding:0px;
+    `
+    return  <animated.div style={mainProps} >   
+                    {child}   
+                    1
+          </animated.div> 
+}; 
 
 function DashboardMain (props: any) { 
+    const { setMenuOpen, isMenuOpen } = props; 
     const [set,setset] = useState(false);
     return  (   
           <DashboardMainView>
@@ -851,41 +900,50 @@ function DashboardMain (props: any) {
               </DashboardTitle>
               <MainDashboardContainer>
                 <MainDashboarView> 
+                    <GridlayoutView on={isMenuOpen} child={
                     <MainBoardView className={`main-border-view`}>
-                        <MainBoardViewLeftChild className={`left-border-view`}>
-                            <BorderLeftChild>
-                                <LeftBorderChild style={{marginLeft:10,width:'40%'}}>
-                                    1
-                                </LeftBorderChild>
-                                <LeftBorderChild style={{marginRight:10,width:'60%'}}>
-                                    2
-                                </LeftBorderChild> 
-                            </BorderLeftChild> 
-                        </MainBoardViewLeftChild>
-                        <MainBoardViewRightChild className={`right-border-view`}>
-                            <BorderRightChild>
-                                <RightBorderChildTop className={`right-top-border-view`}>
-                                    <RightTopItem style={{marginLeft:10}}>
-                                        1
-                                    </RightTopItem>
-                                    <RightTopItem style={{marginLeft:10,marginRight:10}}>
-                                        2
-                                    </RightTopItem>
-                                    <RightTopItem style={{marginRight:10}}>
-                                        3
-                                    </RightTopItem>
-                                </RightBorderChildTop>
-                                <RightBorderChildBottom className={`right-bottom-border-view`}>
-                                    <RightBottomItem style={{marginLeft:10,width:'60%'}}>
-                                        1
-                                    </RightBottomItem>
-                                    <RightBottomItem style={{marginRight:10,width:'40%'}}>
-                                        2
-                                    </RightBottomItem> 
-                                </RightBorderChildBottom>
-                            </BorderRightChild>  
-                        </MainBoardViewRightChild>
-                    </MainBoardView>
+                            <Scrollbars style={{width:'100%', height:'calc(100% - 135px)'  }} >   
+                            {/* <MyFirstGrid/> */}
+                            <LocalStorageLayout isMenuOpen={isMenuOpen}/>
+                            {/* <MainBoardScrollView className={`main-border-scroll-view`}>
+                                    <MainBoardViewLeftChild className={`left-border-view`}>
+                                        <BorderLeftChild>
+                                            <LeftBorderChild style={{marginLeft:10,width:'40%'}}>
+                                                1
+                                            </LeftBorderChild>
+                                            <LeftBorderChild style={{marginRight:10,width:'60%'}}>
+                                                2
+                                            </LeftBorderChild> 
+                                        </BorderLeftChild> 
+                                    </MainBoardViewLeftChild>
+                                    <MainBoardViewRightChild className={`right-border-view`}>
+                                        <BorderRightChild>
+                                            <RightBorderChildTop className={`right-top-border-view`}>
+                                                <RightTopItem style={{marginLeft:10}}>
+                                                    1
+                                                </RightTopItem>
+                                                <RightTopItem style={{marginLeft:10,marginRight:10}}>
+                                                    2
+                                                </RightTopItem>
+                                                <RightTopItem style={{marginRight:10}}>
+                                                    3
+                                                </RightTopItem>
+                                            </RightBorderChildTop>
+                                            <RightBorderChildBottom className={`right-bottom-border-view`}>
+                                                <RightBottomItem style={{marginLeft:10,width:'60%'}}>
+                                                    1
+                                                </RightBottomItem>
+                                                <RightBottomItem style={{marginRight:10,width:'40%'}}>
+                                                    2
+                                                </RightBottomItem> 
+                                            </RightBorderChildBottom>
+                                        </BorderRightChild>  
+                                    </MainBoardViewRightChild>  
+                            </MainBoardScrollView> */}
+                            </Scrollbars>
+                        </MainBoardView> 
+                        }/> 
+                        
                 </MainDashboarView>
               </MainDashboardContainer>
           </DashboardMainView>    
@@ -897,7 +955,7 @@ function UserDashboard (props: any) {
     return  (
         <div className={`dashboard-view`}>    
              <DashboardHeader setMenuOpen={setMenuOpen} isMenuOpen={isMenuOpen} setMenuRef={setMenuRef}/>
-             <DashboardMain/>
+             <DashboardMain setMenuOpen={setMenuOpen} isMenuOpen={isMenuOpen} />
         </div>
     ) 
 };  
