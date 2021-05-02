@@ -7,7 +7,7 @@ const ReactGridLayout = WidthProvider(RGL);
  * This layout demonstrates how to sync to localstorage.
  */
 
- const LeftBorderChild = styled.div`  
+ const ValueComponent = styled.div`  
     flex: 1;
     height: 100%;
     display: flex;
@@ -27,7 +27,7 @@ export default class LocalStorageLayout extends React.PureComponent <any|{layout
     rowHeight: 30,
     onLayoutChange: function() {}
   }; 
-  originalLayout = null;
+  originalLayout: null | [] = null;
   constructor(props: any) {
     super(props);
     this.originalLayout = getFromLS("layout") || [];
@@ -43,9 +43,10 @@ export default class LocalStorageLayout extends React.PureComponent <any|{layout
   }
 
   resetLayout() {
-    this.setState({
-      layout: []
-    });
+    // this.setState({
+    //   layout: []
+    // });
+    this.originalLayout = [];
   }
 
   onLayoutChange(layout: any) {
@@ -58,38 +59,35 @@ export default class LocalStorageLayout extends React.PureComponent <any|{layout
 
   render() {
     return (
-      <div>
-        {/* <button onClick={this.resetLayout}>Reset Layout</button> */}
+      <div style={{overflow:'hidden'}}>
+        <button style={{marginLeft:40}} onClick={removeFromLS}>Reset Layout</button>
         <ReactGridLayout
             style={{minWidth:'100%'}}
           {...this.props}
           layout={this.originalLayout as any}
           onLayoutChange={this.onLayoutChange}
         >
-        <div className="grid-box" key="1" data-grid={{ w: 2, h: 3, x: 8, y: 0,isDraggable: false, static: true  }}>
-            <LeftBorderChild><span>1</span></LeftBorderChild> 
+        <div className="grid-box" key="1" data-grid={{ w: 4, h: 10, x: 1, y: 0, static: true  }}>
+            <ValueComponent><span>1</span></ValueComponent> 
         </div>
-          <div className="grid-box" key="2" data-grid={{ w: 2, h: 3, x: 2, y: 0  }}>
-            <LeftBorderChild><span>2</span></LeftBorderChild> 
+          <div className="grid-box" key="2" data-grid={{ w: 3, h: 10, x: 5, y: 0  }}>
+            <ValueComponent><span>2</span></ValueComponent> 
           </div>
-          <div className="grid-box" key="3" data-grid={{ w: 2, h: 3, x: 4, y: 0  }}>
-            <LeftBorderChild><span>3</span></LeftBorderChild> 
+          <div className="grid-box" key="3" data-grid={{ w: 2, h: 3, x: 8, y: 0  }}>
+            <ValueComponent><span>3</span></ValueComponent> 
           </div>
-          <div className="grid-box" key="4" data-grid={{ w: 2, h: 3, x: 6, y: 0}}>
-            <LeftBorderChild><span>4</span></LeftBorderChild> 
+          <div className="grid-box" key="4" data-grid={{ w: 2, h: 3, x: 10, y: 0}}>
+            <ValueComponent><span>4</span></ValueComponent> 
           </div>
-          <div className="grid-box" key="5" data-grid={{ w: 2, h: 3, x: 8, y: 0 }}>
-            <LeftBorderChild><span>5</span></LeftBorderChild> 
+          <div className="grid-box" key="5" data-grid={{ w: 2, h: 3, x: 12, y: 0 }}>
+            <ValueComponent><span>5</span></ValueComponent> 
           </div>
-          <div className="grid-box" key="6" data-grid={{ w: 2, h: 3, x: 4, y: 0  }}>
-            <LeftBorderChild><span>6</span></LeftBorderChild> 
+          <div className="grid-box" key="6" data-grid={{ w: 2, h: 7, x: 8, y: 2  }}>
+            <ValueComponent><span>6</span></ValueComponent> 
           </div>
-          <div className="grid-box" key="7" data-grid={{ w: 2, h: 3, x: 6, y: 0}}>
-            <LeftBorderChild><span>7</span></LeftBorderChild> 
-          </div>
-          <div className="grid-box" key="8" data-grid={{ w: 2, h: 3, x: 8, y: 0 }}>
-            <LeftBorderChild><span>8</span></LeftBorderChild> 
-          </div>
+          <div className="grid-box" key="7" data-grid={{ w: 4, h: 7, x: 10, y: 2}}>
+            <ValueComponent><span>7</span></ValueComponent> 
+          </div> 
         </ReactGridLayout>
       </div>
     );
@@ -106,6 +104,16 @@ function getFromLS(key: any) {
     }
   }
   return ls[key];
+}
+
+function removeFromLS(key: any) { 
+  if (global.localStorage) {
+    try {
+        global.localStorage.removeItem("rgl-7") 
+    } catch (e) {
+      /*Ignore*/
+    }
+  } 
 }
 
 function saveToLS(key: any, value: any) {
