@@ -6,11 +6,11 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     box-sizing: border-box;
     margin: 0;
-    padding: 0;
+    padding: 0; 
 }
 body,html {
     background-color: #fff;
-    overflow: hidden;
+    overflow: hidden !important;
     height: 100vh;
     width: 100vw;
     max-width: 100vw;
@@ -20,8 +20,7 @@ body,html {
 ::-webkit-scrollbar {
     width: 0px;
     height: 0px;
-  }
-  
+  } 
 .login-screen, .main-screen { 
     -webkit-box-pack: center;
      -ms-flex-pack: center;
@@ -170,7 +169,6 @@ input::placeholder {
     background-color: transparent;
     font-size: 18px;
 }
-
 .main-user-bar{  
     height: 100vh;   
     display: flex;
@@ -219,6 +217,7 @@ input::placeholder {
     flex:1;
     padding: 0;
     margin: 0;  
+    color: #f1f1f1;
 } 
 
 .hvr-grow {
@@ -754,6 +753,7 @@ title .dr {
 }
 
 .main-container { 
+    background: #f1f1f1;
     width: 100vw;
     height: 100vh; 
     display: flex;
@@ -990,6 +990,13 @@ main {
 
 .grid-box{  
     /* max-width: 250px;  */
+    /* transition: transform 0.5s ease; */
+}
+.top-icon-circle:hover{ 
+    transition: transform 0.2s ease;
+}
+.top-icon-circle:hover{ 
+    transform: scale(1.1);
 }
 
 @media only screen and (max-width: 550px) { 

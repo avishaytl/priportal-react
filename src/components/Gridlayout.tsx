@@ -16,9 +16,15 @@ const ReactGridLayout = WidthProvider(RGL);
     justify-content: flex-start;
     background: white; 
     border-radius: 10px;
+    transition: box-shadow ease 0.5s;
     -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15);
     -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15);
     box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15); 
+    :hover{
+      -webkit-box-shadow: 0px 0px 9px 2px rgba(0,0,0,0.25);
+      -moz-box-shadow: 0px 0px 9px 2px rgba(0,0,0,0.25);
+      box-shadow: 0px 0px 9px 2px rgba(0,0,0,0.25);  
+    }
 `
 export default class LocalStorageLayout extends React.PureComponent <any|{layout: any}>{
   static defaultProps = {
@@ -67,22 +73,22 @@ export default class LocalStorageLayout extends React.PureComponent <any|{layout
           layout={this.originalLayout as any}
           onLayoutChange={this.onLayoutChange}
         >
-        <div className="grid-box" key="1" data-grid={{ w: 4, h: 10, x: 1, y: 0, static: true  }}>
+        <div className="grid-box" key="table-component1" data-grid={{ w: 4, h: 10, x: 1, y: 0, static: true }}>
             <ValueComponent><span>1</span></ValueComponent> 
         </div>
-          <div className="grid-box" key="2" data-grid={{ w: 3, h: 10, x: 5, y: 0  }}>
+          <div className="grid-box" key="graph-component1" data-grid={{ w: 3, h: 10, x: 5, y: 0  }}>
             <ValueComponent><span>2</span></ValueComponent> 
           </div>
-          <div className="grid-box" key="3" data-grid={{ w: 2, h: 3, x: 8, y: 0  }}>
+          <div className="grid-box" key="value-component1" data-grid={{ w: 2, h: 3, x: 8, y: 0  }}>
             <ValueComponent><span>3</span></ValueComponent> 
           </div>
-          <div className="grid-box" key="4" data-grid={{ w: 2, h: 3, x: 10, y: 0}}>
+          <div className="grid-box" key="value-component2" data-grid={{ w: 2, h: 3, x: 10, y: 0}}>
             <ValueComponent><span>4</span></ValueComponent> 
           </div>
-          <div className="grid-box" key="5" data-grid={{ w: 2, h: 3, x: 12, y: 0 }}>
+          <div className="grid-box" key="value-component3" data-grid={{ w: 2, h: 3, x: 12, y: 0 }}>
             <ValueComponent><span>5</span></ValueComponent> 
           </div>
-          <div className="grid-box" key="6" data-grid={{ w: 2, h: 7, x: 8, y: 2  }}>
+          <div className="grid-box" key="t" data-grid={{ w: 2, h: 7, x: 8, y: 2  }}>
             <ValueComponent><span>6</span></ValueComponent> 
           </div>
           <div className="grid-box" key="7" data-grid={{ w: 4, h: 7, x: 10, y: 2}}>

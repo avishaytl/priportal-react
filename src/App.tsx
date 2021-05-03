@@ -48,7 +48,7 @@ const data = {
 
 const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) => {
   const useStyles = makeStyles((theme: any) => {
-      let isDarkState =  theme.palette.background.default === '#303030';
+      let isDarkState =  theme.palette.background.default !== '#303030';
       return({   
         bgImg: { 
           backgroundColor: isDarkState ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0)', 
@@ -61,7 +61,7 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
           filter: isDarkState ? 'blur(6px) brightness(0.6)' : 'blur(6px)',
         },
         background: {
-          background: isDarkState ? '#191919' : '#f1f1f1', 
+          background: !isDarkState ? '#191919' : '#f1f1f1', 
         },
         menuBackground: {
           background: isDarkState ? '#010101' : '#bebebe',  
@@ -76,16 +76,15 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
           color: data.secondColor,  
         },
         color: {
-          color: !isDarkState ? '#f1f1f1' : '#202020',
+          color: !isDarkState ? '#202020' : '#f1f1f1',
         },  
         colorNative: {
           color: isDarkState ? '#202020' : '#f1f1f1', 
         },
         menuItem: { 
           borderLeftColor: '#f1f1f1',// data.secondColor, 
-          borderLeftStyle: 'solid',
-          borderLeftWidth: 6, 
-          borderRadius: 6,
+          borderLeftStyle: 'dashed', 
+          borderLeftWidth: 1,   
         },
         loginText: {
           color:  isDarkState ? '#f1f1f1' : '#202020',
@@ -142,12 +141,10 @@ function App() {
   });
   return (   
       <StylesProvider jss={jss}>
-        <ThemeProvider theme={theme}> 
-            <Scrollbars style={{width:'100vw',height:'100vh'}}>
+        <ThemeProvider theme={theme}>  
               <BrowserRouter>
                 <AnimatedSwitch setDarkState={setDarkState} darkState={darkState}/> 
-              </BrowserRouter> 
-            </Scrollbars> 
+              </BrowserRouter>  
         </ThemeProvider>
       </StylesProvider> 
   );

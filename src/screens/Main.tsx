@@ -190,6 +190,8 @@ function UserIconMenu ({ on, child, value, darkState, onClick, isSelectedItem, s
         transition-duration: 0.2s; 
         transition-property: transform;   
         background: ${isSelectedItem === value ? `#000000a0;` : `transparent;`}
+        transition: transform ease 0.2s;
+        transition: background ease 0.3s;
         :hover {
             background: ${ho};  
             transform: scale(1.1);
@@ -517,6 +519,7 @@ const UserTitleView = styled.div`
     align-items: center; 
     justify-content: flex-end; 
     padding-top: 5px; 
+    transition: box-shadow ease 0.5s;
     :hover:last-child div{ 
         -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.10);
         -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.10);
@@ -605,7 +608,7 @@ const MainDashboardContainer = styled.div`
     
 `
 const MainDashboarView = styled.div` 
-    width: 100%;
+    width: 100%; 
     height: 100%; 
     display: flex;
     flex-direction: column;
@@ -770,6 +773,7 @@ const DashboardTitleIconsChild = styled.p`
     border-radius: 4px;
     margin: 5px;
     text-align: center; 
+    transition: box-shadow ease 0.5s;
     :hover{ 
         -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.10);
         -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.10);
@@ -856,7 +860,7 @@ function DashboardHeader (props: any) {
 };  
 // , width: on ? 'calc(100% - 200px)' : 'calc(100% - 90px)'
 function GridlayoutView ({ on, child, styles, setMenuOpen, setMenuRef }:any) {
-    const mainProps = useSpring({ position: on ? 'fixed' : 'absolute', width: '95%',height:'100%', from: {  position: on ? 'absolute' : 'fixed' } });  
+    const mainProps = useSpring({ position: on ? 'fixed' : 'absolute', width: '95%',height:'100%',overflow:'hidden', from: {  position: on ? 'absolute' : 'fixed' } });  
     const Menu = styled.div` 
         flex:1;   
         background-image: linear-gradient(to top, #121e34 , #314570, #314570, #1e2c4c);
@@ -1072,9 +1076,9 @@ function Main(props: any) {
             if (locationKeys[1] === location.key) {
                 // setBackPress(true) 
                 setMenuOpen(false) 
-                setTimeout(() => {
+                // setTimeout(() => {
                     setLocationKeys(([ _, ...keys ]:any) => keys) 
-                }, 1700);
+                // }, 1700);
       
               // Handle forward event
       
@@ -1093,25 +1097,27 @@ function Main(props: any) {
         let str = ' קיצור דרך ';
         if(e.keyCode === 68){//d   
             console.debug('setMenuRef',window.innerWidth)  
-            if(window.innerWidth <= 680)
-                if((setMenuRef.current.style.opacity === '' || setMenuRef.current.style.opacity === '0') || setMenuRef.current.style.zIndex === '-1'){ 
+            if(setMenuRef && setMenuRef.current && setMenuRef.current.style){
+                if(window.innerWidth <= 680)
+                    if((setMenuRef.current.style.opacity === '' || setMenuRef.current.style.opacity === '0') || setMenuRef.current.style.zIndex === '-1'){ 
+                        setMenuRef.current.style.opacity = `1`; 
+                        setMenuRef.current.style.zIndex = `1`;
+    
+                    }else { 
+                        setMenuRef.current.style.opacity = `0`; 
+                        setMenuRef.current.style.zIndex = `-1`;
+        
+                    }
+                else { 
                     setMenuRef.current.style.opacity = `1`; 
                     setMenuRef.current.style.zIndex = `1`;
-
-                }else { 
-                    setMenuRef.current.style.opacity = `0`; 
-                    setMenuRef.current.style.zIndex = `-1`;
-    
                 }
-            else { 
-                setMenuRef.current.style.opacity = `1`; 
-                setMenuRef.current.style.zIndex = `1`;
-            }
-            if(setMenuRef.current.style.width !== '200px' && setMenuRef.current.style.width !== '90px') 
-                setMenuRef.current.style.display = 'absolute' 
-            setMenuOpen(!isMenuOpen)
-            if(window.innerWidth <= 680)
-                setMenuOpen(true)
+                if(setMenuRef.current.style.width !== '200px' && setMenuRef.current.style.width !== '90px') 
+                    setMenuRef.current.style.display = 'absolute' 
+                setMenuOpen(!isMenuOpen)
+                if(window.innerWidth <= 680)
+                    setMenuOpen(true)
+            } 
         }  
         if(e.keyCode === 49)
             runSortCut(str + 1)
