@@ -241,15 +241,17 @@ input::placeholder {
     transform: scale(0.9);
 } */
 .user-icon-menu{       
-    /* overflow: visible !important;  */
+    /* overflow: visible !important;  */ 
+     /* transition-duration: 0.2s!important;  
+     transition: height .2s linear !important;   */
 } 
 .user-icon-text-view{  
-    /* transition-duration: 0.2s!important;  */
-    /* transition: top .2s linear !important;   */
+     /* transition-duration: 0.2s!important;  
+     transition: height .2s ease-in !important;   */
 }
 .category-list{
-    transition-duration: 0.2s!important; 
-    transition: height linear !important;  
+    /* transition-duration: 0.2s!important; 
+    transition: height linear !important;   */
 
 }
 .user-bar-container {
@@ -269,9 +271,9 @@ input::placeholder {
     text-align: center;   
     transition-duration: 0.2s;
     transition-property: transform;
-    padding-right: 5px;
+    /* padding-right: 5px;
     padding-left: 5px; 
-    padding-top: 2px; 
+    padding-top: 2px;  */
 }  
 .user-icon-text-view{
     display: flex;
@@ -990,7 +992,7 @@ main {
 
 .grid-box{  
     /* max-width: 250px;  */
-    /* transition: transform 0.5s ease; */
+    /* transition: transform 0.5s ease; */ 
 }
 .top-icon-circle:hover{ 
     transition: transform 0.2s ease;

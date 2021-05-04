@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch, withRouter} from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group'; 
 import { Scrollbars } from 'react-custom-scrollbars'; 
+import { StoreProvider } from './storeui/storeui'
 import LoginScreen from './screens/Login'; 
 import MainScreen from './screens/Main';  
 
@@ -82,7 +83,7 @@ const AnimatedSwitch = withRouter(({ location, setDarkState, darkState }: any) =
           color: isDarkState ? '#202020' : '#f1f1f1', 
         },
         menuItem: { 
-          borderLeftColor: '#f1f1f1',// data.secondColor, 
+          borderLeftColor: 'gray',// data.secondColor, 
           borderLeftStyle: 'dashed', 
           borderLeftWidth: 1,   
         },
@@ -140,6 +141,7 @@ function App() {
       },
   });
   return (   
+    <StoreProvider> 
       <StylesProvider jss={jss}>
         <ThemeProvider theme={theme}>  
               <BrowserRouter>
@@ -147,6 +149,7 @@ function App() {
               </BrowserRouter>  
         </ThemeProvider>
       </StylesProvider> 
+    </StoreProvider>
   );
 } 
 

@@ -7,7 +7,8 @@ import { AiOutlineFolder, AiTwotoneFolderOpen, AiOutlineAppstore } from 'react-i
 import { BiNotepad } from 'react-icons/bi';      
 import { BsBell } from 'react-icons/bs';       
 import { CgMenuRightAlt } from 'react-icons/cg'; 
-import { IoCloseOutline } from 'react-icons/io5';       
+import { IoCloseOutline } from 'react-icons/io5';  
+import { FaAlignCenter } from 'react-icons/fa';        
 import * as mdIcons from 'react-icons/md';      
 import ListItem from "@material-ui/core/ListItem"; 
 import Collapse from "@material-ui/core/Collapse";
@@ -22,6 +23,7 @@ import LocalStorageLayout from '../components/Gridlayout';
 import imgdashboard from '../dashboard.png';  
 import ReactDOM from 'react-dom'; 
 import GridLayout from 'react-grid-layout';
+import { useStore } from '../storeui/storeui'
 
 class MyFirstGrid extends React.Component {
   render() {
@@ -182,7 +184,8 @@ function UserIconMenu ({ on, child, value, darkState, onClick, isSelectedItem, s
     const mainPropsIcon = useSpring({ height: on ? 50 : 90,    from: { height: on ? 90 : 50  } });  
     const mainPropsText = useSpring({ top: on ? -40 : 0, paddingTop: on ? 10 : 0, maxWidth: on ? '70%' : '100%', position:'relative',   from: { top: on ? 0 : -40, paddingTop: on ? 0 : 10, maxWidth: on ? '100%' : '70%' } });
     const [isSelected,setSelected]:any = useState(false)
-    
+    const store = useStore();
+
     let ho = darkState ? '#ffffffa0' : '#000000a0';
     const MenuItem = styled.div`
         padding-top: 3px; 
@@ -200,17 +203,17 @@ function UserIconMenu ({ on, child, value, darkState, onClick, isSelectedItem, s
     return  <animated.div  onClick={()=>{  
                         setSelected(!isSelected)
                         onClick(isSelectedItem === value ? '!' + value : value ) 
-                    }}  className={`user-icon-menu`} style={mainPropsIcon} >   
+                    }}  className={`user-icon-menu`} style={store.isRightMenuOpen ? {} : mainPropsIcon} >   
                 <MenuItem>
                     {child}
-                    <animated.div className={`user-icon-text-view`} style={mainPropsText}>    
+                    <animated.div className={`user-icon-text-view`} style={store.isRightMenuOpen ? {height: 90} : mainPropsText}>    
                         <p className={`user-icon-text`}>{value}</p>
                     </animated.div>  
                 </MenuItem> 
           </animated.div> 
 }; 
 
-function renderIMenuItems({items, setSelectedItem, isSelectedItem, handleCategoryClick, styles, isCategoryAnime, darkState, isMenuOpen, setMenuOpen}: any) { 
+function renderMenuItems({items, setSelectedItem, isSelectedItem, handleCategoryClick, styles, isCategoryAnime, darkState, isMenuOpen, setMenuOpen}: any) { 
     let data:any = [];   
     for(let i = 0;i < items.length;i++){ 
         const iconNameSelected: keyof typeof mdIcons = items[i].categorie.selectedIcon;
@@ -309,10 +312,10 @@ const MobileCloseButton = styled.div`
 
 function UserMenu(props: any) { 
     const {styles, setMenuOpen, darkState, isMenuOpen, data, setMenuRef} = props;
-    const [isCategoryAnime,setisCategoryAnime]:any = useState({ 
-    }) 
+    const [isCategoryAnime,setisCategoryAnime]:any = useState({}) 
     const [isSelectedItem,setSelectedItem]:any = useState(false)
-    // const [isAnime,setIsAnime]:any = useState(isMenuOpen)
+    const store = useStore();
+    // const [isMenuOpen1,setMenuOpen1]:any = useState(false)
 
     console.debug('UserMenu UserMenu')
 
@@ -343,7 +346,7 @@ function UserMenu(props: any) {
                 } 
                 setMenuOpen(!isMenuOpen)  
             }} className={`mobile-close-menu-button`}>
-                <IoCloseOutline className={`${styles.color}`} size={40}/>
+            <IoCloseOutline className={`${styles.color}`} size={40}/>
             </MobileCloseButton>
             <MenuTopIcon className={`menu-top-icon`} onMouseEnter={async()=>{ 
                         if(!isMenuOpen){
@@ -361,7 +364,7 @@ function UserMenu(props: any) {
                 </UserMobileTitleView>
                 <AiOutlineAppstore onClick={()=>alert('מבט על')} style={{position:'absolute',top:15}} className={`bar-user-icon ${styles.color}`} size={50}/> 
             </MenuTopIcon>
-            {renderIMenuItems({items: data, setSelectedItem, isSelectedItem, handleCategoryClick, styles, isCategoryAnime, darkState, isMenuOpen, setMenuOpen})}  
+            {renderMenuItems({items: data, setSelectedItem, isSelectedItem, handleCategoryClick, styles, isCategoryAnime, darkState, isMenuOpen, setMenuOpen})}  
         </div>
     );
 } 
@@ -882,6 +885,7 @@ function DashboardMain (props: any) {
     const [set,setset] = useState(false);
     return  (   
           <DashboardMainView>
+          <ReactTooltip place={'bottom'}/> 
               <DashboardTitle className={`dashboard-title`}>
                     <DashboardTitleHeaderChild className={`header-child1-dashboard`}> 
                         <DashboardTitleText>
@@ -965,7 +969,7 @@ function UserDashboard (props: any) {
 };  
 
 
-function MenuView ({ on, child, styles, setMenuOpen, setMenuRef }:any) {
+function MenuView ({ on, child, styles, setMenuOpen, setMenuRef }:any) { 
     const mainProps = useSpring({ width: on ? 200 : 90, from: { width: on ? 200 : 90 } });  
     const Menu = styled.div` 
         flex:1;   
@@ -988,7 +992,7 @@ function DashboardView ({ on, child, styles, setMenuOpen }:any) {
     const [isDashboardReady,setDashboardReady] = useState(false)
     const mainProps = useSpring({ opacity: isDashboardReady ? 1 : 0, from: { opacity: isDashboardReady ? 1 : 0 } });   
     setTimeout(() => {
-        setDashboardReady(true)
+        setDashboardReady(true) 
     }, 700);
     const Dashboard = styled.div` 
         width: 100%;
@@ -1012,6 +1016,7 @@ const initialState = {
   
 function Main(props: any) { 
     console.debug('Main Main') 
+    const store = useStore()  
     const [isMenuOpen,setMenuOpen] = useState(false) 
     const [isReady,setIsReady] = useState(false);
     const styles = props.styles; 
@@ -1032,21 +1037,39 @@ function Main(props: any) {
         'קיצור דרך 6',
       ];
       const handleClick = (event: any) => {
-        setMenuOpen(false)  
-          event.preventDefault();
-          setState({
-            mouseX: event.clientX - 2,
-            mouseY: event.clientY - 4,
-          });
+          if(isMenuOpen){
+            setMenuOpen(false)  
+            setTimeout(() => { 
+                store.setRightMenuOpen(true); 
+                event.preventDefault();
+                setState({
+                    mouseX: event.clientX - 2,
+                    mouseY: event.clientY - 4,
+                });
+            }, 500); 
+          }else{ 
+            store.setRightMenuOpen(true); 
+            event.preventDefault();
+            setState({
+                mouseX: event.clientX - 2,
+                mouseY: event.clientY - 4,
+            }); 
+          }
       };
   
       const handleClose = () => {
           setState(initialState);
+          setTimeout(() => {
+            store.setRightMenuOpen(false); 
+          }, 250);
       };
     
     const handleMenuItemClick = (event: any, index: any) => {
         // setSelectedIndex(index);
         setState(initialState);
+        setTimeout(() => {
+          store.setRightMenuOpen(false); 
+        }, 250);
     }; 
 
     document.onkeydown = keyboardDown;document.onkeyup = keyboardUp;
@@ -1063,6 +1086,7 @@ function Main(props: any) {
         if(!isReady){ 
             setIsReady(true)
             setTimeout(() => {
+                store.setEndAnime(true);
                 setMenuOpen(true) 
             }, 1000);
         } 
@@ -1095,7 +1119,7 @@ function Main(props: any) {
     function keyboardDown(e: any){
         console.debug(e.keyCode,e.key)
         let str = ' קיצור דרך ';
-        if(e.keyCode === 68){//d   
+        if(!store.isRightMenuOpen && e.keyCode === 68){//d   
             console.debug('setMenuRef',window.innerWidth)  
             if(setMenuRef && setMenuRef.current && setMenuRef.current.style){
                 if(window.innerWidth <= 680)

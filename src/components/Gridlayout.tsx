@@ -1,6 +1,7 @@
 import React from "react";
 import RGL, { WidthProvider } from "react-grid-layout";
 import styled from "styled-components";
+import DoughnutChart from './DoughnutChart'
 
 const ReactGridLayout = WidthProvider(RGL);
 /**
@@ -89,10 +90,17 @@ export default class LocalStorageLayout extends React.PureComponent <any|{layout
             <ValueComponent><span>5</span></ValueComponent> 
           </div>
           <div className="grid-box" key="t" data-grid={{ w: 2, h: 7, x: 8, y: 2  }}>
-            <ValueComponent><span>6</span></ValueComponent> 
+            <ValueComponent>
+              {/* <span> */}
+              {/* </span> */}
+            </ValueComponent> 
           </div>
           <div className="grid-box" key="7" data-grid={{ w: 4, h: 7, x: 10, y: 2}}>
-            <ValueComponent><span>7</span></ValueComponent> 
+            <ValueComponent>
+              <span>
+                <DoughnutChart/> 
+              </span>
+            </ValueComponent> 
           </div> 
         </ReactGridLayout>
       </div>
