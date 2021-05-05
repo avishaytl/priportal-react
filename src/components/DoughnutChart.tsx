@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as ReactDOM from "react-dom"
 import { Doughnut } from 'react-chartjs-2';
 import { ChartOptions } from 'chart.js'
@@ -7,7 +7,10 @@ import { Observer } from 'mobx-react';
 import styled from 'styled-components';
 import ReactTooltip from 'react-tooltip'; 
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';   
-import  DropdownExampleSearchSelection  from './DropdwonMenu'; 
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';  
+import Fade from '@material-ui/core/Fade';
+import DropdwonMenu from './DropdwonMenu'; 
 
 const ChartContainer = styled.div`  
   min-width: 100%;
@@ -29,6 +32,28 @@ const ChartView = styled.div`
   flex-direction: column;
   align-items: center; 
   justify-content: center;   
+`
+const ChartValueView = styled.div`  
+  position: absolute;
+  bottom: 80px;  
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;  
+}
+`
+const ChartValue = styled.p`   
+  color: #202020; 
+  font-size: 2vw;   
+  line-height: 40px;
+}
+`
+const ChartValueTitle = styled.p`  
+  color: #cecece;
+  font-size: 0.70vw;
+  font-weight: 500;
+  max-width: 100px;
+  text-align: center;
 }
 `
 const TableView = styled.div`  
@@ -57,7 +82,7 @@ const Item  = styled.li<any>`
   align-items: center; 
   justify-content: flex-start;
   margin: 5px; 
-  transition: background ease 0.2s; 
+  transition: background ease 0.15s; 
   :hover{
     background: #ececec; 
   }
@@ -70,13 +95,12 @@ const ItemValue  = styled.p`
   font-size: 14px;
   font-weight: bold;
   color: #202020;  
-  transition: font-size ease 0.2s; 
-  transition: border-bottom ease 0.2s; 
+  transition: font-size ease 0.2s;  
 }
 `
 const ItemTitle  = styled.p`    
   width: 90%;
-  font-size: 14px;
+  font-size: 0.7vw;
   text-align: right; 
   transition: font-size ease 0.2s; 
 }
@@ -105,6 +129,8 @@ const Header  = styled.div`
   flex-direction: row;
   align-items: center;  
   justify-content: flex-start; 
+  border-bottom: 2px solid #e1e1e1;
+  max-height: 50px;
 }
 `
 const HeaderTitle  = styled.p`    
@@ -119,9 +145,16 @@ const HeaderMenuIcon  = styled.div`
   padding-left: 25px;       
 }`
 
+const MenuItemStyle = styled.div` 
+flex:1;
+:hover {
+    background: ${'#cecece'}; 
+}`  
 
-export default function DoughnutChart() { 
+export default function DoughnutChart(props: any) { 
+  const { setIsStatic } = props;
   const store = useStore()  
+  const [isMenuOpen,setMenuOpen] = useState(null);
     const data = {
       labels: [
         // 'לביצוע',
@@ -143,8 +176,8 @@ export default function DoughnutChart() {
           '#9346b7'
         ],     
         hoverOffset: 3,
-        cutout: 85,
-        radius: 85,
+        cutout: '80%',
+        radius: '90%',
         borderRadius: {
           outerEnd: 20,
           innerEnd: 20,
@@ -153,12 +186,65 @@ export default function DoughnutChart() {
         }
       }]
     };  
+    const options = [
+      'העתק',
+      'הדבק',
+      'קיצור דרך 1',
+      'קיצור דרך 2',
+      'קיצור דרך 3',
+      'קיצור דרך 4',
+      'קיצור דרך 5',
+      'קיצור דרך 6',
+    ];
+    const handleMenuItemClick = (event: any, index: any) => {
+        // setSelectedIndex(index); 
+        alert(index)
+    }; 
+    const handleMenu = (event: any) => {
+      setIsStatic()
+      setMenuOpen(event.currentTarget);
+    };
+    const handleClose = () => {
+      setMenuOpen(null);
+      setIsStatic()
+    };
+  
     return (
       <ChartContainer> 
         <Header>
           <HeaderMenuIcon> 
-            <HiOutlineDotsHorizontal/>
-            {/* <DropdownExampleSearchSelection/> */}
+            <HiOutlineDotsHorizontal style={{paddingTop:5,fontSize:24}} aria-controls="fade-menu" onClick={handleMenu}/>
+            {/* <DropdwonMenu/> */}
+              <Menu  
+                  style={{marginTop:30,marginLeft:100}}
+                  dir={'rtl'}
+                  keepMounted
+                  id="fade-menu"
+                  open={Boolean(isMenuOpen)}
+                  onClose={handleClose} 
+                  anchorEl={isMenuOpen} 
+                  TransitionComponent={Fade}
+                
+                  // anchorPosition={
+                  // state.mouseY !== null && state.mouseX !== null
+                  //     ? { top: state.mouseY, left: state.mouseX }
+                  //     : undefined
+                  // } 
+              > 
+                  {options.map((option, index) => (
+                  <MenuItem 
+                      style={{fontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif`}}
+                      key={option}
+                      disabled={index === 0 || index === 1}
+                      // selected={index === selectedIndex}
+                      onClick={(event) => handleMenuItemClick(event, index)}
+                  >
+                      <MenuItemStyle>
+                          {option}
+                      </MenuItemStyle>
+                  </MenuItem>
+                  ))} 
+              </Menu>  
           </HeaderMenuIcon>
           <HeaderTitle> 
             {`לורם איפסום`}
@@ -166,9 +252,17 @@ export default function DoughnutChart() {
         </Header>
         <Main>
           <ChartView>
+            <ChartValueView>
+              <ChartValue>
+                {`${20 + 30 + 25 + 10}` + `$`}
+              </ChartValue>
+              <ChartValueTitle>
+                {`איפסום לורם`}
+              </ChartValueTitle>
+            </ChartValueView>
             <Observer>
                 {() => (
-                <Doughnut   type={`Doughnut`} data={data} options={{ 
+                <Doughnut type={`Doughnut`} data={data} options={{ 
                   animation: {duration: store.isEndAnime ? 0 : 600}
                 }} />
               )}

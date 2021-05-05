@@ -1046,7 +1046,7 @@ function Main(props: any) {
                     mouseX: event.clientX - 2,
                     mouseY: event.clientY - 4,
                 });
-            }, 500); 
+            }, 550); 
           }else{ 
             store.setRightMenuOpen(true); 
             event.preventDefault();
@@ -1086,8 +1086,8 @@ function Main(props: any) {
         if(!isReady){ 
             setIsReady(true)
             setTimeout(() => {
-                store.setEndAnime(true);
-                setMenuOpen(true) 
+                store.setEndAnime(true); 
+                setMenuOpen(true)  
             }, 1000);
         } 
 

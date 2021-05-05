@@ -28,16 +28,18 @@ const countryOptions = [
   { key: 'bj', value: 'bj', flag: 'bj', text: 'Benin' },
   { key: 'il', value: 'il', flag: 'il', text: 'Israel' },
 ]
-
+const options = [
+  { key: 'be', value: 'be', text: 'Belgium' },
+  { key: 'bz', value: 'bz', text: 'Belize' },
+  { key: 'bj', value: 'bj', text: 'Benin' },
+  { key: 'il', value: 'il', text: 'Israel' }
+];
 const DropdownExampleSearchSelection = (props: any) => (
   <Dropdown
     className={props.className}
-    placeholder='Country'
-    fluid
-    search
-    selection
-    defaultValue={'il'}
-    options={countryOptions} 
+    // placeholder='Country' 
+    selection 
+    options={options} 
     icon={<Icon style={{opacity:0.5,marginRight:10}} name='flag' />}
   /> 
 )
