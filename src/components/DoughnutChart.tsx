@@ -4,7 +4,7 @@ import { Doughnut } from 'react-chartjs-2';
 import { ChartOptions } from 'chart.js'
 import { useStore } from '../storeui/storeui'
 import { Observer } from 'mobx-react';
-import styled from 'styled-components';
+import styled , {keyframes} from 'styled-components';
 import ReactTooltip from 'react-tooltip'; 
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';   
 import MenuItem from '@material-ui/core/MenuItem';
@@ -35,7 +35,7 @@ const ChartView = styled.div`
 `
 const ChartValueView = styled.div`  
   position: absolute;
-  bottom: 80px;  
+  bottom: 85px;  
   display: flex;
   flex-direction: column;
   align-items: center; 
@@ -44,13 +44,13 @@ const ChartValueView = styled.div`
 `
 const ChartValue = styled.p`   
   color: #202020; 
-  font-size: 2vw;   
+  font-size: 40px;   
   line-height: 40px;
 }
 `
 const ChartValueTitle = styled.p`  
   color: #cecece;
-  font-size: 0.70vw;
+  font-size: 12px;
   font-weight: 500;
   max-width: 100px;
   text-align: center;
@@ -100,7 +100,7 @@ const ItemValue  = styled.p`
 `
 const ItemTitle  = styled.p`    
   width: 90%;
-  font-size: 0.7vw;
+  font-size: 14px;
   text-align: right; 
   transition: font-size ease 0.2s; 
 }
@@ -150,6 +150,19 @@ flex:1;
 :hover {
     background: ${'#cecece'}; 
 }`  
+
+const svgChartRotate = (props: any) => keyframes`
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(-${props.value}deg);
+  }
+`;
+
+const ChartSvg = styled.g<any>`    
+`;
 
 export default function DoughnutChart(props: any) { 
   const { setIsStatic } = props;
@@ -259,14 +272,11 @@ export default function DoughnutChart(props: any) {
               <ChartValueTitle>
                 {`איפסום לורם`}
               </ChartValueTitle>
-            </ChartValueView>
-            <Observer>
-                {() => (
-                <Doughnut type={`Doughnut`} data={data} options={{ 
-                  animation: {duration: store.isEndAnime ? 0 : 600}
-                }} />
-              )}
-            </Observer>   
+            </ChartValueView> 
+              <svg className="circle-chart" viewBox="0 0 33.83098862 33.83098862" width="18vh" height="18vh" xmlns="http://www.w3.org/2000/svg">
+                <circle className="circle-chart__background" stroke="#efefef" strokeWidth="2" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
+                <circle className="circle-chart__circle" stroke="#00acc1" strokeWidth="2" strokeDasharray={20 + 30 + 25 + 10} strokeLinecap="round" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
+              </svg>  
           </ChartView>
           <TableView>
             <List>

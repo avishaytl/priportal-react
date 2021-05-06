@@ -797,13 +797,7 @@ const DashboardTitleHeaderChild = styled.div`
 const GridView = styled.div`      
     padding: 10px;
     padding-bottom: 50px;
-`
-
-
-
-
-
-
+`   
 
 function DashboardHeader (props: any) { 
     const { setMenuRef, setMenuOpen, isMenuOpen } = props;  
