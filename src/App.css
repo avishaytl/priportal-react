@@ -285,14 +285,27 @@ input::placeholder {
     width: 100%;
     min-height: 100vh;
 } 
+
+.circle-chart__circle_pie {
+    animation: circle-chart-fill-pie 2s reverse; 
+    transform: rotate(0deg);
+    transform-origin: center;
+  }
+
+  @keyframes circle-chart-fill-pie {
+      to { stroke-dasharray: 0 100; }
+    }
+  
 .circle-chart__circle {
     animation: circle-chart-fill 2s reverse;
     transform: rotate(-90deg);
     transform-origin: center;
   }
+
 @keyframes circle-chart-fill {
     to { stroke-dasharray: 0 100; }
   }
+
 /* .circle-chart__circle {
     animation: circle-chart-fill 2s reverse;
     transform: rotate(-90deg);

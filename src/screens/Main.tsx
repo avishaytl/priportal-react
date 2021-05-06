@@ -1086,8 +1086,10 @@ function Main(props: any) {
         if(!isReady){ 
             setIsReady(true)
             setTimeout(() => {
-                store.setEndAnime(true); 
                 setMenuOpen(true)  
+                setTimeout(() => { 
+                store.setEndAnime(true); 
+                }, 500);
             }, 1000);
         } 
 
@@ -1156,11 +1158,12 @@ function Main(props: any) {
         if(e.keyCode === 53)
             runSortCut(str + 6)
     }
-    let ho = props.darkState ? '#bebebe' : '#bebebe';
+    // let ho = props.darkState ? '#bebebe' : '#bebebe';
     const MenuItemStyle = styled.div` 
         flex:1;
-        :hover {
-            background: ${ho}; 
+        :hover { 
+            background: ${'#2C324D'}; 
+            color: #f1f1f1; 
         }`  
         // onContextMenu={handleClick}
     return( <div onContextMenu={handleClick} className={`main-screen ${styles.background} ${isReady ? styles.transform : ``}`}>

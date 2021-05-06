@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import RGL, { WidthProvider } from "react-grid-layout";
 import styled from "styled-components";
 import DoughnutChart from './DoughnutChart'
+import ValueChart from './ValueChart'
+import PieChart from './PieChart'
 
 const ReactGridLayout = WidthProvider(RGL);
 
@@ -125,13 +127,17 @@ export default function LocalStorageLayout(props: any){
           case `value`:
             result.push(
               <div onMouseLeave={()=>setLastCardKey(`table-component${index}`)} className="grid-box" key={`value-component${index}`} data-grid={{ w: getComponentLayout(component.type).w, h: getComponentLayout(component.type).h, x: component.position.x, y: component.position.y, static: false  }}>
-                <ValueComponent><span>{component.type}</span></ValueComponent> 
+                <ValueComponent>
+                  <ValueChart setIsStatic={onChangeStatic}/>
+                </ValueComponent> 
             </div>); 
             break;
           case `pie`:
             result.push(
               <div onMouseLeave={()=>setLastCardKey(`table-component${index}`)} className="grid-box" key={`pie-component${index}`} data-grid={{ w: getComponentLayout(component.type).w, h: getComponentLayout(component.type).h, x: component.position.x, y: component.position.y, static: false }}>
-                <ValueComponent><span>{component.type}</span></ValueComponent> 
+                <ValueComponent>
+                  <PieChart setIsStatic={onChangeStatic}/>
+                </ValueComponent> 
             </div>); 
             break;
           case `dough`:

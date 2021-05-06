@@ -26,7 +26,7 @@ const ChartContainer = styled.div`
 }
 `
 const ChartView = styled.div`  
-  min-width: 50%;
+  min-width: 100%;
   min-height: 100%;
   display: flex;
   flex-direction: column;
@@ -166,7 +166,7 @@ const svgChartRotate = (props: any) => keyframes`
 const ChartSvg = styled.g<any>`    
 `;
 
-export default function DoughnutChart(props: any) { 
+export default function PieChart(props: any) { 
   const { setIsStatic } = props;
   const store = useStore()  
   const [isMenuOpen,setMenuOpen] = useState(null); 
@@ -277,33 +277,9 @@ export default function DoughnutChart(props: any) {
             </ChartValueView> 
               <svg className="circle-chart" viewBox="0 0 33.83098862 33.83098862" width="18vh" height="18vh" xmlns="http://www.w3.org/2000/svg">
                 <circle className="circle-chart__background" stroke="#efefef" strokeWidth="2" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
-                <circle className="circle-chart__circle" stroke="#00acc1" strokeWidth="2" strokeDasharray={20 + 30 + 25 + 10} strokeLinecap="round" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
+                <circle className="circle-chart__circle_pie" stroke="#00acc1" strokeWidth="2" strokeDasharray={(20 + 30 + 25 + 10)} strokeLinecap="round" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
               </svg>  
-          </ChartView>
-          <TableView>
-            <List>
-              <Item borderColor={`#7aa770`} data-tip={`30 אל'טרה בע"ה - לורם איפסום`}>
-                <ItemValue>{`30` + `$`}</ItemValue>
-                <ItemTitle>{`לורם איפסום`}</ItemTitle>
-                <RightBorder background={`#7aa770`}/>
-              </Item>
-              <Item data-tip={`25 אל'טרה בע"ה - לורם איפסום`}>
-                <ItemValue>{`25` + `$`}</ItemValue>
-                <ItemTitle>{`לורם איפסום`}</ItemTitle>
-                <RightBorder background={`#82d1cc`}/>
-              </Item>
-              <Item data-tip={`20 אל'טרה בע"ה - לורם איפסום`}>
-                <ItemValue>{`20` + `$`}</ItemValue>
-                <ItemTitle>{`לורם איפסום`}</ItemTitle>
-                <RightBorder background={`#f3bb7b`}/>
-              </Item>
-              <Item data-tip={`10 אל'טרה בע"ה - לורם איפסום`}>
-                <ItemValue>{`10` + `$`}</ItemValue>
-                <ItemTitle>{`לורם איפסום`}</ItemTitle>
-                <RightBorder background={`#ac6093`}/>
-              </Item>
-            </List>
-          </TableView> 
+          </ChartView>  
         </Main>
       </ChartContainer>
     ); 
