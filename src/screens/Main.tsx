@@ -794,6 +794,10 @@ const DashboardTitleHeaderChild = styled.div`
     padding: 10px;
     padding-bottom: 20px;
 `
+const GridView = styled.div`      
+    padding: 10px;
+    padding-bottom: 50px;
+`
 
 
 
@@ -909,10 +913,12 @@ function DashboardMain (props: any) {
               <MainDashboardContainer>
                 <MainDashboarView> 
                     <GridlayoutView on={isMenuOpen} child={
-                    <MainBoardView className={`main-border-view`}>
-                            <Scrollbars style={{width:'100%', height:'calc(100% - 135px)'  }} >   
+                        <MainBoardView className={`main-border-view`}>
+                            <Scrollbars style={{width:'100%', height:'calc(100% - 135px)'  }} >    
+                                <GridView>
+                                    <LocalStorageLayout isMenuOpen={isMenuOpen}/>
+                                </GridView> 
                             {/* <MyFirstGrid/> */}
-                            <LocalStorageLayout isMenuOpen={isMenuOpen}/>
                             {/* <MainBoardScrollView className={`main-border-scroll-view`}>
                                     <MainBoardViewLeftChild className={`left-border-view`}>
                                         <BorderLeftChild>
