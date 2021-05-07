@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as ReactDOM from "react-dom"
-import { Doughnut } from 'react-chartjs-2';
+import { Doughnut  } from 'react-chartjs-2';
 import { ChartOptions } from 'chart.js'
 import { useStore } from '../storeui/storeui'
 import { Observer } from 'mobx-react';
@@ -31,7 +31,8 @@ const ChartView = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center; 
-  justify-content: center;   
+  justify-content: center; 
+  overflow: hidden;  
 `
 const ChartValueView = styled.div`  
   position: absolute;
@@ -170,12 +171,7 @@ export default function PieChart(props: any) {
   const { setIsStatic } = props;
   const store = useStore()  
   const [isMenuOpen,setMenuOpen] = useState(null); 
-    const data = {
-      labels: [
-        // 'לביצוע',
-        // 'בוצע',
-        // 'אקדא'
-      ],
+    const data = { 
       datasets: [{
         data: [20, 50, 25, 35],
         backgroundColor: [
@@ -192,7 +188,8 @@ export default function PieChart(props: any) {
         ],     
         hoverOffset: 3,
         cutout: '80%',
-        radius: '90%',
+        radius: '60%',
+        maintainAspectRatio : false,
         borderRadius: {
           outerEnd: 20,
           innerEnd: 20,
@@ -275,10 +272,22 @@ export default function PieChart(props: any) {
                 {`איפסום לורם`}
               </ChartValueTitle>
             </ChartValueView> 
-              <svg className="circle-chart" viewBox="0 0 33.83098862 33.83098862" width="18vh" height="18vh" xmlns="http://www.w3.org/2000/svg">
+              {/* <svg className="circle-chart" viewBox="0 0 33.83098862 33.83098862" width="18vh" height="18vh" xmlns="http://www.w3.org/2000/svg">
                 <circle className="circle-chart__background" stroke="#efefef" strokeWidth="2" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
-                <circle className="circle-chart__circle_pie" stroke="#00acc1" strokeWidth="2" strokeDasharray={(20 + 30 + 25 + 10)} strokeLinecap="round" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
-              </svg>  
+                <circle className="circle-chart__circle_pie" stroke="#00acc1" strokeWidth="2" strokeDasharray={`${(50)}`} strokeLinecap="round" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
+              </svg>  */}  
+              <div style={{maxWidth:200}}>
+                <Observer>
+                    {() => (
+                    <Doughnut type={`Doughnut`} data={data} options={{ 
+                        animation: {duration: store.isEndAnime ? 0 : 600}
+                    }} />
+                 )}
+               </Observer>  
+              </div>
+              {/* <div style={{position:'absolute',width:'100%',height:'45%',bottom:0,background:'white'}}>
+
+              </div> */}
           </ChartView>  
         </Main>
       </ChartContainer>

@@ -10,11 +10,15 @@ export type TFriend = {
       friends: [] as TFriend[],
       isEndAnime: false,
       isRightMenuOpen: false,
+      isMsgRead: false,
       setEndAnime(val: boolean){
         this.isEndAnime = val;
       },
       setRightMenuOpen(val: boolean){
         this.isRightMenuOpen = val;
+      },
+      setMsgRead(val: boolean){
+        this.isMsgRead = val;
       },
       makeFriend(name: string, isFavorite = false, isSingle = false) {
         const oldFriend = this.friends.find(friend => friend.name === name)

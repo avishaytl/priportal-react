@@ -35,7 +35,7 @@ const ChartView = styled.div`
 `
 const ChartValueView = styled.div`  
   position: absolute;
-  bottom: 85px;  
+  bottom: 80px;  
   display: flex;
   flex-direction: column;
   align-items: center; 
@@ -275,10 +275,19 @@ export default function DoughnutChart(props: any) {
                 {`איפסום לורם`}
               </ChartValueTitle>
             </ChartValueView> 
-              <svg className="circle-chart" viewBox="0 0 33.83098862 33.83098862" width="18vh" height="18vh" xmlns="http://www.w3.org/2000/svg">
+              {/* <svg className="circle-chart" viewBox="0 0 33.83098862 33.83098862" width="18vh" height="18vh" xmlns="http://www.w3.org/2000/svg">
                 <circle className="circle-chart__background" stroke="#efefef" strokeWidth="2" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
                 <circle className="circle-chart__circle" stroke="#00acc1" strokeWidth="2" strokeDasharray={20 + 30 + 25 + 10} strokeLinecap="round" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
-              </svg>  
+              </svg>   */}
+              <div style={{maxWidth:200}}>
+                <Observer>
+                    {() => (
+                    <Doughnut   type={`Doughnut`} data={data} options={{ 
+                        animation: {duration: store.isEndAnime ? 0 : 600}
+                    }} />
+                 )}
+               </Observer>  
+              </div>
           </ChartView>
           <TableView>
             <List>

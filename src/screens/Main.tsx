@@ -13,7 +13,7 @@ import * as mdIcons from 'react-icons/md';
 import ListItem from "@material-ui/core/ListItem"; 
 import Collapse from "@material-ui/core/Collapse";
 import List from "@material-ui/core/List";
-import styled from 'styled-components';
+import styled , {keyframes} from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import {useSpring, animated} from 'react-spring';  
 import MenuItem from '@material-ui/core/MenuItem';
@@ -24,6 +24,7 @@ import imgdashboard from '../dashboard.png';
 import ReactDOM from 'react-dom'; 
 import GridLayout from 'react-grid-layout';
 import { useStore } from '../storeui/storeui'
+import { Observer } from 'mobx-react-lite';
 
 class MyFirstGrid extends React.Component {
   render() {
@@ -570,7 +571,41 @@ const SelectedCopanyTitle = styled.p`
     color: #2C324D;
     margin: 10px;
 `
-const UserMessageView = styled.div`  
+const svgChartRotate = (props: any) => keyframes`
+  0% {
+    transform: rotate(0deg);
+  }  
+  25% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+`;
+const UserMessageView = styled.div<any>`  
+    width: 40px;   
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    justify-content: center;  
+    padding-top: 5px; 
+    margin-right: 15px;
+    margin-left: 15px;
+    animation: ${props=> svgChartRotate(props)} 1s ease-out;
+    animation-iteration-count: infinite;  
+    &:hover {
+        animation-play-state: ${ `paused !important`};
+    } 
+    &:hover div{
+        transform: scale(1.1)
+    } 
+`
+const UserMessageViewReadMsg = styled.div<any>`  
     width: 40px; 
     overflow: hidden;  
     margin: 0px;
@@ -581,7 +616,7 @@ const UserMessageView = styled.div`
     justify-content: center;  
     padding-top: 5px; 
     margin-right: 15px;
-    margin-left: 15px;
+    margin-left: 15px; 
 `
 const BurgerMenuIcon = styled.div`   
     display: flex;
@@ -589,6 +624,30 @@ const BurgerMenuIcon = styled.div`
     align-items: center; 
     justify-content: center;   
     display: none;
+`
+const MsgValueView = styled.div` 
+    width: 20px;
+    height: 20px; 
+    border-radius: 10px;
+    background: rgba(255,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;   
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    transition: transform .1s; 
+`
+const MsgValue = styled.p` 
+    font-size: 12px;
+    color: #f1f1f1;
+    transition: transform .1s;  
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    flex: 1
 `
 
 const DashboardMainView = styled.div` 
@@ -801,11 +860,28 @@ const GridView = styled.div`
 
 function DashboardHeader (props: any) { 
     const { setMenuRef, setMenuOpen, isMenuOpen } = props;  
-    const [set,setset] = useState(false);
+    const [set,setset] = useState(false); 
+    const store = useStore()  
     return  (    
             <Header className={`dashboard-header`}>  
                 <HeaderChild className={`header-child1`}>
-                    <UserMessageView className={`user-message`}><BsBell/></UserMessageView> 
+                    <Observer>
+                        {()=>{
+                            return(
+                                !store.isMsgRead ? <UserMessageView onClick={()=>{
+                                    alert('readmsg') 
+                                    store.setMsgRead(true)
+                                }} className={`user-message`}>
+                                    {3 && <MsgValueView><MsgValue>{3}</MsgValue></MsgValueView>}
+                                    <BsBell/>
+                                </UserMessageView> :
+                                <UserMessageViewReadMsg onClick={()=>alert('read ur msg')} className={`user-message`}>
+                                    {/* {3 && <MsgValue>{3}</MsgValue>} */}
+                                    <BsBell/>
+                                </UserMessageViewReadMsg> 
+                            )
+                        }}
+                    </Observer> 
                     <Block className={`header-block`}>
                         <BlockIcon>
                             |
@@ -1086,11 +1162,11 @@ function Main(props: any) {
         if(!isReady){ 
             setIsReady(true)
             setTimeout(() => {
-                setMenuOpen(true)  
-                setTimeout(() => { 
-                store.setEndAnime(true); 
+                setMenuOpen(true)   
+                setTimeout(() => {
+                    store.setEndAnime(true);   
                 }, 500);
-            }, 1000);
+            }, 500);
         } 
 
         return history.listen((location: any) => {
