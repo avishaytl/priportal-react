@@ -1162,11 +1162,11 @@ function Main(props: any) {
         if(!isReady){ 
             setIsReady(true)
             setTimeout(() => {
+                store.setEndAnime(true);   
                 setMenuOpen(true)   
                 setTimeout(() => {
-                    store.setEndAnime(true);   
                 }, 500);
-            }, 500);
+            }, 1000);
         } 
 
         return history.listen((location: any) => {
