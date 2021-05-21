@@ -62,7 +62,10 @@ const TableView = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center; 
-  justify-content: flex-start;    
+  justify-content: flex-start;   
+  max-height:229px;
+  overflow:scroll;
+  border-radius:10px; 
 }
 ` 
 const List = styled.ul`  
@@ -75,31 +78,33 @@ const List = styled.ul`
 }
 `
 const Item  = styled.li<any>`  
-  min-width: 80%;
-  height: 40px;
+  width:100%;
+  height: 40px; 
   display: flex;  
   flex-direction: row;
   align-items: center; 
-  justify-content: flex-start;
-  margin: 5px; 
-  transition: background ease 0.15s; 
+  padding: 10px;
+  justify-content: flex-start; 
+  transition: background ease 0.15s;  
   :hover{
-    background: #ececec; 
-  }
-  :hover :first-child{
+    background: #ececec;  
+  }    
+  :hover p{
     font-size: 16px;   
-  } 
+  }
 }
 `
 const ItemValue  = styled.p`   
   font-size: 14px;
   font-weight: bold;
   color: #202020;  
-  transition: font-size ease 0.2s;  
+  transition: font-size ease 0.2s; 
+  margin-right:10px; 
+  min-width:15%;
 }
 `
 const ItemTitle  = styled.p`    
-  width: 90%;
+flex:1;
   font-size: 14px;
   text-align: right; 
   transition: font-size ease 0.2s; 
@@ -171,7 +176,7 @@ export default function DoughnutChart(props: any) {
       labels: [ 
       ],
       datasets: [{
-        data: [30, 25, 20, 10],
+        data: [0],
         backgroundColor: store.backgroundColors,
         hoverBackgroundColor: store.backgroundColorsA,
         hoverOffset: 3,
@@ -185,6 +190,9 @@ export default function DoughnutChart(props: any) {
         }
       }]
     };  
+    data.datasets[0].data = doughData.map((item:any)=>{
+      return parseInt(item.value);
+    })
     const options = [
       'העתק',
       'הדבק',

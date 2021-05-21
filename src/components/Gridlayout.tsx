@@ -96,10 +96,10 @@ const tableData = [
 
 const graphData = [
   {key:1, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `12`, icon1: true, icon2: true, icon3: true, title: `מאי`, cTitle: `מאי`},
-  {key:2, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `19`, icon1: false, icon2: false, icon3: true, title: `יוני`, cTitle: `יוני`},
+  {key:2, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `19`, icon1: false, icon2: true, icon3: true, title: `יוני`, cTitle: `יוני`},
   {key:3, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `9`, icon1: true, icon2: false, icon3: false, title: `יולי`, cTitle: `יולי`},
-  {key:4, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `5`, icon1: false, icon2: true, icon3: true, title: `אוגוסט`, cTitle: `אוג`},
-  {key:5, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `8`, icon1: true, icon2: false, icon3: false, title: `ספטמבר`, cTitle: `ספט`},
+  {key:4, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `5`, icon1: true, icon2: true, icon3: true, title: `אוגוסט`, cTitle: `אוג`},
+  {key:5, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `8`, icon1: true, icon2: true, icon3: false, title: `ספטמבר`, cTitle: `ספט`},
   {key:6, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `3`, icon1: false, icon2: false, icon3: true, title: `נובמבר`, cTitle: `נוב`},
   {key:7, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `10`, icon1: true, icon2: true, icon3: false, title: `דצמבר`, cTitle: `דצמ`},
   {key:8, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `1`, icon1: true, icon2: true, icon3: true, title: `ינואר`, cTitle: `ינו`},
@@ -112,10 +112,13 @@ const valueData = [
 ]
 
 const doughData = [
+  {key:1, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `30`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`},
+  {key:2, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `25`, icon1: true, icon2: false, icon3: false, title: `לורם איפסום`},
+  {key:3, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `20`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`},
+  {key:4, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `10`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`}, 
   {key:1, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `30`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`},
-  {key:2, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `25`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`},
-  {key:3, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `20`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`},
-  {key:4, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `10`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`}, 
+  {key:2, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `25`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`},
+  {key:3, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `20`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`}, 
 ] 
 
 

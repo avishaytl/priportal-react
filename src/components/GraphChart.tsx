@@ -36,43 +36,51 @@ const Main  = styled.div`
 `  
 const TableView = styled.div`  
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   display: grid;   
-  grid-template-columns: auto auto;  
+  grid-template-columns: 100%;  
   padding: 0;
   margin: 0;
+  max-height:200px;
+  overflow:scroll;
+  border-radius:10px;
 }
 `  
 const Item  = styled.div<any>`   
+  width:100%;
   height: 40px; 
   display: flex;  
   flex-direction: row;
   align-items: center; 
-  padding: 5px;
-  justify-content: flex-end; 
-  transition: background ease 0.2s;  
+  padding: 10px;
+  justify-content: flex-start; 
+  transition: background ease 0.15s;  
   :hover{
     background: #ececec;  
-  }   
- 
+  }    
+  :hover p{
+    font-size: 16px;   
+  }
 }
 `
 const ItemValue  = styled.p`   
   font-size: 14px;
   font-weight: bold;
   color: #202020;  
-  transition: font-size ease 0.2s;    
-  margin-left: 5px;
+  transition: font-size ease 0.2s;     
+  text-align:left;
+  min-width:15%;
 }
 `
 const ItemTitle  = styled.p`     
   font-size: 14px;
   text-align: right; 
-  flex:1;
+  flex:1; 
+  transition: font-size ease 0.2s;    
 }
 ` 
 const RightBorder  = styled.p<any>`    
-  width: 6px;
+  width: 5px;
   height: 17px;
   border-radius: 15px; 
   background: ${props=>props.background}; 
@@ -218,13 +226,13 @@ export default function GraphChart(props: any) {
             {graphData.map((item:any,index: number)=>{
               return <Item key={item.key}> 
                   <RightBorder data-tip={item.tip}  background={store.backgroundColors[index]}/>
-                  <ItemValue onClick={()=>alert(item.title)}>{item.value}</ItemValue> 
-                  <ItemTitle onClick={()=>alert(item.title)}>{item.title}</ItemTitle>  
+                  <ItemTitle onClick={()=>alert(item.title)}>{item.title}</ItemTitle>   
                         {(item.icon1 || item.icon2 || item.icon3) && <ItemIcon>
                                             {item.icon1 && <GrDocumentVerified onClick={()=>alert(item.key + ' ic1')} style={{opacity:0.5}}/>}
                                             {item.icon2 && <GrDocumentExcel onClick={()=>alert(item.key + ' ic2')} style={{opacity:0.5}}/>}
                                             {item.icon3 && <GrDocumentDownload onClick={()=>alert(item.key + ' ic3')} style={{opacity:0.5}}/>}
                                 </ItemIcon>}
+                  <ItemValue onClick={()=>alert(item.title)}>{`${item.value}$`}</ItemValue>  
               </Item>
             })}
                     

@@ -38,8 +38,9 @@ const TableView = styled.div`
   flex-direction: column;
   align-items: center; 
   justify-content: flex-start;    
-  max-height:340px;
+  max-height:350px;
   overflow:scroll;
+  border-radius:10px;
 }
 `  
 const Item  = styled.li<any>`   
@@ -85,7 +86,7 @@ const ItemTitle  = styled.p`
   width: 90%;
   font-size: 14px;
   text-align: right; 
-  transition: font-size ease 0.2s; 
+  transition: font-size ease 0.2s;  
 }
 `
 const RightBorder  = styled.p<any>`    
