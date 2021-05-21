@@ -79,9 +79,21 @@ const htmlLayout600 = {
 const data = [
   { type: 'table', position: {x: 0, y: 0}, data:[] },
   { type: 'graph', position: {x: 0, y: 0}, data:[] },
-  { type: 'value', position: {x: 0, y: 0}, data:[] },
-  { type: 'value', position: {x: 0, y: 0}, data:[] },
-  { type: 'value', position: {x: 0, y: 0}, data:[] },
+  { type: 'value', position: {x: 0, y: 0}, data:{
+    key: '1',
+    background: '#01cb9e',
+    }
+  },
+  { type: 'value', position: {x: 0, y: 0}, data:{
+    key: '2',
+    background: '#e84949',
+    }
+  },
+  { type: 'value', position: {x: 0, y: 0}, data:{
+    key: '3',
+    background: '#fad16b',
+    }
+  },
   { type: 'pie', position: {x: 0, y: 0}, data:[] },
   { type: 'dough', position: {x: 0, y: 0}, data:[] },
 ]
@@ -92,12 +104,7 @@ export default function LocalStorageLayout(props: any){
     const [layout,setLayout] = useState(false); 
     const [lastCardPosition,setLastCardPosition] = useState({x:0,y:0,type:``});  
     const [lastCardKey,setLastCardKey] = useState(''); 
-
-    // useEffect(()=>{ 
-    //   if(realDataLayout)
-    //     setRealDataLayout(!realDataLayout)
-    // },[realDataLayout])
-
+ 
     const getComponentLayout = (type: string) =>{
       let lay = {w: 0,h: 0,}
       let comp: any = getDefaultLayout();  
@@ -134,7 +141,9 @@ export default function LocalStorageLayout(props: any){
             result.push(
               <div onMouseLeave={()=>setLastCardKey(`component${index}`)} className="grid-box" key={`value-component${index}`} data-grid={{ w: getComponentLayout(component.type).w, h: getComponentLayout(component.type).h, x: component.position.x, y: component.position.y, static: false  }}>
                 <ComponentContainer>
-                  <ValueChart setIsStatic={onChangeStatic}/>
+                  <ValueChart props={{
+                    background: component.data.background,
+                  }} setIsStatic={onChangeStatic}/>
                 </ComponentContainer> 
             </div>); 
             break;
@@ -237,31 +246,7 @@ export default function LocalStorageLayout(props: any){
         <HeaderIcon color={`#cecece`} left={'50px'} onClick={removeFromLS}>
           {`ע ${lastCardPosition.x} ש ${lastCardPosition.y} ${lastCardPosition.type}`}
         </HeaderIcon>
-        {
-        //   realDataLayout ? <ReactGridLayout
-        //     style={{minWidth:'100%'}}
-        //   {...defaultProps}
-        //   layout={originalLayout}
-        //   onLayoutChange={onLayoutChange}
-        // > 
-        // <div className="grid-box" key="component1" data-grid={getDefaultLayout()?.table}>
-        //     <ComponentContainer><span>1</span></ComponentContainer> 
-        // </div>
-        //   <div className="grid-box" key="graph-component2" data-grid={getDefaultLayout()?.graph}>
-        //     <ComponentContainer><span>2</span></ComponentContainer> 
-        //   </div>
-        //   <div className="grid-box" key="value-component3" data-grid={getDefaultLayout()?.value}>
-        //     <ComponentContainer><span>3</span></ComponentContainer> 
-        //   </div> 
-        //   <div className="grid-box" key="pie-component6" data-grid={getDefaultLayout()?.pie}>
-        //     <ComponentContainer><span>6</span></ComponentContainer> 
-        //   </div> 
-        //   <div className="grid-box" key="dough-component7" data-grid={getDefaultLayout()?.dough}>
-        //     <ComponentContainer> 
-        //         <DoughnutChart setIsStatic={onChangeStatic}/>  
-        //     </ComponentContainer> 
-        //   </div> 
-        // </ReactGridLayout> :
+        { 
             layout ? null : <ReactGridLayout
               style={{minWidth:'100%'}}
             {...defaultProps}
@@ -308,7 +293,4 @@ function saveToLS(key: any, value: any) {
     );
   }
 }
-
-// if (process.env.STATIC_EXAMPLES === true) {
-//   import("../test-hook.jsx").then(fn => fn.default(LocalStorageLayout));
-// }
+ 

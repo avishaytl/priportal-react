@@ -1159,12 +1159,12 @@ function Main(props: any) {
         console.debug('main useEffect')
         if(!isReady){ 
             setIsReady(true)
-            setTimeout(() => { 
-                store.setEndAnime(true);  
-                setMenuOpen(true)   
-                setTimeout(() => {
-                }, 100);
-            }, 1500);
+            setTimeout(() => {  
+                store.setEndAnime(true); 
+                setTimeout(() => {   
+                    setMenuOpen(true)
+                }, 30);
+            }, 1000);
         } 
 
         return history.listen((location: any) => {

@@ -1,10 +1,4 @@
-// import * as ReactDOM from "react-dom"
-// import { Doughnut } from 'react-chartjs-2';
-// import { ChartOptions } from 'chart.js'
-// import { useStore } from '../storeui/storeui'
-// import { Observer } from 'mobx-react';
 import styled from 'styled-components';
-// import ReactTooltip from 'react-tooltip'; 
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';  
 import Fade from '@material-ui/core/Fade';
@@ -34,29 +28,12 @@ const ChartView = styled.div`
   align-items: center; 
   justify-content: center;    
 `
-// const ChartValueView = styled.div`  
-//   position: absolute;
-//   bottom: 85px;  
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center; 
-//   justify-content: center;  
-// }
-// `
 const ChartValue = styled.p`   
   color: #202020; 
   font-size: 12px;   
   transition: scale .25s ease; 
 }
 `
-// const ChartValueTitle = styled.p`  
-//   color: #cecece;
-//   font-size: 12px;
-//   font-weight: 500;
-//   max-width: 100px;
-//   text-align: center;
-// }
-// ` 
 const TableValue  = styled.p`   
   font-size: 40px;
   font-weight: bold;
@@ -64,21 +41,6 @@ const TableValue  = styled.p`
   transition: transform .2s; 
 }
 `
-// const ItemTitle  = styled.p`    
-//   width: 90%;
-//   font-size: 14px;
-//   text-align: right; 
-//   transition: font-size ease 0.2s; 
-// }
-// `
-// const RightBorder  = styled.p<any>`    
-//   width: 6px;
-//   height: 17px;
-//   border-radius: 15px; 
-//   background: ${props=>props.background};
-//   margin-left: 7px;
-// }`
-
 const Main  = styled.div`    
   min-width: 100%;
   max-height: 100%;
@@ -90,31 +52,6 @@ const Main  = styled.div`
   justify-content: center;   
 }
 ` 
-// const HeaderMenuIcon  = styled.div` 
-//   padding: 5px; 
-//   padding-left: 25px;       
-// }`
-
-// const MenuItemStyle = styled.div` 
-// flex:1;
-// :hover {
-//     background: ${'#2C324D'}; 
-//     color: #f1f1f1;
-// }`  
-
-// const svgChartRotate = (props: any) => keyframes`
-//   from {
-//     transform: rotate(0);
-//   }
-
-//   to {
-//     transform: rotate(-${props.value}deg);
-//   }
-// `;
-
-// const ChartSvg = styled.g<any>`    
-// `;
-
 const TableView = styled.div`  
   min-width: 50%;
   min-height: 100%;
@@ -216,8 +153,7 @@ export default function TableChart(props: any) {
     'קיצור דרך 5',
     'קיצור דרך 6',
   ];
-  const handleMenuItemClick = (event: any, index: any) => {
-      // setSelectedIndex(index); 
+  const handleMenuItemClick = (event: any, index: any) => { 
       alert(index)
   }; 
   const handleMenu = (event: any) => {
@@ -233,7 +169,6 @@ export default function TableChart(props: any) {
         <Header>
           <HeaderMenuIcon> 
             <HiOutlineDotsHorizontal style={{paddingTop:5,fontSize:24}} aria-controls="fade-menu" onClick={handleMenu}/>
-            {/* <DropdwonMenu/> */}
               <Menu  
                   style={{marginTop:55,marginLeft:125}}
                   dir={'rtl'}
@@ -243,19 +178,12 @@ export default function TableChart(props: any) {
                   onClose={handleClose} 
                   anchorEl={isMenuOpen} 
                   TransitionComponent={Fade}
-                
-                  // anchorPosition={
-                  // state.mouseY !== null && state.mouseX !== null
-                  //     ? { top: state.mouseY, left: state.mouseX }
-                  //     : undefined
-                  // } 
               > 
                   {options.map((option, index) => (
                   <MenuItem 
                       style={{fontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif`}}
                       key={option}
                       disabled={index === 0 || index === 1}
-                      // selected={index === selectedIndex}
                       onClick={(event) => handleMenuItemClick(event, index)}
                   >
                       <MenuItemStyle>
@@ -270,30 +198,6 @@ export default function TableChart(props: any) {
           </HeaderTitle> 
         </Header>
         <Main>
-          {/* <TableView>
-            <List>
-              <Item borderColor={`#7aa770`} data-tip={`30 אל'טרה בע"ה - לורם איפסום`}>
-                <ItemValue>{`30` + `$`}</ItemValue>
-                <ItemTitle>{`לורם איפסום`}</ItemTitle>
-                <RightBorder background={`#7aa770`}/>
-              </Item>
-              <Item data-tip={`25 אל'טרה בע"ה - לורם איפסום`}>
-                <ItemValue>{`25` + `$`}</ItemValue>
-                <ItemTitle>{`לורם איפסום`}</ItemTitle>
-                <RightBorder background={`#82d1cc`}/>
-              </Item>
-              <Item data-tip={`20 אל'טרה בע"ה - לורם איפסום`}>
-                <ItemValue>{`20` + `$`}</ItemValue>
-                <ItemTitle>{`לורם איפסום`}</ItemTitle>
-                <RightBorder background={`#f3bb7b`}/>
-              </Item>
-              <Item data-tip={`10 אל'טרה בע"ה - לורם איפסום`}>
-                <ItemValue>{`10` + `$`}</ItemValue>
-                <ItemTitle>{`לורם איפסום`}</ItemTitle>
-                <RightBorder background={`#ac6093`}/>
-              </Item>
-            </List>
-          </TableView>  */}
         </Main>
       </ChartContainer>
     ); 

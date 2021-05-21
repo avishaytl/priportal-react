@@ -89,7 +89,7 @@ const Item  = styled.li<any>`
   :hover{
     background: #ececec; 
   }
-  :hover p{
+  :hover :first-child{
     font-size: 16px;   
   } 
 }
