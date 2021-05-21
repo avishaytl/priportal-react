@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import * as ReactDOM from "react-dom"
-import { Doughnut } from 'react-chartjs-2';
-import { ChartOptions } from 'chart.js'
-import { useStore } from '../storeui/storeui'
-import { Observer } from 'mobx-react';
-import styled , {keyframes} from 'styled-components';
-import ReactTooltip from 'react-tooltip'; 
-import { HiOutlineDotsHorizontal } from 'react-icons/hi';   
+// import * as ReactDOM from "react-dom"
+// import { Doughnut } from 'react-chartjs-2';
+// import { ChartOptions } from 'chart.js'
+// import { useStore } from '../storeui/storeui'
+// import { Observer } from 'mobx-react';
+import styled from 'styled-components';
+// import ReactTooltip from 'react-tooltip'; 
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';  
 import Fade from '@material-ui/core/Fade';
-import DropdwonMenu from './DropdwonMenu'; 
-import { ValueCounter } from './ValueCounter';
+import { HiOutlineDotsHorizontal } from 'react-icons/hi';    
+import { FiTrendingDown } from 'react-icons/fi';    
+import { useStore } from '../storeui/storeui';
+import { useState } from 'react';
 
-const ChartContainer = styled.div`  
+const ChartContainer = styled.div<any>`  
   min-width: 100%;
   min-height: 100%; 
   display: flex;
@@ -27,38 +27,94 @@ const ChartContainer = styled.div`
 }
 `
 const ChartView = styled.div`  
-  min-width: 50%;
+  min-width: 30%;
   min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center; 
-  justify-content: center;   
+  justify-content: center;    
 `
-const ChartValueView = styled.div`  
-  position: absolute;
-  bottom: 75px;  
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  justify-content: center;  
-  z-index:0;
-}
-`
+// const ChartValueView = styled.div`  
+//   position: absolute;
+//   bottom: 85px;  
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center; 
+//   justify-content: center;  
+// }
+// `
 const ChartValue = styled.p`   
-  color: transparent; 
-  font-size: 50px;   
-  line-height: 40px;
+  color: #202020; 
+  font-size: 12px;   
+  transition: scale .25s ease; 
 }
 `
-const ChartValueTitle = styled.p`  
- padding-top: 10px;
-  color: #cecece;
-  font-size: 14px;
-  font-weight: 500;
-  max-width: 100px;
-  text-align: center;
+// const ChartValueTitle = styled.p`  
+//   color: #cecece;
+//   font-size: 12px;
+//   font-weight: 500;
+//   max-width: 100px;
+//   text-align: center;
+// }
+// ` 
+const TableValue  = styled.p`   
+  font-size: 40px;
+  font-weight: bold;
+  color: #202020;   
+  transition: transform .2s; 
 }
 `
+// const ItemTitle  = styled.p`    
+//   width: 90%;
+//   font-size: 14px;
+//   text-align: right; 
+//   transition: font-size ease 0.2s; 
+// }
+// `
+// const RightBorder  = styled.p<any>`    
+//   width: 6px;
+//   height: 17px;
+//   border-radius: 15px; 
+//   background: ${props=>props.background};
+//   margin-left: 7px;
+// }`
+
+const Main  = styled.div`    
+  min-width: 100%;
+  max-height: 100%;
+  height: 100%;
+  flex: 1; 
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+  justify-content: center;   
+}
+` 
+// const HeaderMenuIcon  = styled.div` 
+//   padding: 5px; 
+//   padding-left: 25px;       
+// }`
+
+// const MenuItemStyle = styled.div` 
+// flex:1;
+// :hover {
+//     background: ${'#2C324D'}; 
+//     color: #f1f1f1;
+// }`  
+
+// const svgChartRotate = (props: any) => keyframes`
+//   from {
+//     transform: rotate(0);
+//   }
+
+//   to {
+//     transform: rotate(-${props.value}deg);
+//   }
+// `;
+
+// const ChartSvg = styled.g<any>`    
+// `;
+
 const TableView = styled.div`  
   min-width: 50%;
   min-height: 100%;
@@ -115,18 +171,26 @@ const RightBorder  = styled.p<any>`
   background: ${props=>props.background};
   margin-left: 7px;
 }`
+const HeaderTitle  = styled.p`    
+  font-size: 18px;
+  font-weight: 500;
+  text-align: right; 
+  width: 100%;
+  color: #202020;  
+}`
+const HeaderMenuIcon  = styled.div` 
+  padding: 5px; 
+  padding-left: 10px;            
+}`
 
-const Main  = styled.div`    
-  min-width: 100%;
-  max-height: 100%;  
-  display: flex;
-  flex-direction: row;
-  align-items: center; 
-  justify-content: center;   
-  height: 100%;
-  flex: 1; 
-}
-`
+const MenuItemStyle = styled.div` 
+  flex:1;
+  cursor: default;
+  :hover {
+      background: ${'#2C324D'}; 
+      color: #f1f1f1;
+}`  
+
 const Header  = styled.div`    
   width: 100%; 
   padding-right: 25px;   
@@ -138,97 +202,32 @@ const Header  = styled.div`
   max-height: 50px;
 }
 `
-const HeaderTitle  = styled.p`    
-  font-size: 18px;
-  font-weight: 500;
-  text-align: right; 
-  width: 100%;
-  color: #202020;  
-}`
-const HeaderMenuIcon  = styled.div` 
-  padding: 5px; 
-  padding-left: 10px;          
-}`
-
-const MenuItemStyle = styled.div` 
-  flex:1;
-  cursor: default;
-  :hover {
-      background: ${'#2C324D'}; 
-      color: #f1f1f1;
-}`  
-
-const svgChartRotate = (props: any) => keyframes`
-  from {
-    transform: rotate(0);
-  }
-
-  to {
-    transform: rotate(-${props.value}deg);
-  }
-`;
-
-const ChartSvg = styled.g<any>`    
-`;
-
-export default function DoughnutChart(props: any) { 
+export default function GraphChart(props: any) {   
   const { setIsStatic } = props;
   const store = useStore()  
   const [isMenuOpen,setMenuOpen] = useState(null); 
-    const data = {
-      labels: [
-        // 'לביצוע',
-        // 'בוצע',
-        // 'אקדא'
-      ],
-      datasets: [{
-        data: [30, 25, 20, 10],
-        backgroundColor: [
-          '#7aa770',
-          '#82d1cc',
-          '#f3bb7b',
-          '#ac6093'
-        ],
-        hoverBackgroundColor: [
-          '#648f5b',
-          '#72b4b0',
-          '#d19e65',
-          '#995783'
-        ],     
-        hoverOffset: 3,
-        cutout: '80%',
-        radius: '90%',
-        borderRadius: {
-          outerEnd: 20,
-          innerEnd: 20,
-          outerStart: 20,
-          innerStart: 20
-        }
-      }]
-    };  
-    const options = [
-      'העתק',
-      'הדבק',
-      'קיצור דרך 1',
-      'קיצור דרך 2',
-      'קיצור דרך 3',
-      'קיצור דרך 4',
-      'קיצור דרך 5',
-      'קיצור דרך 6',
-    ];
-    const handleMenuItemClick = (event: any, index: any) => {
-        // setSelectedIndex(index); 
-        alert(index)
-    }; 
-    const handleMenu = (event: any) => {
-      setIsStatic()
-      setMenuOpen(event.currentTarget);
-    };
-    const handleClose = () => {
-      setMenuOpen(null);
-      setIsStatic()
-    };
-  
+  const options = [
+    'העתק',
+    'הדבק',
+    'קיצור דרך 1',
+    'קיצור דרך 2',
+    'קיצור דרך 3',
+    'קיצור דרך 4',
+    'קיצור דרך 5',
+    'קיצור דרך 6',
+  ];
+  const handleMenuItemClick = (event: any, index: any) => {
+      // setSelectedIndex(index); 
+      alert(index)
+  }; 
+  const handleMenu = (event: any) => {
+    setIsStatic()
+    setMenuOpen(event.currentTarget);
+  };
+  const handleClose = () => {
+    setMenuOpen(null);
+    setIsStatic()
+  };
     return (
       <ChartContainer> 
         <Header>
@@ -268,36 +267,12 @@ export default function DoughnutChart(props: any) {
           </HeaderMenuIcon>
           <HeaderTitle> 
             {`לורם איפסום`}
-          </HeaderTitle>
+          </HeaderTitle> 
         </Header>
         <Main>
-          <ChartView>
-            <ChartValueView>
-              <ChartValue>
-                <ValueCounter isEndAnime={store.isEndAnime}/>
-                {`${20 + 30 + 25 + 10}` + `$`}
-                </ChartValue>
-              <ChartValueTitle>
-                {`איפסום לורם`}
-              </ChartValueTitle>
-            </ChartValueView> 
-              {/* <svg className="circle-chart" viewBox="0 0 33.83098862 33.83098862" width="18vh" height="18vh" xmlns="http://www.w3.org/2000/svg">
-                <circle className="circle-chart__background" stroke="#efefef" strokeWidth="2" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
-                <circle className="circle-chart__circle" stroke="#314570" strokeWidth="2" strokeDasharray={20 + 30 + 25 + 10} strokeLinecap="round" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
-              </svg>   */}
-              <div style={{maxWidth: window.innerWidth <= 1100 ? 180 : 210,zIndex:1}}>
-                <Observer>
-                    {() => (
-                    <Doughnut   type={`Doughnut`} data={data} options={{ 
-                        animation: {duration: store.isEndAnime ? 0 : 600}
-                    }} />
-                 )}
-               </Observer>  
-              </div>
-          </ChartView>
-          <TableView>
+          {/* <TableView>
             <List>
-              <Item data-tip={`30 אל'טרה בע"ה - לורם איפסום`}>
+              <Item borderColor={`#7aa770`} data-tip={`30 אל'טרה בע"ה - לורם איפסום`}>
                 <ItemValue>{`30` + `$`}</ItemValue>
                 <ItemTitle>{`לורם איפסום`}</ItemTitle>
                 <RightBorder background={`#7aa770`}/>
@@ -318,7 +293,7 @@ export default function DoughnutChart(props: any) {
                 <RightBorder background={`#ac6093`}/>
               </Item>
             </List>
-          </TableView> 
+          </TableView>  */}
         </Main>
       </ChartContainer>
     ); 

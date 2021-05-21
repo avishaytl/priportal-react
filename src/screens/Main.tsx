@@ -137,7 +137,9 @@ const data = {
         categorie: {label:'מכירות', selectedIcon: 'MdLocalGroceryStore', icon: 'MdStore'}, id: 1, category: [{
             categorie: {label:'1מכירות'}, id: 11, category: [{
                 categorie: {label:'2מכירות'}, id: 111, category:[{
-                    categorie: {label:'קריאות שירות'}, id: 33, category: null}]}]}]},
+                    categorie: {label:'קריאות שירות'}, id: 33, category: null}]},{
+                        categorie: {label:'כרטיס עובד'}, id: 22, category: null}]},{
+                            categorie: {label:'כרטיס עובד'}, id: 22, category: null}]},
         {categorie: {label:'דו"חות', selectedIcon: 'MdEventNote', icon: 'MdEventAvailable'}, id: 2 ,category: [{
             categorie: {label:'כרטיס עובד'}, id: 22, category: null},{
                 categorie: {label:'כרטיס עובד'}, id: 22, category: null},{
@@ -190,15 +192,11 @@ function UserIconMenu ({ on, child, value, darkState, onClick, isSelectedItem, s
     let ho = darkState ? '#ffffffa0' : '#000000a0';
     const MenuItem = styled.div`
         padding-top: 3px; 
-        max-height: ${on ? `40px` : `90px`}; 
-        transition-duration: 0.2s; 
-        transition-property: transform;   
-        background: ${isSelectedItem === value ? `#000000a0;` : `transparent;`}
-        transition: transform ease 0.2s;
+        max-height: ${on ? `40px` : `90px`};  
+        background: ${isSelectedItem === value ? `#000000a0;` : `transparent;`} 
         transition: background ease 0.3s;
         :hover {
-            background: ${ho};  
-            transform: scale(1.1);
+            background: ${ho};   
         }
     `
     return  <animated.div  onClick={()=>{  
@@ -1161,12 +1159,12 @@ function Main(props: any) {
         console.debug('main useEffect')
         if(!isReady){ 
             setIsReady(true)
-            setTimeout(() => {
-                store.setEndAnime(true);   
+            setTimeout(() => { 
+                store.setEndAnime(true);  
                 setMenuOpen(true)   
                 setTimeout(() => {
-                }, 500);
-            }, 1000);
+                }, 100);
+            }, 1500);
         } 
 
         return history.listen((location: any) => {

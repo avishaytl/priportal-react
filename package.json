@@ -20,6 +20,7 @@
     "@types/styled-components": "^5.1.7",
     "@types/theme-ui": "^0.3.7",
     "chart.js": "^3.2.1",
+    "jquery": "^3.6.0",
     "jss": "^10.5.1",
     "jss-rtl": "^0.3.0",
     "mobx": "^6.3.0",

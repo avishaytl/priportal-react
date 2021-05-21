@@ -23,19 +23,16 @@ const ChartContainer = styled.div<any>`
   position: absolute;
   left: 0;
   top: 0; 
-  border-bottom: solid 6px ${props=>props.background};
+  border-bottom: solid 4px ${props=>props.background};
   border-radius: 10px;
   background: #f1f1f1;
   transition: background .2s ease; 
   :hover{
-    background: ${props=>props.background}; 
+    background: ${props=>props.background};  
   }
   :hover div p{
     color: #fff; 
-  }
-  :hover div:nth-child(2) p{
-    transform: scale(1.1); 
-  }
+  } 
   :hover div{
     color: #fff; 
   }
@@ -154,7 +151,7 @@ const HeaderTitle  = styled.p`
 // const ChartSvg = styled.g<any>`    
 // `;
 
-export default function ValuetChart(props: any) {  
+export default function ValueChart(props: any) {  
 //   const store = useStore()  
 //   const [isMenuOpen,setMenuOpen] = useState(null); 
 //     const data = {

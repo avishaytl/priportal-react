@@ -4,10 +4,12 @@ import styled from "styled-components";
 import DoughnutChart from './DoughnutChart'
 import ValueChart from './ValueChart'
 import PieChart from './PieChart'
+import TableChart from "./TableChart";
+import GraphChart from "./GraphChart";
 
 const ReactGridLayout = WidthProvider(RGL);
 
- const ValueComponent = styled.div`  
+ const ComponentContainer = styled.div`  
     flex: 1;
     height: 100%;
     display: flex;
@@ -16,14 +18,14 @@ const ReactGridLayout = WidthProvider(RGL);
     justify-content: flex-start;
     background: white; 
     border-radius: 10px;
-    transition: box-shadow ease 0.5s;
+    transition: box-shadow ease 0.3s; 
     -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15);
     -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15);
     box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15); 
     :hover{
       -webkit-box-shadow: 0px 0px 9px 2px rgba(0,0,0,0.25);
       -moz-box-shadow: 0px 0px 9px 2px rgba(0,0,0,0.25);
-      box-shadow: 0px 0px 9px 2px rgba(0,0,0,0.25);  
+      box-shadow: 0px 0px 9px 2px rgba(0,0,0,0.25);   
     }
 `
 const HeaderIcon = styled.button<any>`  
@@ -114,38 +116,42 @@ export default function LocalStorageLayout(props: any){
         switch(component.type){
           case `table`:
             result.push(
-              <div onMouseLeave={()=>setLastCardKey(`table-component${index}`)} className="grid-box" key={`table-component${index}`} data-grid={{ w: getComponentLayout(component.type).w, h: getComponentLayout(component.type).h, x: component.position.x, y: component.position.y, static: false }}>
-                <ValueComponent><span>{component.type}</span></ValueComponent> 
+              <div onMouseLeave={()=>setLastCardKey(`component${index}`)} className="grid-box" key={`component${index}`} data-grid={{ w: getComponentLayout(component.type).w, h: getComponentLayout(component.type).h, x: component.position.x, y: component.position.y, static: false }}>
+                <ComponentContainer>
+                  <TableChart setIsStatic={onChangeStatic}/>   
+                </ComponentContainer> 
             </div>); 
             break;
           case `graph`:
             result.push(
-              <div onMouseLeave={()=>setLastCardKey(`table-component${index}`)} className="grid-box" key={`graph-component${index}`} data-grid={{ w: getComponentLayout(component.type).w, h: getComponentLayout(component.type).h, x: component.position.x, y: component.position.y, static: false  }}>
-                <ValueComponent><span>{component.type}</span></ValueComponent> 
+              <div onMouseLeave={()=>setLastCardKey(`component${index}`)} className="grid-box" key={`graph-component${index}`} data-grid={{ w: getComponentLayout(component.type).w, h: getComponentLayout(component.type).h, x: component.position.x, y: component.position.y, static: false  }}>
+                <ComponentContainer>
+                  <GraphChart setIsStatic={onChangeStatic}/>  
+                </ComponentContainer> 
             </div>); 
             break;
           case `value`:
             result.push(
-              <div onMouseLeave={()=>setLastCardKey(`table-component${index}`)} className="grid-box" key={`value-component${index}`} data-grid={{ w: getComponentLayout(component.type).w, h: getComponentLayout(component.type).h, x: component.position.x, y: component.position.y, static: false  }}>
-                <ValueComponent>
+              <div onMouseLeave={()=>setLastCardKey(`component${index}`)} className="grid-box" key={`value-component${index}`} data-grid={{ w: getComponentLayout(component.type).w, h: getComponentLayout(component.type).h, x: component.position.x, y: component.position.y, static: false  }}>
+                <ComponentContainer>
                   <ValueChart setIsStatic={onChangeStatic}/>
-                </ValueComponent> 
+                </ComponentContainer> 
             </div>); 
             break;
           case `pie`:
             result.push(
-              <div onMouseLeave={()=>setLastCardKey(`table-component${index}`)} className="grid-box" key={`pie-component${index}`} data-grid={{ w: getComponentLayout(component.type).w, h: getComponentLayout(component.type).h, x: component.position.x, y: component.position.y, static: false }}>
-                <ValueComponent>
+              <div onMouseLeave={()=>setLastCardKey(`component${index}`)} className="grid-box" key={`pie-component${index}`} data-grid={{ w: getComponentLayout(component.type).w, h: getComponentLayout(component.type).h, x: component.position.x, y: component.position.y, static: false }}>
+                <ComponentContainer>
                   <PieChart setIsStatic={onChangeStatic}/>
-                </ValueComponent> 
+                </ComponentContainer> 
             </div>); 
             break;
           case `dough`:
             result.push(
-              <div onMouseLeave={()=>setLastCardKey(`table-component${index}`)} className="grid-box" key={`dough-component${index}`} data-grid={{ w: getComponentLayout(component.type).w, h: getComponentLayout(component.type).h, x: component.position.x, y: component.position.y, static: false }}>
-                <ValueComponent> 
+              <div onMouseLeave={()=>setLastCardKey(`component${index}`)} className="grid-box" key={`dough-component${index}`} data-grid={{ w: getComponentLayout(component.type).w, h: getComponentLayout(component.type).h, x: component.position.x, y: component.position.y, static: false }}>
+                <ComponentContainer> 
                   <DoughnutChart setIsStatic={onChangeStatic}/>  
-                </ValueComponent> 
+                </ComponentContainer> 
             </div>); 
             break;
         }  
@@ -195,7 +201,7 @@ export default function LocalStorageLayout(props: any){
     function saveOnLS(){  
       resetLayout()
       removeFromLSO()
-      originalLayout.map((card: any)=>{
+      originalLayout.map((card: any) => {
         card['static'] = true;
       })  
       saveToLS("layout", originalLayout);   
@@ -238,22 +244,22 @@ export default function LocalStorageLayout(props: any){
         //   layout={originalLayout}
         //   onLayoutChange={onLayoutChange}
         // > 
-        // <div className="grid-box" key="table-component1" data-grid={getDefaultLayout()?.table}>
-        //     <ValueComponent><span>1</span></ValueComponent> 
+        // <div className="grid-box" key="component1" data-grid={getDefaultLayout()?.table}>
+        //     <ComponentContainer><span>1</span></ComponentContainer> 
         // </div>
         //   <div className="grid-box" key="graph-component2" data-grid={getDefaultLayout()?.graph}>
-        //     <ValueComponent><span>2</span></ValueComponent> 
+        //     <ComponentContainer><span>2</span></ComponentContainer> 
         //   </div>
         //   <div className="grid-box" key="value-component3" data-grid={getDefaultLayout()?.value}>
-        //     <ValueComponent><span>3</span></ValueComponent> 
+        //     <ComponentContainer><span>3</span></ComponentContainer> 
         //   </div> 
         //   <div className="grid-box" key="pie-component6" data-grid={getDefaultLayout()?.pie}>
-        //     <ValueComponent><span>6</span></ValueComponent> 
+        //     <ComponentContainer><span>6</span></ComponentContainer> 
         //   </div> 
         //   <div className="grid-box" key="dough-component7" data-grid={getDefaultLayout()?.dough}>
-        //     <ValueComponent> 
+        //     <ComponentContainer> 
         //         <DoughnutChart setIsStatic={onChangeStatic}/>  
-        //     </ValueComponent> 
+        //     </ComponentContainer> 
         //   </div> 
         // </ReactGridLayout> :
             layout ? null : <ReactGridLayout
