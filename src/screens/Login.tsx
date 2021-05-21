@@ -42,7 +42,7 @@ const LangButton = styled.div`
   align-items: center;
   justify-content: center;
   padding-bottom: 2px;
-  transition: all .1s ease-in-out;
+  transition: all ease-in-out .1s;
   margin-bottom: 0px;
   margin-top: 0px;
   :hover{ 
@@ -73,7 +73,7 @@ const UserInput = styled.div`
   align-items: center;
   justify-content: flex-start; 
   border-radius: 8px;  
-  transition: all .1s ease-in-out;
+  transition: all ease-in-out .1s;
   border: solid 1px #cecece;
   :hover{
     transform: scale(1.02); 
@@ -109,7 +109,7 @@ const LangValue = styled.p`
   -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.25);
   -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.25);
   box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.25); 
-  transition: all .1s ease-in-out;
+  transition: all ease-in-out .1s;
   :hover{
     transform: scale(1.02);  
   }
@@ -160,7 +160,52 @@ function Input(props: UserInputProps){
         type={type === `text` || !isHiddenEye ? `text` : `password`} />
   </>
 }
+const UserModal = styled.div<any>` 
+    width: 450px;
+    height: 65vh;
+    background: #ffffffc0;
+    position: absolute;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.25);
+    box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.25);
+    max-width: 90vw;
+    min-height: 600px;
+    max-height: 100vh;
+    padding-left: 50px; 
+    padding-right: 50px; 
+    ${props => props.position === 'mid' ? `` : props.position === `left` ? `left: 8vw` : `right: 8vw;`}
+    `
+const ImageModal = styled.div<any>`  
+    width: 200px;
+    height: 200px; 
+    max-height: 300px;  
+    max-width: 300px;   
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;  
+    background-image: url(${props => props.imgSrc}); 
+    `
 
+const LoginBackgroundView = styled.div<any>` 
+    flex:1;
+    max-width: 100vw;
+    height: 100vh;  
+    max-height: 100vh;  
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat; 
+    min-width: 100vw;
+    display: flex;
+    flex-direction: column; 
+    align-items: ${props => props.modalPosition === 'mid' ? 'center' : props.modalPosition === 'left' ? 'flex-start' : 'flex-end'};
+    justify-content: center;
+    background-image: url(${props => props.companyImage}); 
+    `
 function InputCheckbox(props: {value: boolean}){
   const { value } = props;
   const [isCheck, setIsCheck] = useState(value) 
@@ -176,40 +221,10 @@ function LoginUserModal(props: UserLoginProps){
     text: useRef(null),
     password: useRef(null),
   }; 
-  const UserModal = styled.div` 
-      width: 450px;
-      height: 65vh;
-      background: #ffffffc0;
-      position: absolute;
-      border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.25);
-      -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.25);
-      box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.25);
-      max-width: 90vw;
-      min-height: 600px;
-      max-height: 100vh;
-      padding-left: 50px; 
-      padding-right: 50px; 
-      ${position === 'mid' ? `` : position === `left` ? `left: 8vw` : `right: 8vw;`}
-      `
-  const ImageModal = styled.div`  
-      width: 200px;
-      height: 200px; 
-      max-height: 300px;  
-      max-width: 300px;   
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;  
-      background-image: url(${imgSrc}); 
-      `
 
   return(  
-      <UserModal className={`user-modal`}>  
-          <ImageModal/>
+      <UserModal position={position} className={`user-modal`}>  
+          <ImageModal imgSrc={imgSrc}/>
           <LangButton onClick={onLangauagePress}>
             <LangValue>{language === 'Il' ? 'En' : 'Il'}</LangValue>
             <BsArrowRight style={{paddingTop:2}}/>
@@ -247,25 +262,10 @@ function Login(props: any){
       history.push('/main')
     };  
 
-    const LoginBackgroundView = styled.div` 
-        flex:1;
-        max-width: 100vw;
-        height: 100vh;  
-        max-height: 100vh;  
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat; 
-        min-width: 100vw;
-        display: flex;
-        flex-direction: column; 
-        align-items: ${modalPosition === 'mid' ? 'center' : modalPosition === 'left' ? 'flex-start' : 'flex-end'};
-        justify-content: center;
-        background-image: url(${companyImage}); 
-        `
     return(  
         <div className={`login-screen`}> 
           {/* <ReactTooltip/> */}
-          <LoginBackgroundView className={`login-back-view`}>
+          <LoginBackgroundView companyImage={companyImage} modalPosition={modalPosition} className={`login-back-view`}>
             <LoginUserModal 
                 position={modalPosition} 
                 isPriorityUser={false} 

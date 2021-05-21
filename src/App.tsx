@@ -7,8 +7,7 @@ import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles'; 
 import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch, withRouter} from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group'; 
-import { Scrollbars } from 'react-custom-scrollbars'; 
+import { TransitionGroup, CSSTransition } from 'react-transition-group';  
 import { StoreProvider } from './storeui/storeui'
 import LoginScreen from './screens/Login'; 
 import MainScreen from './screens/Main';  

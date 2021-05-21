@@ -8,7 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';  
 import Fade from '@material-ui/core/Fade'; 
 import { ValueCounter } from './ValueCounter';
-import { GrDocumentVerified,GrDocumentExcel,GrDocumentDownload, GrDocumentPerformance } from 'react-icons/gr';    
+import { GrDocumentVerified,GrDocumentExcel,GrDocumentDownload } from 'react-icons/gr';    
 
 const ChartContainer = styled.div`  
   min-width: 100%;

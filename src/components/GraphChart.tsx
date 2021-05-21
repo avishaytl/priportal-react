@@ -7,7 +7,7 @@ import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { useStore } from '../storeui/storeui';
 import { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { GrDocumentVerified,GrDocumentExcel,GrDocumentDownload, GrDocumentPerformance } from 'react-icons/gr';       
+import { GrDocumentVerified,GrDocumentExcel,GrDocumentDownload } from 'react-icons/gr';       
 
 const ChartContainer = styled.div<any>`  
   min-width: 100%;

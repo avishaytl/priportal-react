@@ -163,6 +163,15 @@ function CategoryListAnime ({ on, child }:any) {
           </animated.div> 
 }; 
 
+const UserIconStyle = styled.div<any>`
+padding-top: 3px; 
+max-height: ${props => props.on ? `40px` : `90px`};  
+background: ${props => props.isSelectedItem === props.value ? `#000000a0;` : `transparent;`} 
+transition: background ease 0.3s;
+:hover {
+    background: ${props => props.ho};   
+}
+`
 function UserIconMenu ({ on, child, value, darkState, onClick, isSelectedItem, setMenuOpen, isMenuOpen }:any) {
     const mainPropsIcon = useSpring({ height: on ? 50 : 90,    from: { height: on ? 90 : 50  } });  
     const mainPropsText = useSpring({ top: on ? -40 : 0, paddingTop: on ? 10 : 0, maxWidth: on ? '70%' : '100%', position:'relative',   from: { top: on ? 0 : -40, paddingTop: on ? 0 : 10, maxWidth: on ? '100%' : '70%' } });
@@ -170,25 +179,16 @@ function UserIconMenu ({ on, child, value, darkState, onClick, isSelectedItem, s
     const store = useStore();
 
     let ho = darkState ? '#ffffffa0' : '#000000a0';
-    const MenuItem = styled.div`
-        padding-top: 3px; 
-        max-height: ${on ? `40px` : `90px`};  
-        background: ${isSelectedItem === value ? `#000000a0;` : `transparent;`} 
-        transition: background ease 0.3s;
-        :hover {
-            background: ${ho};   
-        }
-    `
     return  <animated.div onClick={()=>{  
                         setSelected(!isSelected)
                         onClick(isSelectedItem === value ? '!' + value : value ) 
                     }}  className={`user-icon-menu`} style={store.isRightMenuOpen ? {} : mainPropsIcon} >   
-                <MenuItem>
+                <UserIconStyle isSelectedItem={isSelectedItem} on={ho} value={value}>
                     {child}
                     <animated.div className={`user-icon-text-view`} style={store.isRightMenuOpen ? {height: 90} : mainPropsText}>    
                         <p className={`user-icon-text`}>{value}</p>
                     </animated.div>  
-                </MenuItem> 
+                </UserIconStyle> 
           </animated.div> 
 }; 
 
@@ -811,17 +811,7 @@ function DashboardHeader (props: any) {
 };  
 // , width: on ? 'calc(100% - 200px)' : 'calc(100% - 90px)'
 function GridlayoutView ({ on, child, styles, setMenuOpen, setMenuRef }:any) {
-    const mainProps = useSpring({ position: on ? 'fixed' : 'absolute', width: '95%',height:'100%',overflow:'hidden', from: {  position: on ? 'absolute' : 'fixed' } });  
-    const Menu = styled.div` 
-        flex:1;   
-        background-image: linear-gradient(to top, #121e34 , #314570, #314570, #1e2c4c);
-        border-top-left-radius: 10px;
-        -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.55);
-        -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.55);
-        box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.55); 
-        margin:0px;
-        padding:0px;
-    `
+    const mainProps = useSpring({ position: on ? 'fixed' : 'absolute', width: '95%',height:'100%',overflow:'hidden', from: {  position: on ? 'absolute' : 'fixed' } });   
     return  <animated.div style={mainProps} >   
                     {child}   
                     1
@@ -883,39 +873,45 @@ function UserDashboard (props: any) {
 };  
 
 
+const MenuStyle = styled.div` 
+    flex:1;   
+    background-image: linear-gradient(to top, #121e34 , #314570, #314570, #1e2c4c);
+    border-top-left-radius: 10px;
+    -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.55);
+    -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.55);
+    box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.55); 
+    margin:0px;
+    padding:0px;
+`
 function MenuView ({ on, child, styles, setMenuOpen, setMenuRef }:any) { 
     const mainProps = useSpring({ width: on ? 200 : 90, from: { width: on ? 200 : 90 } });  
-    const Menu = styled.div` 
-        flex:1;   
-        background-image: linear-gradient(to top, #121e34 , #314570, #314570, #1e2c4c);
-        border-top-left-radius: 10px;
-        -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.55);
-        -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.55);
-        box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.55); 
-        margin:0px;
-        padding:0px;
-    `
     return  <animated.div ref={setMenuRef} id={`menu-view`} className={`menu-view ${styles.background}`} style={mainProps} >  
-                <Menu className={'menu-styled'}>
+                <MenuStyle className={'menu-styled'}>
                     {child} 
-                </Menu>
+                </MenuStyle>
           </animated.div> 
 }; 
 
+const Dashboard = styled.div` 
+    width: 100%;
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;  
+    align-items: flex-end; 
+    justify-content: flex-start;
+`
+const MenuItemStyle = styled.div` 
+    flex:1;
+    :hover { 
+        background: ${'#2C324D'}; 
+        color: #f1f1f1; 
+    }`  
 function DashboardView ({ on, child, styles, setMenuOpen }:any) {
     const [isDashboardReady,setDashboardReady] = useState(false)
     const mainProps = useSpring({ opacity: isDashboardReady ? 1 : 0, from: { opacity: isDashboardReady ? 1 : 0 } });   
     setTimeout(() => {
         setDashboardReady(true) 
     }, 700);
-    const Dashboard = styled.div` 
-        width: 100%;
-        height: 100vh; 
-        display: flex;
-        flex-direction: column;  
-        align-items: flex-end; 
-        justify-content: flex-start;
-    `
     return  <animated.div className={`main-dashboard ${styles.background}`} style={mainProps} >    
                 <Dashboard>
                     {child}
@@ -1071,15 +1067,8 @@ function Main(props: any) {
             runSortCut(str + 6)
     }
     // let ho = props.darkState ? '#bebebe' : '#bebebe';
-    const MenuItemStyle = styled.div` 
-        flex:1;
-        :hover { 
-            background: ${'#2C324D'}; 
-            color: #f1f1f1; 
-        }`  
         // onContextMenu={handleClick}
-    return( <div onContextMenu={handleClick} className={`main-screen ${styles.background} ${isReady ? styles.transform : ``}`}>
-            <ReactTooltip place={'left'}/>  
+    return( <div onContextMenu={handleClick} className={`main-screen ${styles.background} ${isReady ? styles.transform : ``}`}> 
             <Menu  
                 dir={'rtl'}
                 keepMounted

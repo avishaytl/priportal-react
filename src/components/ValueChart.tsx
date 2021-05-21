@@ -108,7 +108,7 @@ export default function ValueChart(pro: any) {
           </HeaderTitle>
         </Header>
         <Main>
-          <ChartView  data-tip={`3.9% לורם איפסום`}> 
+          <ChartView data-tip={`3.9% לורם איפסום`}> 
               {/* <FiTrendingDown/> */}
               <AnimeIcon on={false}/>
               <ChartValue> 
