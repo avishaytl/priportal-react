@@ -7,6 +7,7 @@ import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { useStore } from '../storeui/storeui';
 import { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
+import { GrDocumentVerified,GrDocumentExcel,GrDocumentDownload, GrDocumentPerformance } from 'react-icons/gr';       
 
 const ChartContainer = styled.div<any>`  
   min-width: 100%;
@@ -36,25 +37,23 @@ const Main  = styled.div`
 const TableView = styled.div`  
   width: 100%;
   height: 100%;
-  display: grid;  
-  grid-template-columns: auto auto;
+  display: grid;   
+  grid-template-columns: auto auto;  
+  padding: 0;
+  margin: 0;
 }
 `  
 const Item  = styled.div<any>`   
-  height: 40px;
+  height: 40px; 
   display: flex;  
   flex-direction: row;
   align-items: center; 
   padding: 5px;
-  justify-content: flex-end;
-  margin: 5px; 
-  transition: background ease 0.15s; 
+  justify-content: flex-end; 
+  transition: background ease 0.2s;  
   :hover{
-    background: #ececec; 
-  }
-  :hover :first-child{
-    font-size: 16px;   
-  } 
+    background: #ececec;  
+  }   
  
 }
 `
@@ -62,24 +61,22 @@ const ItemValue  = styled.p`
   font-size: 14px;
   font-weight: bold;
   color: #202020;  
-  transition: font-size ease 0.2s;  
-  position: absolute; 
-  margin-right:40%
+  transition: font-size ease 0.2s;    
+  margin-left: 5px;
 }
 `
-const ItemTitle  = styled.p`    
-  width: 90%;
+const ItemTitle  = styled.p`     
   font-size: 14px;
   text-align: right; 
+  flex:1;
 }
-`
+` 
 const RightBorder  = styled.p<any>`    
   width: 6px;
   height: 17px;
   border-radius: 15px; 
-  background: ${props=>props.background};
+  background: ${props=>props.background}; 
   margin-left: 7px;
-  transition: background ease 0.2s;  
 }`
 const HeaderTitle  = styled.p`    
   font-size: 18px;
@@ -112,8 +109,16 @@ const Header  = styled.div`
   max-height: 50px;
 }
 `
+const ItemIcon  = styled.div<any>`      
+  display: flex;  
+  flex-direction: row;
+  align-items: center;  
+  justify-content: flex-end;  
+}
+`
 export default function GraphChart(props: any) {   
   const { setIsStatic } = props;
+  const graphData = props.data;
   const store = useStore()  
   const [isMenuOpen,setMenuOpen] = useState(null); 
   const options = [
@@ -138,33 +143,25 @@ export default function GraphChart(props: any) {
     setIsStatic()
   };
   const data = {
-    labels: ['רוני', 'אסף', 'מוטי', 'דוד', 'אורנה', 'לורם'],
+    labels: [''],
     datasetIndex: 15,
     dataIndex: 15,
     datasets: [
       {   
         label: 'לורם איפסום',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [ 
-          '#7aa770',
-          '#82d1cc',
-          '#f3bb7b',
-          '#ac6093',
-          '#a282e0',
-          '#dc597d',
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-        ],
+        data: [0],
+        backgroundColor: store.backgroundColors,
+        borderColor: store.backgroundColorsA,
         borderWidth: 0,
       },
     ],
-  };
+  }; 
+  data.labels = graphData.map((item:any)=>{
+    return item.cTitle;
+  })
+  data.datasets[0].data = graphData.map((item:any)=>{
+    return parseInt(item.value);
+  })
     return (
       <ChartContainer> 
         <Header>
@@ -217,37 +214,20 @@ export default function GraphChart(props: any) {
                     )}
           </Observer>  
           </div>
-          <TableView> 
-                    <Item data-tip={`30 אל'טרה בע"ה - לורם איפסום`} onClick={()=>alert(`רוני`)} background={`${`#7aa770`}6a`}> 
-                        <ItemValue>{`12`}</ItemValue>
-                        <ItemTitle>{`רוני`}</ItemTitle>
-                        <RightBorder background={`#7aa770`}/>
-                    </Item>
-                    <Item data-tip={`30 אל'טרה בע"ה - לורם איפסום`} onClick={()=>alert(`אסף`)} background={`${`#82d1cc`}6a`}> 
-                        <ItemValue>{`19`}</ItemValue>
-                        <ItemTitle>{`אסף`}</ItemTitle>
-                        <RightBorder background={`#82d1cc`}/>
-                    </Item>
-                    <Item data-tip={`30 אל'טרה בע"ה - לורם איפסום`} onClick={()=>alert(`מוטי`)} background={`${`#f3bb7b`}6a`}> 
-                        <ItemValue>{`3`}</ItemValue>
-                        <ItemTitle>{`מוטי`}</ItemTitle>
-                        <RightBorder background={`#f3bb7b`}/>
-                    </Item>
-                    <Item data-tip={`30 אל'טרה בע"ה - לורם איפסום`} onClick={()=>alert(`דוד`)} background={`${`#ac6093`}6a`}> 
-                        <ItemValue>{`5`}</ItemValue>
-                        <ItemTitle>{`דוד`}</ItemTitle>
-                        <RightBorder background={`#ac6093`}/>
-                    </Item>
-                    <Item data-tip={`30 אל'טרה בע"ה - לורם איפסום`} onClick={()=>alert(`אורנה`)} background={`${`#a282e0`}6a`}> 
-                        <ItemValue>{`2`}</ItemValue>
-                        <ItemTitle>{`אורנה`}</ItemTitle>
-                        <RightBorder background={`#a282e0`}/>
-                    </Item>
-                    <Item data-tip={`30 אל'טרה בע"ה - לורם איפסום`} onClick={()=>alert(`לורם`)} background={`${`#dc597d`}6a`}> 
-                        <ItemValue>{`3`}</ItemValue>
-                        <ItemTitle>{`לורם`}</ItemTitle>
-                        <RightBorder background={`#dc597d`}/>
-                    </Item>
+          <TableView dir={`rtl`}> 
+            {graphData.map((item:any,index: number)=>{
+              return <Item key={item.key}> 
+                  <RightBorder data-tip={item.tip}  background={store.backgroundColors[index]}/>
+                  <ItemValue onClick={()=>alert(item.title)}>{item.value}</ItemValue> 
+                  <ItemTitle onClick={()=>alert(item.title)}>{item.title}</ItemTitle>  
+                        {(item.icon1 || item.icon2 || item.icon3) && <ItemIcon>
+                                            {item.icon1 && <GrDocumentVerified onClick={()=>alert(item.key + ' ic1')} style={{opacity:0.5}}/>}
+                                            {item.icon2 && <GrDocumentExcel onClick={()=>alert(item.key + ' ic2')} style={{opacity:0.5}}/>}
+                                            {item.icon3 && <GrDocumentDownload onClick={()=>alert(item.key + ' ic3')} style={{opacity:0.5}}/>}
+                                </ItemIcon>}
+              </Item>
+            })}
+                    
           </TableView>
         </Main>
       </ChartContainer>

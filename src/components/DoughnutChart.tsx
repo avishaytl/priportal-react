@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
-import * as ReactDOM from "react-dom"
-import { Doughnut } from 'react-chartjs-2';
-import { ChartOptions } from 'chart.js'
+import React, { useState } from 'react'; 
+import { Doughnut } from 'react-chartjs-2'; 
 import { useStore } from '../storeui/storeui'
 import { Observer } from 'mobx-react';
-import styled , {keyframes} from 'styled-components';
-import ReactTooltip from 'react-tooltip'; 
+import styled from 'styled-components'; 
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';   
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';  
-import Fade from '@material-ui/core/Fade';
-import DropdwonMenu from './DropdwonMenu'; 
+import Fade from '@material-ui/core/Fade'; 
 import { ValueCounter } from './ValueCounter';
+import { GrDocumentVerified,GrDocumentExcel,GrDocumentDownload, GrDocumentPerformance } from 'react-icons/gr';    
 
 const ChartContainer = styled.div`  
   min-width: 100%;
@@ -41,7 +38,7 @@ const ChartValueView = styled.div`
   flex-direction: column;
   align-items: center; 
   justify-content: center;  
-  z-index:0;
+  z-index:0; 
 }
 `
 const ChartValue = styled.p`   
@@ -157,44 +154,26 @@ const MenuItemStyle = styled.div`
       background: ${'#2C324D'}; 
       color: #f1f1f1;
 }`  
-
-const svgChartRotate = (props: any) => keyframes`
-  from {
-    transform: rotate(0);
-  }
-
-  to {
-    transform: rotate(-${props.value}deg);
-  }
-`;
-
-const ChartSvg = styled.g<any>`    
-`;
-
+ 
+const ItemIcon  = styled.div<any>`      
+display: flex;  
+flex-direction: row;
+align-items: center;  
+justify-content: flex-end;  
+}
+`
 export default function DoughnutChart(props: any) { 
   const { setIsStatic } = props;
+  const doughData = props.data;
   const store = useStore()  
   const [isMenuOpen,setMenuOpen] = useState(null); 
     const data = {
-      labels: [
-        // 'לביצוע',
-        // 'בוצע',
-        // 'אקדא'
+      labels: [ 
       ],
       datasets: [{
         data: [30, 25, 20, 10],
-        backgroundColor: [
-          '#7aa770',
-          '#82d1cc',
-          '#f3bb7b',
-          '#ac6093'
-        ],
-        hoverBackgroundColor: [
-          '#648f5b',
-          '#72b4b0',
-          '#d19e65',
-          '#995783'
-        ],     
+        backgroundColor: store.backgroundColors,
+        hoverBackgroundColor: store.backgroundColorsA,
         hoverOffset: 3,
         cutout: '80%',
         radius: '90%',
@@ -233,8 +212,7 @@ export default function DoughnutChart(props: any) {
       <ChartContainer> 
         <Header>
           <HeaderMenuIcon> 
-            <HiOutlineDotsHorizontal style={{paddingTop:5,fontSize:24}} aria-controls="fade-menu" onClick={handleMenu}/>
-            {/* <DropdwonMenu/> */}
+            <HiOutlineDotsHorizontal style={{paddingTop:5,fontSize:24}} aria-controls="fade-menu" onClick={handleMenu}/> 
               <Menu  
                   style={{marginTop:55,marginLeft:125}}
                   dir={'rtl'}
@@ -243,13 +221,7 @@ export default function DoughnutChart(props: any) {
                   open={Boolean(isMenuOpen)}
                   onClose={handleClose} 
                   anchorEl={isMenuOpen} 
-                  TransitionComponent={Fade}
-                
-                  // anchorPosition={
-                  // state.mouseY !== null && state.mouseX !== null
-                  //     ? { top: state.mouseY, left: state.mouseX }
-                  //     : undefined
-                  // } 
+                  TransitionComponent={Fade} 
               > 
                   {options.map((option, index) => (
                   <MenuItem 
@@ -273,9 +245,9 @@ export default function DoughnutChart(props: any) {
         <Main>
           <ChartView>
             <ChartValueView>
+              <ValueCounter isEndAnime={store.isEndAnime}/>
               <ChartValue>
-                <ValueCounter isEndAnime={store.isEndAnime}/>
-                {`${20 + 30 + 25 + 10}` + `$`}
+                {`${20 + 30 + 25 + 10}$`}
                 </ChartValue>
               <ChartValueTitle>
                 {`איפסום לורם`}
@@ -297,26 +269,18 @@ export default function DoughnutChart(props: any) {
           </ChartView>
           <TableView>
             <List>
-              <Item data-tip={`30 אל'טרה בע"ה - לורם איפסום`}>
-                <ItemValue>{`30` + `$`}</ItemValue>
-                <ItemTitle>{`לורם איפסום`}</ItemTitle>
-                <RightBorder background={`#7aa770`}/>
-              </Item>
-              <Item data-tip={`25 אל'טרה בע"ה - לורם איפסום`}>
-                <ItemValue>{`25` + `$`}</ItemValue>
-                <ItemTitle>{`לורם איפסום`}</ItemTitle>
-                <RightBorder background={`#82d1cc`}/>
-              </Item>
-              <Item data-tip={`20 אל'טרה בע"ה - לורם איפסום`}>
-                <ItemValue>{`20` + `$`}</ItemValue>
-                <ItemTitle>{`לורם איפסום`}</ItemTitle>
-                <RightBorder background={`#f3bb7b`}/>
-              </Item>
-              <Item data-tip={`10 אל'טרה בע"ה - לורם איפסום`}>
-                <ItemValue>{`10` + `$`}</ItemValue>
-                <ItemTitle>{`לורם איפסום`}</ItemTitle>
-                <RightBorder background={`#ac6093`}/>
-              </Item>
+              {doughData.map((item:any,index:number)=>{
+                return <Item key={item.key} >
+                  <ItemValue>{`${item.value}$`}</ItemValue>
+                        {(item.icon1 || item.icon2 || item.icon3) && <ItemIcon>
+                                            {item.icon1 && <GrDocumentVerified onClick={()=>alert(item.key + ' ic1')} style={{opacity:0.5}}/>}
+                                            {item.icon2 && <GrDocumentExcel onClick={()=>alert(item.key + ' ic2')} style={{opacity:0.5}}/>}
+                                            {item.icon3 && <GrDocumentDownload onClick={()=>alert(item.key + ' ic3')} style={{opacity:0.5}}/>}
+                                </ItemIcon>}
+                  <ItemTitle>{`${item.title}`}</ItemTitle>
+                  <RightBorder data-tip={`${item.tip}`} background={store.backgroundColors[index]}/>
+                </Item>
+              })} 
             </List>
           </TableView> 
         </Main>

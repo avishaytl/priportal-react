@@ -9,6 +9,26 @@ export type TFriend = {
     return {
       friends: [] as TFriend[],
       isEndAnime: false,
+      backgroundColors: [
+        `#7aa770`,
+        `#82d1cc`,
+        `#f3bb7b`,
+        `#ac6093`,
+        `#a282e0`,
+        `#dc597d`,
+        `#3f43bc`,
+        `#ea8464`, 
+      ], 
+      backgroundColorsA: [
+        '#648f5b',
+        '#72b4b0',
+        '#d19e65',
+        '#995783',
+        '#866db7',
+        '#973d56',
+        '#7c2e44',
+        '#a55e48',
+      ],  
       isRightMenuOpen: false,
       isMsgRead: false,
       setEndAnime(val: boolean){

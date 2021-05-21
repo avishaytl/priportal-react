@@ -7,8 +7,7 @@ import { AiOutlineFolder, AiTwotoneFolderOpen, AiOutlineAppstore } from 'react-i
 import { BiNotepad } from 'react-icons/bi';      
 import { BsBell } from 'react-icons/bs';       
 import { CgMenuRightAlt } from 'react-icons/cg'; 
-import { IoCloseOutline } from 'react-icons/io5';  
-import { FaAlignCenter } from 'react-icons/fa';        
+import { IoCloseOutline } from 'react-icons/io5';      
 import * as mdIcons from 'react-icons/md';      
 import ListItem from "@material-ui/core/ListItem"; 
 import Collapse from "@material-ui/core/Collapse";
@@ -20,29 +19,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';  
 import { Scrollbars } from 'react-custom-scrollbars';
 import LocalStorageLayout from '../components/Gridlayout';   
-import imgdashboard from '../dashboard.png';  
-import ReactDOM from 'react-dom'; 
-import GridLayout from 'react-grid-layout';
+import imgdashboard from '../dashboard.png';    
 import { useStore } from '../storeui/storeui'
 import { Observer } from 'mobx-react-lite';
-
-class MyFirstGrid extends React.Component {
-  render() {
-    // layout is an array of objects, see the demo for more complete usage
-    const layout = [
-      {i: 'a', x: 0, y: 0, w: 1, h: 2, static: true},
-      {i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4},
-      {i: 'c', x: 4, y: 0, w: 1, h: 2}
-    ];
-    return (
-      <GridLayout className="layout" layout={layout} cols={12} rowHeight={30} width={1200}>
-        <div key="a">a</div>
-        <div key="b">b</div>
-        <div key="c">c</div>
-      </GridLayout>
-    )
-  }
-}
+ 
 
 function stopEvent(event: any){
     if(event.preventDefault !== undefined)
@@ -199,7 +179,7 @@ function UserIconMenu ({ on, child, value, darkState, onClick, isSelectedItem, s
             background: ${ho};   
         }
     `
-    return  <animated.div  onClick={()=>{  
+    return  <animated.div onClick={()=>{  
                         setSelected(!isSelected)
                         onClick(isSelectedItem === value ? '!' + value : value ) 
                     }}  className={`user-icon-menu`} style={store.isRightMenuOpen ? {} : mainPropsIcon} >   
@@ -220,7 +200,7 @@ function renderMenuItems({items, setSelectedItem, isSelectedItem, handleCategory
         const IconSelected = mdIcons[iconNameSelected]; 
         const Icon = mdIcons[iconName]; 
         data.push( 
-            <>
+            <div key={`${i}`} >
             <UserIconMenu isSelectedItem={isSelectedItem} styles={styles} onClick={(value: string)=>{ 
                 if(isMenuOpen)
                     handleCategoryClick(items[i].categorie.label)
@@ -239,8 +219,8 @@ function renderMenuItems({items, setSelectedItem, isSelectedItem, handleCategory
                         }, 250);
                     }} className={`bar-user-icon ${styles.color}`}/>  }
                 </div>}/>  
-            {isCategoryAnime[items[i].categorie.label] && <CategoryListAnime on={isCategoryAnime[items[i].categorie.label]} child={<CategoryList setMenuOpen={setMenuOpen} darkState={darkState} data={items[i].category ? items[i].category : []} styles={styles}/>}/> }
-            </>
+            {isCategoryAnime[items[i].categorie.label] && <CategoryListAnime key={`${i}`} on={isCategoryAnime[items[i].categorie.label]} child={<CategoryList setMenuOpen={setMenuOpen} darkState={darkState} data={items[i].category ? items[i].category : []} styles={styles}/>}/> }
+            </div>
         )
     } 
     return  <Scrollbars style={{width:'100%',height:'100vh'}} className={`scroll`}><div style={{ overflowX:'hidden', overflowY:'auto'}}> 
@@ -682,111 +662,7 @@ const MainBoardView = styled.div`
     flex-direction: column;
     align-items: center; 
     justify-content: flex-start;  
-`
-const MainBoardViewRightChild = styled.div` 
-    width: 100%;
-    height: 100%; 
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: flex-start;
-    padding: 20px; 
-    padding-left: 10px; 
-`
-const MainBoardViewLeftChild = styled.div`  
-    width: 100%;
-    height: 100%; 
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: center;
-    padding: 20px; 
-    padding-right: 10px;
-`
-const MainBoardScrollView = styled.div`  
-    width: 100%;
-    height: 100%; 
-    display: flex;
-    flex-direction: row;
-    align-items: center; 
-    justify-content: center; 
-    padding-bottom: 60px;
-`
-const BorderLeftChild = styled.div`  
-    width: 100%;
-    height: 100%; 
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center; 
-    justify-content: flex-start;
-`
-const BorderRightChild = styled.div`  
-    width: 100%;
-    height: 100%; 
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: flex-start;
-`
-const RightBorderChildBottom = styled.div`  
-    width: 100%;
-    height: 65%; 
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center; 
-    justify-content: flex-start;
-    padding-top: 10px;
-`
-const RightBorderChildTop = styled.div`  
-    width: 100%;
-    height: 35%; 
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center; 
-    justify-content: flex-start;
-    padding-bottom: 10px;
-`
-
-const LeftBorderChild = styled.div`  
-    width: 50%;
-    height: 100%; 
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: flex-start;
-    background: white; 
-    border-radius: 10px;
-    -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15);
-    -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15);
-    box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15); 
-`
-const RightTopItem = styled.div`  
-    flex:1;
-    max-width: 33.33%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: flex-start;
-    background: white; 
-    border-radius: 10px;
-    -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15);
-    -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15);
-    box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15);  
-`
-const RightBottomItem = styled.div`   
-    height: 100%;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: flex-start;
-    background: white; 
-    border-radius: 10px;
-    -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15);
-    -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15);
-    box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.15); 
-`
+` 
 
 const DashboardTitle = styled.div` 
     width: 100%;
@@ -985,43 +861,7 @@ function DashboardMain (props: any) {
                             <Scrollbars style={{width:'100%', height:'calc(100% - 135px)'  }} >    
                                 <GridView>
                                     <LocalStorageLayout isMenuOpen={isMenuOpen}/>
-                                </GridView> 
-                            {/* <MyFirstGrid/> */}
-                            {/* <MainBoardScrollView className={`main-border-scroll-view`}>
-                                    <MainBoardViewLeftChild className={`left-border-view`}>
-                                        <BorderLeftChild>
-                                            <LeftBorderChild style={{marginLeft:10,width:'40%'}}>
-                                                1
-                                            </LeftBorderChild>
-                                            <LeftBorderChild style={{marginRight:10,width:'60%'}}>
-                                                2
-                                            </LeftBorderChild> 
-                                        </BorderLeftChild> 
-                                    </MainBoardViewLeftChild>
-                                    <MainBoardViewRightChild className={`right-border-view`}>
-                                        <BorderRightChild>
-                                            <RightBorderChildTop className={`right-top-border-view`}>
-                                                <RightTopItem style={{marginLeft:10}}>
-                                                    1
-                                                </RightTopItem>
-                                                <RightTopItem style={{marginLeft:10,marginRight:10}}>
-                                                    2
-                                                </RightTopItem>
-                                                <RightTopItem style={{marginRight:10}}>
-                                                    3
-                                                </RightTopItem>
-                                            </RightBorderChildTop>
-                                            <RightBorderChildBottom className={`right-bottom-border-view`}>
-                                                <RightBottomItem style={{marginLeft:10,width:'60%'}}>
-                                                    1
-                                                </RightBottomItem>
-                                                <RightBottomItem style={{marginRight:10,width:'40%'}}>
-                                                    2
-                                                </RightBottomItem> 
-                                            </RightBorderChildBottom>
-                                        </BorderRightChild>  
-                                    </MainBoardViewRightChild>  
-                            </MainBoardScrollView> */}
+                                </GridView>  
                             </Scrollbars>
                         </MainBoardView> 
                         }/> 
@@ -1097,9 +937,7 @@ function Main(props: any) {
     const [ locationKeys, setLocationKeys ]:any = useState([])
     const history = useHistory() 
     const [state, setState]:any = React.useState(initialState);
-    const setMenuRef: any = React.useRef(null);
-    // const [selectedIndex, setSelectedIndex] = React.useState(1);
-    // const [isBackPress,setBackPress] = useState(false);
+    const setMenuRef: any = React.useRef(null); 
     const options = [
         'העתק',
         'הדבק',
@@ -1163,7 +1001,7 @@ function Main(props: any) {
                 store.setEndAnime(true); 
                 setTimeout(() => {   
                     setMenuOpen(true)
-                }, 30);
+                },50);
             }, 1000);
         } 
 

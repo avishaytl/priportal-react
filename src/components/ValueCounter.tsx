@@ -25,9 +25,11 @@ export class ValueCounter extends React.Component <any,any>{
     if(!this.props.isEndAnime)
       this.timer = setInterval(() => {
         this.decrementTimeRemaining();
-      },10);
+      },1);
     }
-  
+    componentWillUnmount(){
+      clearInterval(this.timer);
+    }
     render() {
       return (
         <div className="countdown-timer">
@@ -44,7 +46,7 @@ export class ValueCounter extends React.Component <any,any>{
               />
             </svg>
           </div>
-          <div className="countdown-timer__text">
+          <div className="countdown-timer__text"> 
             {this.state.startTime}$
           </div>
         </div>

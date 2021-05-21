@@ -3,9 +3,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';  
 import Fade from '@material-ui/core/Fade';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';    
-import { FiTrendingDown } from 'react-icons/fi';    
+import { GrDocumentVerified,GrDocumentExcel,GrDocumentDownload } from 'react-icons/gr';        
 import { useStore } from '../storeui/storeui';
-import { useState } from 'react';
+import { useState } from 'react'; 
 
 const ChartContainer = styled.div<any>`  
   min-width: 100%;
@@ -19,28 +19,7 @@ const ChartContainer = styled.div<any>`
   left: 0;
   top: 0; 
 }
-`
-const ChartView = styled.div`  
-  min-width: 30%;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  justify-content: center;    
-`
-const ChartValue = styled.p`   
-  color: #202020; 
-  font-size: 12px;   
-  transition: scale .25s ease; 
-}
-`
-const TableValue  = styled.p`   
-  font-size: 40px;
-  font-weight: bold;
-  color: #202020;   
-  transition: transform .2s; 
-}
-`
+`  
 const Main  = styled.div`    
   min-width: 100%;
   max-height: 100%;
@@ -49,49 +28,57 @@ const Main  = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center; 
-  justify-content: center;   
+  justify-content: center;    
 }
 ` 
 const TableView = styled.div`  
-  min-width: 50%;
-  min-height: 100%;
+  min-width: 100%;
+  max-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center; 
   justify-content: flex-start;    
+  max-height:340px;
+  overflow:scroll;
 }
-` 
-const List = styled.ul`  
+`  
+const Item  = styled.li<any>`   
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  justify-content: flex-start; 
-}
-`
-const Item  = styled.li<any>`  
-  min-width: 80%;
-  height: 40px;
+  min-height: 40px;
+  padding-right: 10px;
   display: flex;  
   flex-direction: row;
   align-items: center; 
-  justify-content: flex-start;
-  margin: 5px; 
+  justify-content: flex-start; 
   transition: background ease 0.15s; 
   :hover{
-    background: #ececec; 
+    background: #ececec;   
   }
-  :hover p{
+  :hover p:nth-child(${props=>props.isIcon ? `4` : `3`}){
     font-size: 16px;   
   } 
+  :hover p:nth-child(1){
+    font-size: 16px;   
+  }
 }
 `
-const ItemValue  = styled.p`   
+const ItemValue  = styled.p<any>`   
   font-size: 14px;
-  font-weight: bold;
+  font-weight: ${(props)=>props.isValue ? `bold` : `400`};
   color: #202020;  
   transition: font-size ease 0.2s;  
+  min-width:15%;
+  margin-right:10px;
+  margin-left:10px;
+}
+`
+const ItemIcon  = styled.div<any>`    
+  min-width:15%; 
+  padding-top:5px; 
+  display: flex;  
+  flex-direction: row;
+  align-items: center;  
+  justify-content: flex-start; 
 }
 `
 const ItemTitle  = styled.p`    
@@ -102,12 +89,13 @@ const ItemTitle  = styled.p`
 }
 `
 const RightBorder  = styled.p<any>`    
-  width: 6px;
+  width: 10px;
   height: 17px;
   border-radius: 15px; 
   background: ${props=>props.background};
   margin-left: 7px;
 }`
+
 const HeaderTitle  = styled.p`    
   font-size: 18px;
   font-weight: 500;
@@ -140,7 +128,7 @@ const Header  = styled.div`
 }
 `
 export default function TableChart(props: any) {   
-  const { setIsStatic } = props;
+  const { setIsStatic, data } = props;
   const store = useStore()  
   const [isMenuOpen,setMenuOpen] = useState(null); 
   const options = [
@@ -197,7 +185,24 @@ export default function TableChart(props: any) {
             {`לורם איפסום`}
           </HeaderTitle> 
         </Header>
-        <Main>
+        <Main> 
+          <TableView>
+            {data.map((item: any)=>{
+              let brColor = item.pos === `1` ? `#82d18c` : item.pos === `2` ? `#f4c162` : `#d18282`
+              return <Item isIcon={item.icon1 || item.icon2 || item.icon3} key={item.key} background={`${brColor}6a`}> 
+                        <ItemValue onClick={()=>alert(item.key + item.title)}  isValue>{item.firstVal}</ItemValue>
+                        <ItemValue onClick={()=>alert(item.key + item.title)} >{item.secVal}</ItemValue>  
+                        {(item.icon1 || item.icon2 || item.icon3) && <ItemIcon>
+                                            {item.icon1 && <GrDocumentVerified onClick={()=>alert(item.key + ' ic1')} style={{opacity:0.5}}/>}
+                                            {item.icon2 && <GrDocumentExcel onClick={()=>alert(item.key + ' ic2')} style={{opacity:0.5}}/>}
+                                            {item.icon3 && <GrDocumentDownload onClick={()=>alert(item.key + ' ic3')} style={{opacity:0.5}}/>}
+                                </ItemIcon>}
+                        <ItemTitle onClick={()=>alert(item.key + item.title)} >{item.title}</ItemTitle>
+                        <RightBorder data-tip={item.tip} background={brColor}/>
+                    </Item> 
+            })}
+               
+          </TableView>
         </Main>
       </ChartContainer>
     ); 
