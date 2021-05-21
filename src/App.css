@@ -1116,49 +1116,37 @@ main {
     transform: scale(1.1);
 }
 
-@media only screen and (max-width: 550px) { 
-    .header-child2,.header-block{ 
-        display: none !important; 
+@media only screen and (max-width: 1100px) {
+    .main-border-view{
+        flex-direction: column !important;
+        height: 100% !important;
     }
-    .header-child1{
-        min-width: 100%;
-    }
-    .selected-company{
-        width: 100%;
-    }
-}
-@media only screen and (max-width: 680px) {
-    .right-top-border-view{
-        /* flex-direction: column !important; */
-    }
-    .top-icon-circle, .top-icon-border{
-        display: none !important;  
+    .left-border-view,.right-border-view{
+        width: 100% !important;
 
     }
-    .mobile-company-menu-image, .mobile-user-title-view{
-        display: flex !important;   
+    .user-login-title{
+        font-size: 18px !important;
     }
-    .mobile-close-menu-button{
-        display: flex !important;   
+
+    .user-login-priority-label{
+        font-size: 12px !important;
     }
-    .menu-top-icon{
-        height: 140px !important;
+    
+    .user-modal{
+        left: unset !important;
+        right: unset !important;
     }
-    .menu-view{
-        z-index: -1;
-        opacity: 0; 
-        position: absolute; 
-        width: 100vw !important; 
-        height: 100vh !important; 
+
+    .login-back-view{ 
+        justify-content: center !important;
+        align-items: center !important;
     } 
-    .menu-styled{ 
-        /* display: none !important;  */ 
-        border-top-left-radius: 0px !important;  
-    } 
-    .burger-menu{
-        display: block !important;  
-    }
-} 
+
+    .countdown-timer__text {  
+        font-size: 40px;    
+      }
+}
 @media only screen and (max-width: 850px) {
     
     .dashboard-title{
@@ -1194,34 +1182,58 @@ main {
     .header-block{
         margin: 0;
     }
+    .countdown-timer__text {  
+        font-size: 30px !important;    
+      }
     
 }
 
-@media only screen and (max-width: 1100px) {
-    .main-border-view{
-        flex-direction: column !important;
-        height: 100% !important;
+@media only screen and (max-width: 680px) {
+    .right-top-border-view{
+        /* flex-direction: column !important; */
     }
-    .left-border-view,.right-border-view{
-        width: 100% !important;
+    .top-icon-circle, .top-icon-border{
+        display: none !important;  
 
     }
-    .user-login-title{
-        font-size: 18px !important;
+    .mobile-company-menu-image, .mobile-user-title-view{
+        display: flex !important;   
     }
-
-    .user-login-priority-label{
-        font-size: 12px !important;
+    .mobile-close-menu-button{
+        display: flex !important;   
     }
-    
-    .user-modal{
-        left: unset !important;
-        right: unset !important;
+    .menu-top-icon{
+        height: 140px !important;
     }
-
-    .login-back-view{ 
-        justify-content: center !important;
-        align-items: center !important;
+    .menu-view{
+        z-index: -1;
+        opacity: 0; 
+        position: absolute; 
+        width: 100vw !important; 
+        height: 100vh !important; 
     } 
-
+    .menu-styled{ 
+        /* display: none !important;  */ 
+        border-top-left-radius: 0px !important;  
+    } 
+    .burger-menu{
+        display: block !important;  
+    }
+    .countdown-timer__text {  
+        font-size: 35px !important;    
+      }
+} 
+@media only screen and (max-width: 550px) { 
+    .header-child2,.header-block{ 
+        display: none !important; 
+    }
+    .header-child1{
+        min-width: 100%;
+    }
+    .selected-company{
+        width: 100%;
+    }
+    .countdown-timer__text {  
+        font-size: 40px !important;    
+      }
 }

@@ -33,7 +33,7 @@ const ChartView = styled.div`
 `
 const ChartValueView = styled.div`  
   position: absolute;
-  bottom: 75px;  
+  bottom:  ${ window.innerWidth <= 800 ? `none` : `75px`};  
   display: flex;
   flex-direction: column;
   align-items: center; 
@@ -50,7 +50,7 @@ const ChartValue = styled.p`
 const ChartValueTitle = styled.p`  
  padding-top: 10px;
   color: #cecece;
-  font-size: 14px;
+  font-size: ${ window.innerWidth <= 800 ? `12px` : `14px`};
   font-weight: 500;
   max-width: 100px;
   text-align: center;
@@ -265,7 +265,7 @@ export default function DoughnutChart(props: any) {
                 <circle className="circle-chart__background" stroke="#efefef" strokeWidth="2" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
                 <circle className="circle-chart__circle" stroke="#314570" strokeWidth="2" strokeDasharray={20 + 30 + 25 + 10} strokeLinecap="round" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
               </svg>   */}
-              <div style={{maxWidth: window.innerWidth <= 1100 ? 180 : 210,zIndex:1}}>
+              <div style={{maxWidth: window.innerWidth <= 600 ? 200 : window.innerWidth <= 1100 ? 150 : window.innerWidth <= 1600 ? 200 : 210,zIndex:1}}>
                 <Observer>
                     {() => (
                     <Doughnut   type={`Doughnut`} data={data} options={{ 

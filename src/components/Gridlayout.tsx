@@ -59,14 +59,21 @@ const htmlLayout1300 = {
   graph: { w: 5, h: 10, x: 7, y: 0, static: false },
   value: { w: 4, h: 3, x: 12, y: 0, static: false },
   pie: { w: 4, h: 7, x: 7, y: 2, static: false },
-  dough: { w: 6, h: 7, x: 1, y: 2, static: false }
+  dough: { w: 7, h: 7, x: 1, y: 2, static: false }
 } 
 const htmlLayout800 = {
-  table: { w: 7, h: 10, x: 1, y: 0, static: false },
+  table: { w: 8, h: 10, x: 1, y: 0, static: false },
   graph: { w: 6, h: 10, x: 8, y: 0, static: false },
   value: { w: 5, h: 3, x: 1, y: 1, static: false },
   pie: { w: 5, h: 7, x: 8, y: 2, static: false },
-  dough: { w: 7, h: 7, x: 1, y: 2, static: false }
+  dough: { w: 9, h: 7, x: 1, y: 2, static: false }
+} 
+const htmlLayout700 = {
+  table: { w: 9, h: 10, x: 1, y: 0, static: false },
+  graph: { w: 6, h: 10, x: 8, y: 0, static: false },
+  value: { w: 5, h: 3, x: 1, y: 1, static: false },
+  pie: { w: 5, h: 7, x: 8, y: 2, static: false },
+  dough: { w: 10, h: 7, x: 1, y: 2, static: false }
 } 
 const htmlLayout600 = {
   table: { w: 16, h: 10, x: 0, y: 0, static: false },
@@ -116,9 +123,9 @@ const doughData = [
   {key:2, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `25`, icon1: true, icon2: false, icon3: false, title: `לורם איפסום`},
   {key:3, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `20`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`},
   {key:4, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `10`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`}, 
-  {key:1, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `30`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`},
-  {key:2, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `25`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`},
-  {key:3, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `20`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`}, 
+  {key:5, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `30`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`},
+  {key:6, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `25`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`},
+  {key:7, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `20`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`}, 
 ] 
 
 
@@ -210,8 +217,10 @@ export default function LocalStorageLayout(props: any){
         return htmlLayout1600;
       if(window.innerWidth >= 800)
         return htmlLayout1300;
+      if(window.innerWidth >= 700)
+          return htmlLayout800; 
       if(window.innerWidth >= 600)
-        return htmlLayout800; 
+        return htmlLayout700;
       if(window.innerWidth <= 599)
         return htmlLayout600;  
     }

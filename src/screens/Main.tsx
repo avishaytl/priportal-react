@@ -1001,7 +1001,7 @@ function Main(props: any) {
                 store.setEndAnime(true); 
                 setTimeout(() => {   
                     setMenuOpen(true)
-                },50);
+                },100);
             }, 1000);
         } 
 

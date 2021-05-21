@@ -204,7 +204,7 @@ export default function GraphChart(props: any) {
           </HeaderTitle> 
         </Header>
         <Main>  
-              <div style={{zIndex:1}}>
+              <div style={{maxWidth: window.innerWidth <= 1100 ? 180 : window.innerWidth <= 1600 ? 250 : 300,zIndex:1}}>
             <Observer>
                     {() => (
                     <Bar  type={`Bar`}  data={data} options={{
