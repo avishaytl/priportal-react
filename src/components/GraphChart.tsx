@@ -217,7 +217,7 @@ export default function GraphChart(props: any) {
                             },
                             ],
                         }, 
-                        animation: {duration: store.isEndAnime ? 0 : 600}
+                        animation: {duration: store.isEndAnime ? 0 : 1000}
                     }} />
                     )}
           </Observer>  

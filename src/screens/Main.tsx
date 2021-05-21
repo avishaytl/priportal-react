@@ -911,7 +911,7 @@ function DashboardView ({ on, child, styles, setMenuOpen }:any) {
     const mainProps = useSpring({ opacity: isDashboardReady ? 1 : 0, from: { opacity: isDashboardReady ? 1 : 0 } });   
     setTimeout(() => {
         setDashboardReady(true) 
-    }, 700);
+    }, 500);
     return  <animated.div className={`main-dashboard ${styles.background}`} style={mainProps} >    
                 <Dashboard>
                     {child}

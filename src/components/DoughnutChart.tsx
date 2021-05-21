@@ -269,7 +269,7 @@ export default function DoughnutChart(props: any) {
                 <Observer>
                     {() => (
                     <Doughnut   type={`Doughnut`} data={data} options={{ 
-                        animation: {duration: store.isEndAnime ? 0 : 600}
+                        animation: {duration: store.isEndAnime ? 0 : 1000}
                     }} />
                  )}
                </Observer>  
