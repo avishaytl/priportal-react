@@ -271,7 +271,7 @@ export default function DoughnutChart(props: any) {
                 <Observer>
                     {() => (
                     <Doughnut   type={`Doughnut`} data={data} options={{ 
-                        animation: {duration: store.isEndAnime ? 0 : 1500}
+                        animation: {duration: store.isEndAnime ? 0 : 1200}
                     }} />
                  )}
                </Observer>  
@@ -288,7 +288,7 @@ export default function DoughnutChart(props: any) {
                                             {item.icon3 && <GrDocumentDownload onClick={()=>alert(item.key + ' ic3')} style={{opacity:0.5}}/>}
                                 </ItemIcon>}
                   <ItemTitle>{`${item.title}`}</ItemTitle>
-                  <RightBorder data-tip={`${item.tip}`} background={store.backgroundColors[index]}/>
+                  <RightBorder data-tip={`${item.tip}`} background={store.getBackgroundColor(index)}/>
                 </Item>
               })} 
             </List>

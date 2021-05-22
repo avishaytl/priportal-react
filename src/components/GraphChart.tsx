@@ -204,7 +204,7 @@ export default function GraphChart(props: any) {
           </HeaderTitle> 
         </Header>
         <Main>  
-              <div style={{maxWidth: window.innerWidth <= 1100 ? 180 : window.innerWidth <= 1600 ? 250 : 300,zIndex:1}}>
+              <div style={{maxWidth: window.innerWidth <= 1100 ? 180 : window.innerWidth <= 1600 ? 250 : 300,zIndex:1,borderBottom:'2px solid #e1e1e1'}}>
             <Observer>
                     {() => (
                     <Bar  type={`Bar`}  data={data} options={{
@@ -217,7 +217,7 @@ export default function GraphChart(props: any) {
                             },
                             ],
                         }, 
-                        animation: {duration: store.isEndAnime ? 0 : 1500}
+                        animation: {duration: store.isEndAnime ? 0 : 1200}
                     }} />
                     )}
           </Observer>  
@@ -225,7 +225,7 @@ export default function GraphChart(props: any) {
           <TableView dir={`rtl`}> 
             {graphData.map((item:any,index: number)=>{
               return <Item key={item.key}> 
-                  <RightBorder data-tip={item.tip}  background={store.backgroundColors[index]}/>
+                  <RightBorder data-tip={item.tip}  background={store.getBackgroundColor(index)}/>
                   <ItemTitle onClick={()=>alert(item.title)}>{item.title}</ItemTitle>   
                         {(item.icon1 || item.icon2 || item.icon3) && <ItemIcon>
                                             {item.icon1 && <GrDocumentVerified onClick={()=>alert(item.key + ' ic1')} style={{opacity:0.5}}/>}

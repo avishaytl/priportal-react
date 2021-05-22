@@ -160,7 +160,7 @@ function ListChild(props: any){
                                             <ListChild darkState={props.darkState} key={l} styles={styles} item={ite} index={l}/> 
                                         </div>
                             return  <ListItem key={l}>
-                                            <MenuItem  key={l}>
+                                            <MenuItem ho={ho} key={l}>
                                                 <div className={`menu-item `}>
                                                     <div className={`menu-text ${styles.menuItem}`}>  
                                                         <p className={`margin0-padding0 font20 ${styles.color}`}>{ite.categorie.label}</p>

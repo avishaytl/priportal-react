@@ -29,6 +29,20 @@ export type TFriend = {
         '#7c2e44',
         '#a55e48',
       ],  
+      getBackgroundColor(index: number){
+        if(this.backgroundColors[index])
+          return this.backgroundColors[index]
+        if(this.backgroundColors[index - 8])
+          return this.backgroundColors[index - 8] 
+        if(this.backgroundColors[index - 16])
+          return this.backgroundColors[index - 16]
+        if(this.backgroundColors[index - 32])
+            return this.backgroundColors[index - 32] 
+        if(this.backgroundColors[index - 64])
+          return this.backgroundColors[index - 64]
+        if(this.backgroundColors[index - 128])
+            return this.backgroundColors[index - 128] 
+      },
       isRightMenuOpen: false,
       isMsgRead: false,
       setEndAnime(val: boolean){

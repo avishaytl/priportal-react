@@ -434,7 +434,6 @@ function DashboardMain (props: any) {
     const [set,setset] = useState(false);
     return  (   
           <DashboardMainView>
-          <ReactTooltip place={'bottom'}/> 
               <DashboardTitle className={`dashboard-title`}>
                     <DashboardTitleHeaderChild className={`header-child1-dashboard`}> 
                         <DashboardTitleText>
@@ -477,6 +476,7 @@ function UserDashboard (props: any) {
     const { setMenuRef, setMenuOpen, isMenuOpen, data } = props;  
     return  (
         <div className={`dashboard-view`}>    
+            <ReactTooltip place={'bottom'}/> 
              <DashboardHeader setMenuOpen={setMenuOpen} isMenuOpen={isMenuOpen} setMenuRef={setMenuRef}/>
              <DashboardMain data={data} setMenuOpen={setMenuOpen} isMenuOpen={isMenuOpen} />
         </div>

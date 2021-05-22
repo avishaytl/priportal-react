@@ -8,7 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';   
 import { useStore } from '../storeui/storeui' 
 import UserMenu from '../components/UserMenu';
-import UserDashboard from '../components/UserDashboard';
+import UserDashboard from '../components/UserDashboard'; 
  
 function getRandomArbitrary(min: number, max: number) { 
     return `${(Math.random() * (max - min) + min).toFixed(0)}`;
@@ -77,6 +77,13 @@ const data = {
             {key:5, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `30`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`},
             {key:6, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `25`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`},
             {key:7, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `20`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`}, 
+            {key:8, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `25`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`},
+            {key:9, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `20`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`}, 
+            {key:10, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `25`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`},
+            {key:11, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `20`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`}, 
+            {key:12, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `20`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`}, 
+            {key:13, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `25`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`},
+            {key:14, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `20`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`}, 
         ]}, 
     ]
   
@@ -231,8 +238,15 @@ function Main(props: any) {
         stopEvent(e);
     // keyboardUp(evt);
     }
-      
+    const setScreenProps = () =>{  
+        if(window.innerWidth <= 750 && window.innerWidth <= 650){
+            setMenuRef.current.style.opacity = `1`; 
+            setMenuRef.current.style.zIndex = `1`; 
+        }
+            // setMenuOpen(!isMenuOpen) 
+    }
     useEffect(()=>{
+        window.addEventListener('resize',setScreenProps)
         console.debug('main useEffect')
         if(!isReady){ 
             setIsReady(true)
