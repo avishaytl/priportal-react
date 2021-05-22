@@ -70,13 +70,15 @@ const ItemValue  = styled.p`
   transition: font-size ease 0.2s;     
   text-align:left;
   min-width:15%;
+  z-index:5;
 }
 `
 const ItemTitle  = styled.p`     
   font-size: 14px;
   text-align: right; 
   flex:1; 
-  transition: font-size ease 0.2s;    
+  transition: font-size ease 0.2s; 
+  z-index:5;   
 }
 ` 
 const RightBorder  = styled.p<any>`    
@@ -85,6 +87,7 @@ const RightBorder  = styled.p<any>`
   border-radius: 15px; 
   background: ${props=>props.background}; 
   margin-left: 7px;
+  z-index:5;
 }`
 const HeaderTitle  = styled.p`    
   font-size: 16px;
@@ -122,6 +125,7 @@ const ItemIcon  = styled.div<any>`
   flex-direction: row;
   align-items: center;  
   justify-content: flex-end;  
+  z-index:5;
 }
 `
 const OnPressBack = styled.div<any>`  
@@ -231,9 +235,9 @@ export default function GraphChart(props: any) {
           <TableView dir={`rtl`}> 
             {graphData.map((item:any,index: number)=>{
               return <Item key={item.key}> 
-              <OnPressBack onClick={()=>onRowPress(item.title + item.key)}/>
+              {/* <OnPressBack onClick={()=>onRowPress(item.title + item.key)}/> */}
                   <RightBorder data-tip={item.tip}  background={store.getBackgroundColor(index)}/>
-                  <ItemTitle>{item.title}</ItemTitle>   
+                  <ItemTitle onClick={()=>onRowPress(item.title + item.key)}>{item.title}</ItemTitle>   
                         {(item.icon1 || item.icon2 || item.icon3) && <ItemIcon>
                                             {item.icon1 && <GrDocumentVerified onClick={()=>onRowIconPress(item.key + ' ic1')} style={{opacity:0.5}}/>}
                                             {item.icon2 && <GrDocumentExcel onClick={()=>onRowIconPress(item.key + ' ic2')} style={{opacity:0.5}}/>}

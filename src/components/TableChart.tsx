@@ -80,6 +80,7 @@ const ItemIcon  = styled.div<any>`
   flex-direction: row;
   align-items: center;  
   justify-content: flex-start; 
+  z-index:5;
 }
 `
 const ItemTitle  = styled.p`    
@@ -131,7 +132,7 @@ const Header  = styled.div`
 const OnPressBack = styled.div<any>`  
   width:100%;
   height: 40px;   
-  position:absolute; 
+  position:absolute;  
 }
 `
 export default function TableChart(props: any) {   
@@ -197,7 +198,7 @@ export default function TableChart(props: any) {
             {data.map((item: any)=>{
               let brColor = item.pos === `1` ? `#82d18c` : item.pos === `2` ? `#f4c162` : `#d18282`
               return <Item isIcon={item.icon1 || item.icon2 || item.icon3} key={item.key} background={`${brColor}6a`}> 
-                      <OnPressBack onClick={()=>onRowPress(item.title + item.key)}/>
+                      {/* <OnPressBack onClick={()=>onRowPress(item.title + item.key)}/> */}
                         <ItemValue isValue>{item.firstVal}</ItemValue>
                         <ItemValue>{item.secVal}</ItemValue>  
                         {(item.icon1 || item.icon2 || item.icon3) && <ItemIcon>
@@ -205,7 +206,7 @@ export default function TableChart(props: any) {
                                             {item.icon2 && <GrDocumentExcel onClick={()=>onRowIconPress(item.key + ' ic2')} style={{opacity:0.5}}/>}
                                             {item.icon3 && <GrDocumentDownload onClick={()=>onRowIconPress(item.key + ' ic3')} style={{opacity:0.5}}/>}
                                 </ItemIcon>}
-                        <ItemTitle>{item.title}</ItemTitle>
+                        <ItemTitle onClick={()=>onRowPress(item.title + item.key)}>{item.title}</ItemTitle>
                         <RightBorder data-tip={item.tip} background={brColor}/>
                     </Item> 
             })}

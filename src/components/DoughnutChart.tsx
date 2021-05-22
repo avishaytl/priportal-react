@@ -290,14 +290,14 @@ export default function DoughnutChart(props: any) {
             <List>
               {doughData.map((item:any,index:number)=>{
                 return <Item key={item.key}>
-                  <OnPressBack onClick={()=>onRowPress(item.title + item.key)}/>
+                  {/* <OnPressBack onClick={()=>onRowPress(item.title + item.key)}/> */}
                   <ItemValue>{`${item.value}$`}</ItemValue>
                         {(item.icon1 || item.icon2 || item.icon3) && <ItemIcon>
                                             {item.icon1 && <GrDocumentVerified onClick={()=>onRowIconPress(item.key + ' ic1')} style={{opacity:0.5}}/>}
                                             {item.icon2 && <GrDocumentExcel onClick={()=>onRowIconPress(item.key + ' ic2')} style={{opacity:0.5}}/>}
                                             {item.icon3 && <GrDocumentDownload onClick={()=>onRowIconPress(item.key + ' ic3')} style={{opacity:0.5}}/>}
                                 </ItemIcon>}
-                  <ItemTitle>{`${item.title}`}</ItemTitle>
+                  <ItemTitle onClick={()=>onRowPress(item.title + item.key)}>{`${item.title}`}</ItemTitle>
                   <RightBorder data-tip={`${item.tip}`} background={store.getBackgroundColor(index)}/>
                 </Item>
               })} 
