@@ -87,7 +87,7 @@ const RightBorder  = styled.p<any>`
   margin-left: 7px;
 }`
 const HeaderTitle  = styled.p`    
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   text-align: right; 
   width: 100%;
@@ -108,7 +108,7 @@ const MenuItemStyle = styled.div`
 
 const Header  = styled.div`    
   width: 100%; 
-  padding-right: 25px;   
+  padding-right: 15px;   
   display: flex;  
   flex-direction: row;
   align-items: center;  
@@ -217,7 +217,7 @@ export default function GraphChart(props: any) {
                             },
                             ],
                         }, 
-                        animation: {duration: store.isEndAnime ? 0 : 1000}
+                        animation: {duration: store.isEndAnime ? 0 : 1500}
                     }} />
                     )}
           </Observer>  

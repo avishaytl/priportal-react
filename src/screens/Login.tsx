@@ -2,10 +2,12 @@ import '../App.css';
 import '../App.scss';  
 import { BsArrowRight } from 'react-icons/bs';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
-import { useRef, useState } from 'react'; 
+import { useEffect, useRef, useState } from 'react'; 
 // import ReactTooltip from 'react-tooltip';
 import { useHistory } from 'react-router-dom'; 
 import styled from 'styled-components'; 
+import LazyImage from '../components/LazyImage';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 interface UserLoginProps{
   position: string; // left, right, mid
@@ -138,28 +140,6 @@ const PriorityUserLabel = styled.label`
   user-select: none;
 `
 
-
-function Input(props: UserInputProps){
-  const { value, type, userRefs, onLoginPress } = props;
-  const [inputValue, setInputValue] = useState(value)
-  const [isHiddenEye, setHiddenEye] = useState(true)
-  return <> 
-    {type === `password` && (!isHiddenEye ? <FaRegEye onClick={()=>setHiddenEye(!isHiddenEye)}/> : <FaRegEyeSlash onClick={()=>setHiddenEye(!isHiddenEye)}/>)}
-    <input 
-        onKeyDown={(e)=>{
-            if (e.key === 'Enter')
-              if(type === `text` && userRefs[`password`])
-                userRefs[`password`].current.focus();
-              else 
-                onLoginPress() 
-        }} 
-        ref={userRefs[type]} 
-        defaultValue={inputValue} 
-        onChange={(e)=>setInputValue(e.target.value)} 
-        className={`user-login-input`} 
-        type={type === `text` || !isHiddenEye ? `text` : `password`} />
-  </>
-}
 const UserModal = styled.div<any>` 
     width: 450px;
     height: 65vh;
@@ -203,9 +183,37 @@ const LoginBackgroundView = styled.div<any>`
     display: flex;
     flex-direction: column; 
     align-items: ${props => props.modalPosition === 'mid' ? 'center' : props.modalPosition === 'left' ? 'flex-start' : 'flex-end'};
-    justify-content: center;
-    background-image: url(${props => props.companyImage}); 
+    justify-content: center; 
     `
+
+function Input(props: UserInputProps){
+  const { value, type, userRefs, onLoginPress } = props;
+  const [inputValue, setInputValue] = useState(value)
+  const [isHiddenEye, setHiddenEye] = useState(true)
+  const handleFocus = (e:any) => {
+    if(type === `text`)
+      e.target.select();
+  };
+  return <> 
+    {type === `password` && (!isHiddenEye ? <FaRegEye onClick={()=>setHiddenEye(!isHiddenEye)}/> : <FaRegEyeSlash onClick={()=>setHiddenEye(!isHiddenEye)}/>)}
+    <input 
+        onKeyDown={(e)=>{
+            if (e.key === 'Enter')
+              if(type === `text` && userRefs[`password`])
+                userRefs[`password`].current.focus();
+              else 
+                onLoginPress() 
+        }} 
+        ref={userRefs[type]} 
+        defaultValue={inputValue} 
+        onChange={(e)=>setInputValue(e.target.value)} 
+        className={`user-login-input`} 
+        autoFocus={type === `text`} 
+        onFocus={handleFocus}
+        type={type === `text` || !isHiddenEye ? `text` : `password`} />
+  </>
+}
+
 function InputCheckbox(props: {value: boolean}){
   const { value } = props;
   const [isCheck, setIsCheck] = useState(value) 
@@ -224,7 +232,12 @@ function LoginUserModal(props: UserLoginProps){
 
   return(  
       <UserModal position={position} className={`user-modal`}>  
-          <ImageModal imgSrc={imgSrc}/>
+          {/* <ImageModal imgSrc={imgSrc}/> */}
+          <LazyImage image={{
+                container: {width:'200px',height:'200px'},
+                alt: 'company img?',
+                src: imgSrc,
+            }}/>
           <LangButton onClick={onLangauagePress}>
             <LangValue>{language === 'Il' ? 'En' : 'Il'}</LangValue>
             <BsArrowRight style={{paddingTop:2}}/>
@@ -255,7 +268,7 @@ function LoginUserModal(props: UserLoginProps){
 }
 
 function Login(props: any){    
-    const [modalPosition, setModalPosition] = useState('right');   
+    const [modalPosition, setModalPosition] = useState('right'); // right, left, mid  
     const companyImage = 'https://wallpaperaccess.com/full/521095.jpg';
     const history = useHistory(); 
     const navigateToMain = () => { 
@@ -265,7 +278,12 @@ function Login(props: any){
     return(  
         <div className={`login-screen`}> 
           {/* <ReactTooltip/> */}
-          <LoginBackgroundView companyImage={companyImage} modalPosition={modalPosition} className={`login-back-view`}>
+          <LoginBackgroundView modalPosition={modalPosition} className={`login-back-view`}>
+            <LazyImage image={{
+                container: {width:'100vw',height:'100vh'},
+                alt: 'company img?',
+                src: companyImage,
+            }}/>
             <LoginUserModal 
                 position={modalPosition} 
                 isPriorityUser={false} 

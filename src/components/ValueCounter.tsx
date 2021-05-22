@@ -6,8 +6,8 @@ export class ValueCounter extends React.Component <any,any>{
     constructor(props: any) {
       super(props);
       this.state = {
-        timeRemainingInSeconds: 85,
-        startTime: this.props.isEndAnime ? 85 : 0
+        timeRemainingInSeconds: this.props.value,
+        startTime: this.props.isEndAnime ? this.props.value : 0
       };
     }
   
@@ -25,7 +25,7 @@ export class ValueCounter extends React.Component <any,any>{
     if(!this.props.isEndAnime)
       this.timer = setInterval(() => {
         this.decrementTimeRemaining();
-      },1);
+      },10);
     }
     componentWillUnmount(){
       clearInterval(this.timer);

@@ -84,7 +84,7 @@ const Header  = styled.div`
 }
 `
 const HeaderTitle  = styled.p`    
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   text-align: right; 
   width: 100%;

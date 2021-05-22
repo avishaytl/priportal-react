@@ -131,7 +131,7 @@ const Main  = styled.div`
 `
 const Header  = styled.div`    
   width: 100%; 
-  padding-right: 25px;   
+  padding-right: 15px;   
   display: flex;  
   flex-direction: row;
   align-items: center;  
@@ -141,7 +141,7 @@ const Header  = styled.div`
 }
 `
 const HeaderTitle  = styled.p`    
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   text-align: right; 
   width: 100%;
@@ -190,7 +190,9 @@ export default function DoughnutChart(props: any) {
         }
       }]
     };  
+    let counter = 0;
     data.datasets[0].data = doughData.map((item:any)=>{
+      counter += parseInt(item.value);
       return parseInt(item.value);
     })
     const options = [
@@ -251,11 +253,11 @@ export default function DoughnutChart(props: any) {
           </HeaderTitle>
         </Header>
         <Main>
-          <ChartView>
+          <ChartView className={`table-view-chart-doug`}>
             <ChartValueView>
-              <ValueCounter isEndAnime={store.isEndAnime}/>
+              <ValueCounter value={counter} isEndAnime={store.isEndAnime}/>
               <ChartValue>
-                {`${20 + 30 + 25 + 10}$`}
+                {`${counter}$`}
                 </ChartValue>
               <ChartValueTitle>
                 {`איפסום לורם`}
@@ -265,17 +267,17 @@ export default function DoughnutChart(props: any) {
                 <circle className="circle-chart__background" stroke="#efefef" strokeWidth="2" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
                 <circle className="circle-chart__circle" stroke="#314570" strokeWidth="2" strokeDasharray={20 + 30 + 25 + 10} strokeLinecap="round" fill="none" cx="16.91549431" cy="16.91549431" r="15.91549431" />
               </svg>   */}
-              <div style={{maxWidth: window.innerWidth <= 600 ? 200 : window.innerWidth <= 1100 ? 150 : window.innerWidth <= 1600 ? 200 : 210,zIndex:1}}>
+              <div style={{maxWidth: window.innerWidth <= 600 ? 130 : window.innerWidth <= 1100 ? 150 : window.innerWidth <= 1600 ? 200 : 210,zIndex:1}}>
                 <Observer>
                     {() => (
                     <Doughnut   type={`Doughnut`} data={data} options={{ 
-                        animation: {duration: store.isEndAnime ? 0 : 1000}
+                        animation: {duration: store.isEndAnime ? 0 : 1500}
                     }} />
                  )}
                </Observer>  
               </div>
           </ChartView>
-          <TableView>
+          <TableView className={`table-view-list-doug`}>
             <List>
               {doughData.map((item:any,index:number)=>{
                 return <Item key={item.key} >

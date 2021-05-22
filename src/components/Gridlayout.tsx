@@ -83,63 +83,64 @@ const htmlLayout600 = {
   dough: { w: 16, h: 7, x: 0, y: 6, static: false }
 } 
 
-function getRandomArbitrary(min: number, max: number) { 
-  return `${(Math.random() * (max - min) + min).toFixed(0)}`;
-}
+// function getRandomArbitrary(min: number, max: number) { 
+//   return `${(Math.random() * (max - min) + min).toFixed(0)}`;
+// }
 
-const tableData = [
-  {key:1, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `208$`, secVal: `19.2.2`, icon1: true, icon2: false, icon3: true,title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
-  {key:2, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `258$`, secVal: `18.2.2`, icon1: false, icon2: true, icon3: false, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
-  {key:3, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `8$`, secVal: `17.2.2`, icon1: true, icon2: true, icon3: false, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
-  {key:4, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `28$`, secVal: `16.2.2`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
-  {key:5, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `0$`, secVal: `15.2.2`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
-  {key:6, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `25$`, secVal: `14.2.2`, icon1: false, icon2: true, icon3: true, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
-  {key:7, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `58$`, secVal: `13.2.2`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
-  {key:8, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `250$`, secVal: `12.2.2`, icon1: true, icon2: true, icon3: false, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
-  {key:9, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `208$`, secVal: `11.2.2`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
-  {key:10, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `2508$`, secVal: `1.2.2`, icon1: false, icon2: true, icon3: false, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
-  {key:11, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `258$`, secVal: `2.2.2`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
-]
+// const tableData = [
+//   {key:1, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `208$`, secVal: `19.2.2`, icon1: true, icon2: false, icon3: true,title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
+//   {key:2, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `258$`, secVal: `18.2.2`, icon1: false, icon2: true, icon3: false, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
+//   {key:3, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `8$`, secVal: `17.2.2`, icon1: true, icon2: true, icon3: false, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
+//   {key:4, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `28$`, secVal: `16.2.2`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
+//   {key:5, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `0$`, secVal: `15.2.2`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
+//   {key:6, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `25$`, secVal: `14.2.2`, icon1: false, icon2: true, icon3: true, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
+//   {key:7, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `58$`, secVal: `13.2.2`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
+//   {key:8, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `250$`, secVal: `12.2.2`, icon1: true, icon2: true, icon3: false, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
+//   {key:9, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `208$`, secVal: `11.2.2`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
+//   {key:10, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `2508$`, secVal: `1.2.2`, icon1: false, icon2: true, icon3: false, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
+//   {key:11, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `258$`, secVal: `2.2.2`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
+// ]
 
-const graphData = [
-  {key:1, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `12`, icon1: true, icon2: true, icon3: true, title: `מאי`, cTitle: `מאי`},
-  {key:2, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `19`, icon1: false, icon2: true, icon3: true, title: `יוני`, cTitle: `יוני`},
-  {key:3, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `9`, icon1: true, icon2: false, icon3: false, title: `יולי`, cTitle: `יולי`},
-  {key:4, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `5`, icon1: true, icon2: true, icon3: true, title: `אוגוסט`, cTitle: `אוג`},
-  {key:5, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `8`, icon1: true, icon2: true, icon3: false, title: `ספטמבר`, cTitle: `ספט`},
-  {key:6, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `3`, icon1: false, icon2: false, icon3: true, title: `נובמבר`, cTitle: `נוב`},
-  {key:7, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `10`, icon1: true, icon2: true, icon3: false, title: `דצמבר`, cTitle: `דצמ`},
-  {key:8, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `1`, icon1: true, icon2: true, icon3: true, title: `ינואר`, cTitle: `ינו`},
-] 
+// const graphData = [
+//   {key:1, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `12`, icon1: true, icon2: true, icon3: true, title: `מאי`, cTitle: `מאי`},
+//   {key:2, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `19`, icon1: false, icon2: true, icon3: true, title: `יוני`, cTitle: `יוני`},
+//   {key:3, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `9`, icon1: true, icon2: false, icon3: false, title: `יולי`, cTitle: `יולי`},
+//   {key:4, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `5`, icon1: true, icon2: true, icon3: true, title: `אוגוסט`, cTitle: `אוג`},
+//   {key:5, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `8`, icon1: true, icon2: true, icon3: false, title: `ספטמבר`, cTitle: `ספט`},
+//   {key:6, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `3`, icon1: false, icon2: false, icon3: true, title: `נובמבר`, cTitle: `נוב`},
+//   {key:7, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `10`, icon1: true, icon2: true, icon3: false, title: `דצמבר`, cTitle: `דצמ`},
+//   {key:8, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `1`, icon1: true, icon2: true, icon3: true, title: `ינואר`, cTitle: `ינו`},
+// ] 
 
-const valueData = [
-  {key: 1,background: '#01cb9e'},
-  {key: 2,background: '#e84949'},
-  {key: 3,background: '#fad16b'}
-]
+// const valueData = [
+//   {key: 1,background: '#01cb9e'},
+//   {key: 2,background: '#e84949'},
+//   {key: 3,background: '#fad16b'}
+// ]
 
-const doughData = [
-  {key:1, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `30`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`},
-  {key:2, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `25`, icon1: true, icon2: false, icon3: false, title: `לורם איפסום`},
-  {key:3, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `20`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`},
-  {key:4, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `10`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`}, 
-  {key:5, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `30`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`},
-  {key:6, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `25`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`},
-  {key:7, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `20`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`}, 
-] 
+// const doughData = [
+//   {key:1, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `30`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`},
+//   {key:2, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `25`, icon1: true, icon2: false, icon3: false, title: `לורם איפסום`},
+//   {key:3, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `20`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`},
+//   {key:4, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `10`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`}, 
+//   {key:5, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `30`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`},
+//   {key:6, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `25`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`},
+//   {key:7, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `20`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`}, 
+// ] 
 
 
-const data = [
-  { type: 'table', position: {x: 0, y: 0}, data: tableData },
-  { type: 'graph', position: {x: 0, y: 0}, data: graphData },
-  { type: 'value', position: {x: 0, y: 0}, data: valueData[0]},
-  { type: 'value', position: {x: 0, y: 0}, data: valueData[1]},
-  { type: 'value', position: {x: 0, y: 0}, data: valueData[2]},
-  { type: 'pie', position: {x: 0, y: 0}, data:[] },
-  { type: 'dough', position: {x: 0, y: 0}, data: doughData },
-]
+// const data = [
+//   { type: 'table', position: {x: 0, y: 0}, data: tableData },
+//   { type: 'graph', position: {x: 0, y: 0}, data: graphData },
+//   { type: 'value', position: {x: 0, y: 0}, data: valueData[0]},
+//   { type: 'value', position: {x: 0, y: 0}, data: valueData[1]},
+//   { type: 'value', position: {x: 0, y: 0}, data: valueData[2]},
+//   { type: 'pie', position: {x: 0, y: 0}, data:[] },
+//   { type: 'dough', position: {x: 0, y: 0}, data: doughData },
+// ]
 
-export default function LocalStorageLayout(props: any){
+export default function Gridlayout(props: any){
+    const { data } = props;
     const [isStatic,setIsStatic] = useState(false);
     const [originalLayout,setOriginalLayout] = useState(getFromLS("layout") || []); 
     const [layout,setLayout] = useState(false); 

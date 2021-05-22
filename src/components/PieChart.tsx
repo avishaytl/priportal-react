@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import * as ReactDOM from "react-dom"
-import { Doughnut  } from 'react-chartjs-2';
-import { ChartOptions } from 'chart.js'
-import { useStore } from '../storeui/storeui'
-import { Observer } from 'mobx-react';
-import styled , {keyframes} from 'styled-components';
-import ReactTooltip from 'react-tooltip'; 
+import { useState } from 'react'; 
+import { useStore } from '../storeui/storeui' 
+import styled , {keyframes} from 'styled-components'; 
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';   
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';  
-import Fade from '@material-ui/core/Fade';
-import DropdwonMenu from './DropdwonMenu'; 
+import Fade from '@material-ui/core/Fade'; 
 
 const ChartContainer = styled.div`  
   min-width: 100%;
@@ -127,7 +121,7 @@ const Main  = styled.div`
 `
 const Header  = styled.div`    
   width: 100%; 
-  padding-right: 25px;   
+  padding-right: 15px;   
   display: flex;  
   flex-direction: row;
   align-items: center;  
@@ -137,7 +131,7 @@ const Header  = styled.div`
 }
 `
 const HeaderTitle  = styled.p`    
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   text-align: right; 
   width: 100%;
