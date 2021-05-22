@@ -16,7 +16,7 @@ const ChartContainer = styled.div<any>`
   top: 0; 
   border-bottom: solid 4px ${props=>props.background};
   border-radius: 10px;
-  background: #f1f1f1;
+  background: #fff;
   transition: background .2s ease; 
   transition: border-bottom .2s ease; 
   :hover{

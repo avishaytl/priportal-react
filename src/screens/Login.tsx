@@ -209,7 +209,7 @@ function Input(props: UserInputProps){
         onChange={(e)=>setInputValue(e.target.value)} 
         className={`user-login-input`} 
         autoFocus={type === `text`} 
-        onFocus={handleFocus}
+        // onFocus={handleFocus}
         type={type === `text` || !isHiddenEye ? `text` : `password`} />
   </>
 }
