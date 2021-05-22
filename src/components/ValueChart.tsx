@@ -101,7 +101,7 @@ export default function ValueChart(pro: any) {
             </animated.div> 
     }; 
     return (
-      <ChartContainer onClick={()=>alert(`לורם איפסום`)} background={props.background}> 
+      <ChartContainer onClick={()=>props.onRowPress(`לורם איפסום`)} background={props.background}> 
         <Header> 
           <HeaderTitle> 
             {`לורם איפסום`}

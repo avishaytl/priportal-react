@@ -2,8 +2,7 @@ import '../App.css';
 import '../App.scss';  
 import { BsArrowRight } from 'react-icons/bs';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
-import { useEffect, useRef, useState } from 'react'; 
-// import ReactTooltip from 'react-tooltip';
+import { useRef, useState } from 'react';  
 import { useHistory } from 'react-router-dom'; 
 import styled from 'styled-components'; 
 import LazyImage from '../components/LazyImage';
@@ -18,6 +17,7 @@ interface UserLoginProps{
   language: string;
   onLoginPress: ()=> void;
   onLangauagePress: ()=> void;
+  colors: object
 }
 
 interface UserInputProps{
@@ -99,10 +99,10 @@ const LangValue = styled.p`
   color: #314570;
   font-weight: 500;
   `
-  const LoginButton = styled.div` 
+  const LoginButton = styled.div<any>` 
   width: 100%;
   height: 50px;
-  background-image: linear-gradient(to right, #121e34 , #314570);
+  background-image: linear-gradient(to right, ${props => props.colors.primary},${props => props.colors.secondary});
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -160,16 +160,16 @@ const UserModal = styled.div<any>`
     padding-right: 50px; 
     ${props => props.position === 'mid' ? `` : props.position === `left` ? `left: 8vw` : `right: 8vw;`}
     `
-const ImageModal = styled.div<any>`  
-    width: 200px;
-    height: 200px; 
-    max-height: 300px;  
-    max-width: 300px;   
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;  
-    background-image: url(${props => props.imgSrc}); 
-    `
+// const ImageModal = styled.div<any>`  
+//     width: 200px;
+//     height: 200px; 
+//     max-height: 300px;  
+//     max-width: 300px;   
+//     background-position: center;
+//     background-size: cover;
+//     background-repeat: no-repeat;  
+//     background-image: url(${props => props.imgSrc}); 
+//     `
 
 const LoginBackgroundView = styled.div<any>` 
     flex:1;
@@ -224,7 +224,7 @@ function InputCheckbox(props: {value: boolean}){
 }
 
 function LoginUserModal(props: UserLoginProps){
-  const { position, isPriorityUser, userName, userPass, imgSrc, language, onLoginPress, onLangauagePress } = props;
+  const { colors, position, isPriorityUser, userName, userPass, imgSrc, language, onLoginPress, onLangauagePress } = props;
   const userRefs = {
     text: useRef(null),
     password: useRef(null),
@@ -260,7 +260,7 @@ function LoginUserModal(props: UserLoginProps){
               <InputCheckbox value={isPriorityUser}/>
             </PriorityUserLabel> 
           </PriorityUserView>
-          <LoginButton onClick={onLoginPress}>
+          <LoginButton colors={colors} onClick={onLoginPress}>
             <LoginButtonText>{`כניסה`}</LoginButtonText>
           </LoginButton>
       </UserModal>
@@ -270,6 +270,7 @@ function LoginUserModal(props: UserLoginProps){
 function Login(props: any){    
     const [modalPosition, setModalPosition] = useState('right'); // right, left, mid  
     const companyImage = 'https://wallpaperaccess.com/full/521095.jpg';
+    const colors = {primary: '#121e34',secondary:'#314570', tertiary: '#1e2c4c'}
     const history = useHistory(); 
     const navigateToMain = () => { 
       history.push('/main')
@@ -285,6 +286,7 @@ function Login(props: any){
                 src: companyImage,
             }}/>
             <LoginUserModal 
+                colors={colors}
                 position={modalPosition} 
                 isPriorityUser={false} 
                 userName={`avishay`} 

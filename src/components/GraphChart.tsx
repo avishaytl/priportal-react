@@ -124,8 +124,14 @@ const ItemIcon  = styled.div<any>`
   justify-content: flex-end;  
 }
 `
+const OnPressBack = styled.div<any>`  
+  width:100%;
+  height: 40px;   
+  position:absolute; 
+}
+`
 export default function GraphChart(props: any) {   
-  const { setIsStatic } = props;
+  const { setIsStatic, onRowPress, onRowIconPress } = props;
   const graphData = props.data;
   const store = useStore()  
   const [isMenuOpen,setMenuOpen] = useState(null); 
@@ -225,14 +231,15 @@ export default function GraphChart(props: any) {
           <TableView dir={`rtl`}> 
             {graphData.map((item:any,index: number)=>{
               return <Item key={item.key}> 
+              <OnPressBack onClick={()=>onRowPress(item.title + item.key)}/>
                   <RightBorder data-tip={item.tip}  background={store.getBackgroundColor(index)}/>
-                  <ItemTitle onClick={()=>alert(item.title)}>{item.title}</ItemTitle>   
+                  <ItemTitle>{item.title}</ItemTitle>   
                         {(item.icon1 || item.icon2 || item.icon3) && <ItemIcon>
-                                            {item.icon1 && <GrDocumentVerified onClick={()=>alert(item.key + ' ic1')} style={{opacity:0.5}}/>}
-                                            {item.icon2 && <GrDocumentExcel onClick={()=>alert(item.key + ' ic2')} style={{opacity:0.5}}/>}
-                                            {item.icon3 && <GrDocumentDownload onClick={()=>alert(item.key + ' ic3')} style={{opacity:0.5}}/>}
+                                            {item.icon1 && <GrDocumentVerified onClick={()=>onRowIconPress(item.key + ' ic1')} style={{opacity:0.5}}/>}
+                                            {item.icon2 && <GrDocumentExcel onClick={()=>onRowIconPress(item.key + ' ic2')} style={{opacity:0.5}}/>}
+                                            {item.icon3 && <GrDocumentDownload onClick={()=>onRowIconPress(item.key + ' ic3')} style={{opacity:0.5}}/>}
                                 </ItemIcon>}
-                  <ItemValue onClick={()=>alert(item.title)}>{`${item.value}$`}</ItemValue>  
+                  <ItemValue>{`${item.value}$`}</ItemValue>  
               </Item>
             })}
                     

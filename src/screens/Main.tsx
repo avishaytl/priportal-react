@@ -17,6 +17,7 @@ function getRandomArbitrary(min: number, max: number) {
   
 const data = { 
     barCompanyName: 'סביבת הדגמה',  
+    colors: {primary: '#121e34',secondary:'#314570', tertiary: '#1e2c4c'},
     userMsg: 3,
     menuCategories: [{
         categorie: {label:'מכירות', selectedIcon: 'MdLocalGroceryStore', icon: 'MdStore'}, id: 1, category: [{
@@ -43,7 +44,7 @@ const data = {
             categorie: {label:'2הנהלה'}, id: 44, category: null}]}, 
     ], 
     dashboard:[
-        { type: 'table', position: {x: 0, y: 0}, data: [
+        { type: 'table',onRowPress: (key:string)=>{alert(key)}, onRowIconPress: (key:string)=>{alert(key)}, position: {x: 0, y: 0}, data: [
             {key:1, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `208$`, secVal: `19.2.2`, icon1: true, icon2: false, icon3: true,title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
             {key:2, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `258$`, secVal: `18.2.2`, icon1: false, icon2: true, icon3: false, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
             {key:3, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `8$`, secVal: `17.2.2`, icon1: true, icon2: true, icon3: false, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
@@ -56,7 +57,7 @@ const data = {
             {key:10, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `2508$`, secVal: `1.2.2`, icon1: false, icon2: true, icon3: false, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
             {key:11, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, firstVal: `258$`, secVal: `2.2.2`, icon1: true, icon2: true, icon3: true, title: `לורם איפסום`, pos: getRandomArbitrary(1,3)},
         ]},
-        { type: 'graph', position: {x: 0, y: 0}, data: [
+        { type: 'graph',onRowPress: (key:string)=>{alert(key)}, onRowIconPress: (key:string)=>{alert(key)}, position: {x: 0, y: 0}, data: [
             {key:1, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `12`, icon1: true, icon2: true, icon3: true, title: `מאי`, cTitle: `מאי`},
             {key:2, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `19`, icon1: false, icon2: true, icon3: true, title: `יוני`, cTitle: `יוני`},
             {key:3, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `9`, icon1: true, icon2: false, icon3: false, title: `יולי`, cTitle: `יולי`},
@@ -66,11 +67,11 @@ const data = {
             {key:7, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `10`, icon1: true, icon2: true, icon3: false, title: `דצמבר`, cTitle: `דצמ`},
             {key:8, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `1`, icon1: true, icon2: true, icon3: true, title: `ינואר`, cTitle: `ינו`},
         ]},
-        { type: 'value', position: {x: 0, y: 0}, data: {key: 1,background: '#01cb9e'}},
-        { type: 'value', position: {x: 0, y: 0}, data: {key: 2,background: '#e84949'}},
-        { type: 'value', position: {x: 0, y: 0}, data: {key: 3,background: '#fad16b'}},
-        { type: 'pie', position: {x: 0, y: 0}, data:[] },
-        { type: 'dough', position: {x: 0, y: 0}, data: [
+        { type: 'value',onRowPress: (key:string)=>{alert(key)}, onRowIconPress: (key:string)=>{alert(key)}, position: {x: 0, y: 0}, data: {key: 1,background: '#01cb9e'}},
+        { type: 'value',onRowPress: (key:string)=>{alert(key)}, onRowIconPress: (key:string)=>{alert(key)}, position: {x: 0, y: 0}, data: {key: 2,background: '#e84949'}},
+        { type: 'value',onRowPress: (key:string)=>{alert(key)}, onRowIconPress: (key:string)=>{alert(key)}, position: {x: 0, y: 0}, data: {key: 3,background: '#fad16b'}},
+        { type: 'pie',onRowPress: (key:string)=>{alert(key)}, onRowIconPress: (key:string)=>{alert(key)}, position: {x: 0, y: 0}, data:[] },
+        { type: 'dough',onRowPress: (key:string)=>{alert(key)}, onRowIconPress: (key:string)=>{alert(key)}, position: {x: 0, y: 0}, data: [
             {key:1, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `30`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`},
             {key:2, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `25`, icon1: true, icon2: false, icon3: false, title: `לורם איפסום`},
             {key:3, tip: `30 אל'טרה בע"ה - דצמבר איפסום`, value: `20`, icon1: true, icon2: false, icon3: true, title: `לורם איפסום`},
@@ -91,9 +92,9 @@ const data = {
 }  
  
 
-const MenuStyle = styled.div` 
+const MenuStyle = styled.div<any>` 
     flex:1;   
-    background-image: linear-gradient(to top, #121e34 , #314570, #314570, #1e2c4c);
+    background-image: linear-gradient(to top,${props => props.colors.primary},${props => props.colors.secondary},${props => props.colors.secondary},${props => props.colors.tertiary});
     border-top-left-radius: 10px;
     -webkit-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.55);
     -moz-box-shadow: 0px 0px 11px 2px rgba(0,0,0,0.55);
@@ -146,10 +147,10 @@ function runSortCut(str: any){
 }
 
 
-function MenuView ({ on, child, styles, setMenuOpen, setMenuRef }:any) { 
+function MenuView ({ on, child, styles, colors, setMenuRef }:any) { 
     const mainProps = useSpring({ width: on ? 200 : 90, from: { width: on ? 200 : 90 } });  
     return  <animated.div ref={setMenuRef} id={`menu-view`} className={`menu-view ${styles.background}`} style={mainProps} >  
-                <MenuStyle className={'menu-styled'}>
+                <MenuStyle colors={colors} className={'menu-styled'}>
                     {child} 
                 </MenuStyle>
           </animated.div> 
@@ -241,7 +242,7 @@ function Main(props: any) {
     // keyboardUp(evt);
     }
     const setScreenProps = () =>{  
-        if(window.innerWidth <= 680 && window.innerWidth <= 650){
+        if(window.innerWidth <= 680 && window.innerWidth >= 650){
             setMenuRef.current.style.opacity = `1`; 
             setMenuRef.current.style.zIndex = `1`; 
         } 
@@ -358,13 +359,14 @@ function Main(props: any) {
                 <MemoComponent child={<DashboardView
                     styles={styles} 
                     setMenuOpen={setMenuOpen} 
-                    child={<UserDashboard data={data.dashboard} setMenuRef={setMenuRef} isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen} />}/>  }/>   
+                    child={<UserDashboard colors={data.colors} data={data.dashboard} setMenuRef={setMenuRef} isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen} />}/>  }/>   
                 <MenuView  
+                    colors={data.colors}
                     setMenuRef={setMenuRef} 
                     styles={styles} 
                     setMenuOpen={setMenuOpen} 
                     on={isMenuOpen} 
-                    child={<UserMenu data={data.menuCategories} setMenuRef={setMenuRef} darkState={props.darkState} isMenuOpen={isMenuOpen} setMenuPos={setMenuOpen} styles={styles}/>}/>   
+                    child={<UserMenu colors={data.colors} data={data.menuCategories} setMenuRef={setMenuRef} darkState={props.darkState} isMenuOpen={isMenuOpen} setMenuPos={setMenuOpen} styles={styles}/>}/>   
             </div>
         </div>)
 }

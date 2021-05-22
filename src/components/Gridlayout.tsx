@@ -167,7 +167,7 @@ export default function Gridlayout(props: any){
             result.push(
               <div onMouseLeave={()=>setLastCardKey(`component${index}`)} className="grid-box" key={`component${index}`} data-grid={{ w: getComponentLayout(component.type).w, h: getComponentLayout(component.type).h, x: component.position.x, y: component.position.y, static: false }}>
                 <ComponentContainer>
-                  <TableChart data={component.data} setIsStatic={onChangeStatic}/>   
+                  <TableChart onRowPress={component.onRowPress} onRowIconPress={component.onRowIconPress} data={component.data} setIsStatic={onChangeStatic}/>   
                 </ComponentContainer> 
             </div>); 
             break;
@@ -175,7 +175,7 @@ export default function Gridlayout(props: any){
             result.push(
               <div onMouseLeave={()=>setLastCardKey(`component${index}`)} className="grid-box" key={`graph-component${index}`} data-grid={{ w: getComponentLayout(component.type).w, h: getComponentLayout(component.type).h, x: component.position.x, y: component.position.y, static: false  }}>
                 <ComponentContainer>
-                  <GraphChart data={component.data} setIsStatic={onChangeStatic}/>  
+                  <GraphChart onRowPress={component.onRowPress} onRowIconPress={component.onRowIconPress} data={component.data} setIsStatic={onChangeStatic}/>  
                 </ComponentContainer> 
             </div>); 
             break;
@@ -183,7 +183,7 @@ export default function Gridlayout(props: any){
             result.push(
               <div onMouseLeave={()=>setLastCardKey(`component${index}`)} className="grid-box" key={`value-component${index}`} data-grid={{ w: getComponentLayout(component.type).w, h: getComponentLayout(component.type).h, x: component.position.x, y: component.position.y, static: false  }}>
                 <ComponentContainer>
-                  <ValueChart props={{
+                  <ValueChart onRowPress={component.onRowPress} onRowIconPress={component.onRowIconPress} props={{
                     background: component.data.background,
                   }} setIsStatic={onChangeStatic}/>
                 </ComponentContainer> 
@@ -193,7 +193,7 @@ export default function Gridlayout(props: any){
             result.push(
               <div onMouseLeave={()=>setLastCardKey(`component${index}`)} className="grid-box" key={`pie-component${index}`} data-grid={{ w: getComponentLayout(component.type).w, h: getComponentLayout(component.type).h, x: component.position.x, y: component.position.y, static: false }}>
                 <ComponentContainer>
-                  <PieChart setIsStatic={onChangeStatic}/>
+                  <PieChart onRowPress={component.onRowPress} onRowIconPress={component.onRowIconPress} setIsStatic={onChangeStatic}/>
                 </ComponentContainer> 
             </div>); 
             break;
@@ -201,7 +201,7 @@ export default function Gridlayout(props: any){
             result.push(
               <div onMouseLeave={()=>setLastCardKey(`component${index}`)} className="grid-box" key={`dough-component${index}`} data-grid={{ w: getComponentLayout(component.type).w, h: getComponentLayout(component.type).h, x: component.position.x, y: component.position.y, static: false }}>
                 <ComponentContainer> 
-                  <DoughnutChart data={component.data} setIsStatic={onChangeStatic}/>  
+                  <DoughnutChart onRowPress={component.onRowPress} onRowIconPress={component.onRowIconPress} data={component.data} setIsStatic={onChangeStatic}/>  
                 </ComponentContainer> 
             </div>); 
             break;

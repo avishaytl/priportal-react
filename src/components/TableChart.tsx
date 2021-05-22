@@ -128,8 +128,14 @@ const Header  = styled.div`
   max-height: 50px;
 }
 `
+const OnPressBack = styled.div<any>`  
+  width:100%;
+  height: 40px;   
+  position:absolute; 
+}
+`
 export default function TableChart(props: any) {   
-  const { setIsStatic, data } = props;
+  const { setIsStatic, data, onRowPress, onRowIconPress } = props;
   const store = useStore()  
   const [isMenuOpen,setMenuOpen] = useState(null); 
   const options = [
@@ -191,14 +197,15 @@ export default function TableChart(props: any) {
             {data.map((item: any)=>{
               let brColor = item.pos === `1` ? `#82d18c` : item.pos === `2` ? `#f4c162` : `#d18282`
               return <Item isIcon={item.icon1 || item.icon2 || item.icon3} key={item.key} background={`${brColor}6a`}> 
-                        <ItemValue onClick={()=>alert(item.key + item.title)}  isValue>{item.firstVal}</ItemValue>
-                        <ItemValue onClick={()=>alert(item.key + item.title)} >{item.secVal}</ItemValue>  
+                      <OnPressBack onClick={()=>onRowPress(item.title + item.key)}/>
+                        <ItemValue isValue>{item.firstVal}</ItemValue>
+                        <ItemValue>{item.secVal}</ItemValue>  
                         {(item.icon1 || item.icon2 || item.icon3) && <ItemIcon>
-                                            {item.icon1 && <GrDocumentVerified onClick={()=>alert(item.key + ' ic1')} style={{opacity:0.5}}/>}
-                                            {item.icon2 && <GrDocumentExcel onClick={()=>alert(item.key + ' ic2')} style={{opacity:0.5}}/>}
-                                            {item.icon3 && <GrDocumentDownload onClick={()=>alert(item.key + ' ic3')} style={{opacity:0.5}}/>}
+                                            {item.icon1 && <GrDocumentVerified onClick={()=>onRowIconPress(item.key + ' ic1')} style={{opacity:0.5}}/>}
+                                            {item.icon2 && <GrDocumentExcel onClick={()=>onRowIconPress(item.key + ' ic2')} style={{opacity:0.5}}/>}
+                                            {item.icon3 && <GrDocumentDownload onClick={()=>onRowIconPress(item.key + ' ic3')} style={{opacity:0.5}}/>}
                                 </ItemIcon>}
-                        <ItemTitle onClick={()=>alert(item.key + item.title)} >{item.title}</ItemTitle>
+                        <ItemTitle>{item.title}</ItemTitle>
                         <RightBorder data-tip={item.tip} background={brColor}/>
                     </Item> 
             })}
