@@ -877,6 +877,11 @@ title .dr {
     align-items: flex-start;
     justify-content: flex-end;
     flex-direction: row; 
+    
+    background-position: center;
+    background-size: cover; 
+    background-repeat: no-repeat;  
+    background-image: linear-gradient(to top, transparent, transparent, #f1f1f1),url('./dashboard.png');
 }
 main {
     padding: 0;
@@ -1218,6 +1223,9 @@ main {
     } 
     .burger-menu{
         display: block !important;  
+    }
+    .user-icon-text{
+        text-align: right;
     }
     .countdown-timer__text {  
         font-size: 35px !important;    

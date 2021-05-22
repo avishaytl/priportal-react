@@ -9,7 +9,6 @@ import styled , {keyframes} from 'styled-components';
 import {useSpring, animated} from 'react-spring';   
 import { Scrollbars } from 'react-custom-scrollbars';
 import Gridlayout from '../components/Gridlayout';   
-import imgdashboard from '../dashboard.png';    
 import { useStore } from '../storeui/storeui'
 import { Observer } from 'mobx-react-lite'; 
 
@@ -251,10 +250,6 @@ const MainDashboardContainer = styled.div`
     width: 100%;
     height: 100vh;
     overflow-y: auto;
-    background-position: center;
-    background-size: cover; 
-    background-repeat: no-repeat;  
-    background-image: linear-gradient(to top, transparent, transparent, #f1f1f1),url(${imgdashboard});
 
 `
 const MainDashboarView = styled.div` 

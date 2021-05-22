@@ -193,7 +193,7 @@ function CategoryListAnime ({ on, child }:any) {
 
 function UserIconMenu ({ on, child, value, darkState, onClick, isSelectedItem, setMenuOpen, isMenuOpen }:any) {
     const mainPropsIcon = useSpring({ height: on ? 50 : 90,    from: { height: on ? 90 : 50  } });  
-    const mainPropsText = useSpring({ top: on ? -40 : 0, paddingTop: on ? 10 : 0, maxWidth: on ? '70%' : '100%', position:'relative',   from: { top: on ? 0 : -40, paddingTop: on ? 0 : 10, maxWidth: on ? '100%' : '70%' } });
+    const mainPropsText = useSpring({ top: on ? -40 : 0, paddingTop: on ? 10 : 0, maxWidth: on ? window.innerWidth <= 680 ? '80%' : '70%' : '100%', position:'relative',   from: { top: on ? 0 : -40, paddingTop: on ? 0 : 10, maxWidth: on ? '100%' :  window.innerWidth <= 680 ? '80%' : '70%' } });
     const [isSelected,setSelected]:any = useState(false)
     const store = useStore();
 

@@ -8,8 +8,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';   
 import { useStore } from '../storeui/storeui' 
 import UserMenu from '../components/UserMenu';
-import UserDashboard from '../components/UserDashboard'; 
- 
+import UserDashboard from '../components/UserDashboard';   
+import MemoComponent from '../components/charts/MemoComponent';
+
 function getRandomArbitrary(min: number, max: number) { 
     return `${(Math.random() * (max - min) + min).toFixed(0)}`;
   }
@@ -107,6 +108,7 @@ const Dashboard = styled.div`
     flex-direction: column;  
     align-items: flex-end; 
     justify-content: flex-start;
+    
 `
 const MenuItemStyle = styled.div` 
     flex:1;
@@ -159,7 +161,7 @@ function DashboardView ({ on, child, styles, setMenuOpen }:any) {
     setTimeout(() => {
         setDashboardReady(true) 
     }, 750);
-    return  <animated.div className={`main-dashboard ${styles.background}`} style={mainProps} >    
+    return  <animated.div className={`main-dashboard`} style={mainProps} >    
                 <Dashboard>
                     {isDashboardReady ? child : null}
                 </Dashboard>
@@ -239,10 +241,10 @@ function Main(props: any) {
     // keyboardUp(evt);
     }
     const setScreenProps = () =>{  
-        if(window.innerWidth <= 750 && window.innerWidth <= 650){
+        if(window.innerWidth <= 680 && window.innerWidth <= 650){
             setMenuRef.current.style.opacity = `1`; 
             setMenuRef.current.style.zIndex = `1`; 
-        }
+        } 
             // setMenuOpen(!isMenuOpen) 
     }
     useEffect(()=>{
@@ -352,11 +354,11 @@ function Main(props: any) {
                 </MenuItem>
                 ))} 
             </Menu>  
-            <div className={'main-container'}>       
-                <DashboardView
+            <div className={'main-container'}>   
+                <MemoComponent child={<DashboardView
                     styles={styles} 
                     setMenuOpen={setMenuOpen} 
-                    child={<UserDashboard data={data.dashboard} setMenuRef={setMenuRef} isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen} />}/>  
+                    child={<UserDashboard data={data.dashboard} setMenuRef={setMenuRef} isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen} />}/>  }/>   
                 <MenuView  
                     setMenuRef={setMenuRef} 
                     styles={styles} 
