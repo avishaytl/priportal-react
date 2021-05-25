@@ -9,7 +9,7 @@ import List from "@material-ui/core/List";
 import styled from 'styled-components'; 
 import {useSpring, animated} from 'react-spring';   
 import { Scrollbars } from 'react-custom-scrollbars'; 
-import { useStore } from '../storeui/storeui' 
+import { useStore } from '../uistore/storeui';
 
 
 

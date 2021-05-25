@@ -4,7 +4,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';  
 import Fade from '@material-ui/core/Fade';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';     
-import { useStore } from '../storeui/storeui';
+import { useStore } from '../uistore/storeui';
 import { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { GrDocumentVerified,GrDocumentExcel,GrDocumentDownload } from 'react-icons/gr';       

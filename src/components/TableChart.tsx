@@ -4,7 +4,7 @@ import Menu from '@material-ui/core/Menu';
 import Fade from '@material-ui/core/Fade';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';    
 import { GrDocumentVerified,GrDocumentExcel,GrDocumentDownload } from 'react-icons/gr';        
-import { useStore } from '../storeui/storeui';
+import { useStore } from '../uistore/storeui';
 import { useState } from 'react'; 
 
 const ChartContainer = styled.div<any>`  

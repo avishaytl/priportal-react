@@ -9,7 +9,7 @@ import styled , {keyframes} from 'styled-components';
 import {useSpring, animated} from 'react-spring';   
 import { Scrollbars } from 'react-custom-scrollbars';
 import Gridlayout from '../components/Gridlayout';   
-import { useStore } from '../storeui/storeui'
+import { useStore } from '../uistore/storeui';
 import { Observer } from 'mobx-react-lite'; 
 
 const Header = styled.div` 

@@ -1,5 +1,5 @@
 import { useState } from 'react'; 
-import { useStore } from '../storeui/storeui' 
+import { useStore } from '../uistore/storeui';
 import styled , {keyframes} from 'styled-components'; 
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';   
 import MenuItem from '@material-ui/core/MenuItem';

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { FiTrendingDown } from 'react-icons/fi';  
 import {useSpring, animated} from 'react-spring';     
-import { useStore } from '../storeui/storeui';
+import { useStore } from '../uistore/storeui';
 
 const ChartContainer = styled.div<any>`  
   min-width: 100%;

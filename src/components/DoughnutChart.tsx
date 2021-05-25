@@ -1,6 +1,6 @@
 import React, { useState } from 'react'; 
 import { Doughnut } from 'react-chartjs-2'; 
-import { useStore } from '../storeui/storeui'
+import { useStore } from '../uistore/storeui'
 import { Observer } from 'mobx-react';
 import styled from 'styled-components'; 
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';   

@@ -6,10 +6,10 @@ import { useHistory } from 'react-router-dom';
 import {useSpring, animated} from 'react-spring';  
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';   
-import { useStore } from '../storeui/storeui' 
+import { useStore } from '../uistore/storeui';
 import UserMenu from '../components/UserMenu';
 import UserDashboard from '../components/UserDashboard';   
-import MemoComponent from '../components/charts/MemoComponent';
+import MemoComponent from '../components/helpers/MemoComponent';
 
 function getRandomArbitrary(min: number, max: number) { 
     return `${(Math.random() * (max - min) + min).toFixed(0)}`;

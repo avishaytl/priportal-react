@@ -6,6 +6,8 @@ import ValueChart from './ValueChart'
 import PieChart from './PieChart'
 import TableChart from "./TableChart";
 import GraphChart from "./GraphChart";
+import AlertDialog from "./helpers/AlertDialog";
+import { useStore } from "../uistore/storeui";
 
 const ReactGridLayout = WidthProvider(RGL);
 
@@ -146,13 +148,21 @@ export default function Gridlayout(props: any){
     const [layout,setLayout] = useState(false); 
     const [lastCardPosition,setLastCardPosition] = useState({x:0,y:0,type:``});  
     const [lastCardKey,setLastCardKey] = useState(''); 
-    // const setScreenProps1 = () =>{  
-    //   if(originalLayout !== [])
-    //     removeFromLS();
-    // }
-    // useEffect(()=>{ 
-    //   window.addEventListener('resize',setScreenProps1)
-    // })
+    const store = useStore()  
+    const [isSetScreenProps,setScreenProps] = useState(false)
+
+    const setScreenProps1 = () =>{  
+      if(((window.innerWidth <= 580 && window.innerWidth >= 570) || (window.innerWidth <= 680 && window.innerWidth >= 670) || (window.innerWidth <= 880 && window.innerWidth >= 870) || (window.innerWidth <= 1050 && window.innerWidth >= 1040)) ){
+        setScreenProps(true)
+        store.setAlertDialogOpen(true)
+        // setScreenProps(true)
+        // await removeFromLS();
+        // setScreenProps(false)
+      }
+    }
+    useEffect(()=>{ 
+      window.addEventListener('resize',setScreenProps1)
+    })
     const getComponentLayout = (type: string) =>{
       let lay = {w: 0,h: 0,}
       let comp: any = getDefaultLayout();  
@@ -293,7 +303,7 @@ export default function Gridlayout(props: any){
         <HeaderIcon left={'40px'} onClick={saveOnLS}>
           {`שמירה`}
         </HeaderIcon> 
-        <HeaderIcon color={`#cecece`} left={'50px'} onClick={removeFromLS}>
+        <HeaderIcon color={`#cecece`} left={'50px'}>
           {`ע ${lastCardPosition.x} ש ${lastCardPosition.y} ${lastCardPosition.type}`}
         </HeaderIcon>
         { 
@@ -305,8 +315,15 @@ export default function Gridlayout(props: any){
           > 
           {getCards()}
           </ReactGridLayout>
-        }
-     
+        } 
+        <AlertDialog  
+          title={`Dont try me ✌️`}  
+          btnRightTitle={`Sory`} 
+          btnRightClick={async()=>{
+            store.setAlertDialogOpen(false)
+            await removeFromLS()
+            setScreenProps(false)
+          }}  />
       </div>
     );
 }

@@ -1,11 +1,11 @@
 import React from 'react'
-import { createStore, TStore } from './createStore'
+import { uiStore, TStore } from './uiStore'
 import { useLocalStore } from 'mobx-react' // 6.x or mobx-react-lite@1.4.0
 
 const StoreContext = React.createContext<TStore | null>(null)
 
 export const StoreProvider = ({ children }: any) => {
-  const store = useLocalStore(createStore)
+  const store = useLocalStore(uiStore)
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
 }
 
