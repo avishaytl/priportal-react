@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RGL, { WidthProvider } from "react-grid-layout";
 import styled from "styled-components";
 import DoughnutChart from './DoughnutChart'
@@ -146,7 +146,13 @@ export default function Gridlayout(props: any){
     const [layout,setLayout] = useState(false); 
     const [lastCardPosition,setLastCardPosition] = useState({x:0,y:0,type:``});  
     const [lastCardKey,setLastCardKey] = useState(''); 
- 
+    // const setScreenProps1 = () =>{  
+    //   if(originalLayout !== [])
+    //     removeFromLS();
+    // }
+    // useEffect(()=>{ 
+    //   window.addEventListener('resize',setScreenProps1)
+    // })
     const getComponentLayout = (type: string) =>{
       let lay = {w: 0,h: 0,}
       let comp: any = getDefaultLayout();  

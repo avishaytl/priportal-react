@@ -245,6 +245,7 @@ function Main(props: any) {
         if(window.innerWidth <= 680 && window.innerWidth >= 650){
             setMenuRef.current.style.opacity = `1`; 
             setMenuRef.current.style.zIndex = `1`; 
+            setMenuOpen(!isMenuOpen) 
         } 
             // setMenuOpen(!isMenuOpen) 
     }
@@ -261,29 +262,33 @@ function Main(props: any) {
             }, 1000);
         } 
 
-        return history.listen((location: any) => {
-          if (history.action === 'PUSH') {
-            setLocationKeys([ location.key ])
-          }
-      
-          if (history.action === 'POP') {
-            if (locationKeys[1] === location.key) {
-                // setBackPress(true) 
-                setMenuOpen(false) 
-                // setTimeout(() => {
-                    setLocationKeys(([ _, ...keys ]:any) => keys) 
-                // }, 1700);
-      
-              // Handle forward event
-      
-            } else {
-              setLocationKeys((keys: any) => [ location.key, ...keys ])
-      
-              // Handle back event
-      
+        return (
+            ()=>{
+                history.listen((location: any) => {
+                    if (history.action === 'PUSH') {
+                      setLocationKeys([ location.key ])
+                    }
+                
+                    if (history.action === 'POP') {
+                      if (locationKeys[1] === location.key) {
+                          // setBackPress(true) 
+                          setMenuOpen(false) 
+                          // setTimeout(() => {
+                              setLocationKeys(([ _, ...keys ]:any) => keys) 
+                          // }, 1700);
+                
+                        // Handle forward event
+                
+                      } else {
+                        setLocationKeys((keys: any) => [ location.key, ...keys ])
+                
+                        // Handle back event
+                
+                      }
+                    }
+                  })  
             }
-          }
-        })
+        )
     }, [ locationKeys, isReady ]) 
 
     function keyboardDown(e: any){
