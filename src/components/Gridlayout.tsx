@@ -152,7 +152,7 @@ export default function Gridlayout(props: any){
     const [isSetScreenProps,setScreenProps] = useState(false)
 
     const setScreenProps1 = () =>{  
-      if(((window.innerWidth <= 580 && window.innerWidth >= 570) || (window.innerWidth <= 700 && window.innerWidth >= 710) || (window.innerWidth <= 880 && window.innerWidth >= 870) || (window.innerWidth <= 1050 && window.innerWidth >= 1040)) ){
+      if(!isSetScreenProps && ((window.innerWidth <= 580 && window.innerWidth >= 570) || (window.innerWidth <= 700 && window.innerWidth >= 710) || (window.innerWidth <= 880 && window.innerWidth >= 870) || (window.innerWidth <= 1050 && window.innerWidth >= 1040)) ){
         setScreenProps(!isSetScreenProps)
         store.setAlertDialogOpen(true)
         // setScreenProps(true)
