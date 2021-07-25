@@ -11,15 +11,81 @@ import UserMenu from '../components/UserMenu';
 import UserDashboard from '../components/UserDashboard';   
 import MemoComponent from '../components/helpers/MemoComponent';
 
+interface DataProps{
+    barCompanyName: string;
+    colors: Colors; 
+    userMsg: number;
+    menuCategories: MenuCategorie[];
+    dashboard: Chart[];
+}
+
+interface Colors{
+    primary: string;
+    secondary: string;
+    tertiary: string;
+}
+
+interface MenuCategorie{
+    categorie: CategorieLabel;
+    id: number;
+    category: CategoryLabel[];
+}
+
+interface CategorieLabel{
+    label: string;
+    selectedIcon: string;
+    icon: string;
+}
+
+interface CategoryLabel{
+    categorie: CategorieLabelChild;
+    id: number;
+    category: CategoryLabel[] | null;
+}
+
+interface CategorieLabelChild{
+    label: string; 
+}
+
+interface Position{
+    x: number; 
+    y: number; 
+}
+
+interface Chart{
+    type: string; 
+    onRowPress: (key: string)=>void; 
+    onRowIconPress: (key: string)=>void; 
+    position: Position; 
+    data: ChartData[] | ChartData;  
+}
+
+interface ChartData{
+    key: number; 
+    tip?: string; 
+    value?: string;
+    firstVal?: string; 
+    secVal?: string; 
+    icon1?: boolean; 
+    icon2?: boolean; 
+    icon3?: boolean; 
+    title?: string;  
+    cTitle?: string;
+    pos?: string;  
+    background?: string;
+}
+
+
 function getRandomArbitrary(min: number, max: number) { 
     return `${(Math.random() * (max - min) + min).toFixed(0)}`;
   }
   
-const data = { 
+const data:DataProps = { 
     barCompanyName: 'סביבת הדגמה',  
     colors: {primary: '#121e34',secondary:'#314570', tertiary: '#1e2c4c'},
     userMsg: 3,
-    menuCategories: [{
+    menuCategories: [
+        {
         categorie: {label:'מכירות', selectedIcon: 'MdLocalGroceryStore', icon: 'MdStore'}, id: 1, category: [{
             categorie: {label:'1מכירות'}, id: 11, category: [{
                 categorie: {label:'2מכירות'}, id: 111, category:[{
@@ -29,7 +95,7 @@ const data = {
         {categorie: {label:'דו"חות', selectedIcon: 'MdEventNote', icon: 'MdEventAvailable'}, id: 2 ,category: [{
             categorie: {label:'כרטיס עובד'}, id: 22, category: null},{
                 categorie: {label:'כרטיס עובד'}, id: 22, category: null},{
-            categorie: {label:'כרטיס עובד'}, id: 22, category: null}]},
+                    categorie: {label:'כרטיס עובד'}, id: 22, category: null}]},
         {categorie: {label:'שירות', selectedIcon: 'MdBuild', icon: 'MdCached'}, id: 3 ,category: [{
             categorie: {label:'קריאות שירות'}, id: 33, category: null}]},
         {categorie: {label:'חשבונות', selectedIcon: 'MdDns', icon: 'MdDescription'}, id: 4 ,category: [{
